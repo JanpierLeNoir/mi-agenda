@@ -1,12 +1,12 @@
-// Nombre del cache (cámbialo si actualizas la app)
-const CACHE_NAME = 'mi-agenda-v2';
+const CACHE_NAME = 'mi-agenda-v3';
 
-// Archivos esenciales de tu app
+// ⚠️ RUTA BASE DE GITHUB PAGES
+const BASE = '/mi-agenda/';
+
 const ASSETS = [
-  '/',
-  '/mi_agenda.html',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap'
+  BASE,
+  BASE + 'index.html',
+  BASE + 'manifest.json'
 ];
 
 // ===== INSTALACIÓN =====
@@ -23,45 +23,34 @@ self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
+        keys.map(key => key !== CACHE_NAME && caches.delete(key))
       )
     )
   );
   self.clients.claim();
 });
 
-// ===== FETCH (MAGIA OFFLINE) =====
+// ===== FETCH =====
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
+    caches.match(event.request).then(cached => {
 
-      // 1. Si existe en cache → úsalo
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+      // 1. Si está en cache
+      if (cached) return cached;
 
-      // 2. Si no → intenta red
+      // 2. Si no, intenta red
       return fetch(event.request)
-        .then(networkResponse => {
-
-          // Guardar en cache para futuro
+        .then(res => {
           return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
+            cache.put(event.request, res.clone());
+            return res;
           });
-
         })
         .catch(() => {
-
-          // 3. Si falla (offline total) → fallback
+          // 3. Fallback offline
           if (event.request.mode === 'navigate') {
-            return caches.match('/mi_agenda.html');
+            return caches.match(BASE + 'index.html');
           }
-
         });
 
     })
