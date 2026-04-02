@@ -46,12 +46,15 @@ self.addEventListener('fetch', event => {
             return res;
           });
         })
-        .catch(() => {
-          // 3. Fallback offline
-          if (event.request.mode === 'navigate') {
-            return caches.match(BASE + 'index.html');
-          }
+              .catch(() => {
+        if (event.request.mode === 'navigate') {
+          return caches.match(BASE + 'index.html');
+        }
+        return new Response("Offline", {
+          status: 503,
+          statusText: "Offline"
         });
+      });
 
     })
   );
