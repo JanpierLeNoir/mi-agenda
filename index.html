@@ -102,6 +102,17 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .type-deber{background:#fef9c3;color:#854d0e}
 .type-leccion{background:#dcfce7;color:#166534}
 .type-practica{background:#e0e7ff;color:#3730a3}
+.type-proyecto{background:#fce7f3;color:#9d174d}
+.type-taller{background:#ffedd5;color:#9a3412}
+.type-exposicion{background:#f0fdf4;color:#14532d}
+.type-otro{background:#f1f5f9;color:#475569}
+.pending-item.done{opacity:.55}
+.pending-item.done .pending-subject{text-decoration:line-through;color:var(--text3)}
+.done-section-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:4px 0;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.done-section-title::after{content:'';flex:1;height:1px;background:var(--bg3)}
+/* Modal centrado para pendientes */
+#modal-overlay.centered{align-items:center}
+#modal-overlay.centered #modal{border-radius:16px;max-height:85vh;width:calc(100% - 32px);max-width:400px}
 .section-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:4px 0}
 .days-until{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
 .days-urgent{background:#fee2e2;color:#991b1b}
@@ -181,6 +192,10 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
       </div>
       <div class="section-title">Próximos pendientes</div>
       <div class="pending-list" id="pending-list"></div>
+      <div class="done-section-title" id="done-toggle" onclick="toggleDone()" style="margin-top:4px">
+        ✓ Cumplidos <span id="done-count" style="font-size:11px;background:var(--bg3);padding:1px 7px;border-radius:99px;font-weight:600"></span>
+      </div>
+      <div class="pending-list" id="done-list" style="display:none"></div>
     </div>
 
     <!-- EDITOR -->
@@ -243,8 +258,8 @@ const DAYS=['LU','MA','MI','JU','VI'];
 const DAYS_FULL=['Lunes','Martes','Miércoles','Jueves','Viernes'];
 const HOURS=['07:00','08:00','09:00','10:00','11:00','12:00'];
 const HOURS_END=['08:00','09:00','10:00','11:00','12:00','13:00'];
-const TYPE_LABELS={exam:'EXAMEN',deber:'DEBER',leccion:'LECCIÓN',practica:'PRÁCTICA'};
-const TYPE_CLASS={exam:'type-exam',deber:'type-deber',leccion:'type-leccion',practica:'type-practica'};
+const TYPE_LABELS={exam:'EXAMEN',deber:'DEBER',leccion:'LECCIÓN',practica:'PRÁCTICA',proyecto:'PROYECTO',taller:'TALLER',exposicion:'EXPOSICIÓN',otro:'OTRO'};
+const TYPE_CLASS={exam:'type-exam',deber:'type-deber',leccion:'type-leccion',practica:'type-practica',proyecto:'type-proyecto',taller:'type-taller',exposicion:'type-exposicion',otro:'type-otro'};
 const MONTH_NAMES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 const DAY_NAMES=['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
 
@@ -429,7 +444,7 @@ function assignBlock(sid){
 function openAddPending(){
   pendingEditId=null;
   if(!state.subjects.length){toast('Crea materias primero');return;}
-  showModal('Nuevo Pendiente',buildPendingForm(null));
+  showModal('Nuevo Pendiente',buildPendingForm(null),true);
 }
 function buildPendingForm(p){
   const subOpts=state.subjects.map(s=>`<option value="${s.id}"${p&&p.subjectId===s.id?' selected':''}>${s.name}</option>`).join('');
@@ -442,6 +457,10 @@ function buildPendingForm(p){
         <option value="deber"${p&&p.type==='deber'?' selected':''}>Deber</option>
         <option value="leccion"${p&&p.type==='leccion'?' selected':''}>Lección</option>
         <option value="practica"${p&&p.type==='practica'?' selected':''}>Práctica</option>
+        <option value="proyecto"${p&&p.type==='proyecto'?' selected':''}>Proyecto</option>
+        <option value="taller"${p&&p.type==='taller'?' selected':''}>Taller</option>
+        <option value="exposicion"${p&&p.type==='exposicion'?' selected':''}>Exposición</option>
+        <option value="otro"${p&&p.type==='otro'?' selected':''}>Otro</option>
       </select>
     </div>
     <div class="form-group">
@@ -471,13 +490,25 @@ function savePending(){
     const p=state.pendings.find(x=>x.id===pendingEditId);
     Object.assign(p,{type,subjectId,desc,date});
   } else {
-    state.pendings.push({id:'p'+Date.now(),type,subjectId,desc,date});
+    state.pendings.push({id:'p'+Date.now(),type,subjectId,desc,date,done:false});
   }
   save();renderCalendar();renderPendings();closeModal();toast('Pendiente guardado');
 }
 function deletePending(id){
   state.pendings=state.pendings.filter(p=>p.id!==id);
   save();renderCalendar();renderPendings();toast('Eliminado');
+}
+function completePending(id){
+  const p=state.pendings.find(x=>x.id===id);
+  if(!p)return;
+  p.done=!p.done;
+  save();renderCalendar();renderPendings();
+  toast(p.done?'¡Cumplido! ✓':'Marcado como pendiente');
+}
+let doneVisible=false;
+function toggleDone(){
+  doneVisible=!doneVisible;
+  document.getElementById('done-list').style.display=doneVisible?'flex':'none';
 }
 
 /* ====== CALENDARIO ====== */
@@ -536,37 +567,54 @@ function changeMonth(dir){
 }
 
 function renderPendings(){
-  const el=document.getElementById('pending-list');
-  const today=new Date();
-  today.setHours(0,0,0,0);
-  const sorted=[...state.pendings].sort((a,b)=>a.date.localeCompare(b.date));
-  if(!sorted.length){
-    el.innerHTML='<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes</div><div class="empty-sub">¡Todo al día!</div></div>';return;
-  }
-  el.innerHTML=sorted.map(p=>{
-    const sub=state.subjects.find(s=>s.id===p.subjectId);
-    if(!sub)return'';
+  const elActive=document.getElementById('pending-list');
+  const elDone=document.getElementById('done-list');
+  const doneCount=document.getElementById('done-count');
+  const today=new Date();today.setHours(0,0,0,0);
+
+  const active=[...state.pendings].filter(p=>!p.done).sort((a,b)=>a.date.localeCompare(b.date));
+  const done=[...state.pendings].filter(p=>p.done).sort((a,b)=>b.date.localeCompare(a.date));
+
+  doneCount.textContent=done.length||'';
+  document.getElementById('done-toggle').style.display=done.length?'flex':'none';
+
+  function buildItem(p,isDone){
+    const sub=state.subjects.find(s=>s.id===p.subjectId);if(!sub)return'';
     const date=new Date(p.date+'T00:00:00');
     const diff=Math.round((date-today)/(1000*60*60*24));
-    const diffLabel=diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
-    const diffClass=diff<0||diff===0?'days-urgent':diff<=3?'days-soon':'days-ok';
+    const diffLabel=isDone?'Cumplido':diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
+    const diffClass=isDone?'days-ok':diff<0||diff===0?'days-urgent':diff<=3?'days-soon':'days-ok';
     const dateLabel=date.toLocaleDateString('es-EC',{day:'numeric',month:'short'});
-    return `<div class="pending-item">
+    return `<div class="pending-item${isDone?' done':''}">
       <div class="pending-color" style="background:${sub.color}"></div>
       <div class="pending-info">
         <div class="pending-subject">${sub.name}</div>
         <div style="display:flex;gap:6px;align-items:center;margin-top:4px">
-          <span class="pending-type ${TYPE_CLASS[p.type]}">${TYPE_LABELS[p.type]}</span>
+          <span class="pending-type ${TYPE_CLASS[p.type]||'type-otro'}">${TYPE_LABELS[p.type]||p.type}</span>
           ${p.desc?`<span style="font-size:11px;color:var(--text3)">${p.desc}</span>`:''}
         </div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
         <div class="pending-date">${dateLabel}</div>
         <div class="days-until ${diffClass}">${diffLabel}</div>
-        <button onclick="deletePending('${p.id}')" style="font-size:10px;background:none;border:none;color:var(--text3);cursor:pointer;padding:2px">✕</button>
+        <div style="display:flex;gap:4px;margin-top:2px">
+          <button onclick="completePending('${p.id}')" title="${isDone?'Desmarcar':'Marcar cumplido'}"
+            style="width:26px;height:26px;border-radius:6px;border:1px solid ${isDone?'#10b981':'var(--bg3)'};background:${isDone?'rgba(16,185,129,.15)':'var(--bg2)'};color:${isDone?'#10b981':'var(--text3)'};cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px">✓</button>
+          <button onclick="deletePending('${p.id}')"
+            style="width:26px;height:26px;border-radius:6px;border:1px solid var(--bg3);background:var(--bg2);color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px">✕</button>
+        </div>
       </div>
     </div>`;
-  }).join('');
+  }
+
+  if(!active.length){
+    elActive.innerHTML='<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes activos</div><div class="empty-sub">¡Todo al día!</div></div>';
+  } else {
+    elActive.innerHTML=active.map(p=>buildItem(p,false)).join('');
+  }
+  elDone.style.flexDirection='column';
+  elDone.style.gap='8px';
+  elDone.innerHTML=done.map(p=>buildItem(p,true)).join('');
 }
 
 /* ====== UTILS ====== */
@@ -577,9 +625,18 @@ function switchView(name,btn){
   btn.classList.add('active');
   closeDetail();
 }
-function showModal(title,content){
+function showModal(title,content,centered=false){
+  const overlay=document.getElementById('modal-overlay');
+  const modal=document.getElementById('modal');
   document.getElementById('modal-content').innerHTML=`<div class="modal-title">${title}</div>${content}`;
-  document.getElementById('modal-overlay').classList.add('open');
+  if(centered){
+    overlay.classList.add('centered');
+    modal.style.borderRadius='16px';
+  } else {
+    overlay.classList.remove('centered');
+    modal.style.borderRadius='20px 20px 0 0';
+  }
+  overlay.classList.add('open');
 }
 function closeModal(e){
   if(e&&e.target!==document.getElementById('modal-overlay'))return;
