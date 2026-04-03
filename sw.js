@@ -1,13 +1,12 @@
-const CACHE_NAME = 'mi-agenda-v4';  
+const CACHE_NAME = 'mi-agenda-v4';   // Puedes dejar este número fijo de ahora en adelante
 
-// RUTA BASE DE GITHUB PAGES
 const BASE = '/mi-agenda/';
 
 const ASSETS = [
   BASE,
   BASE + 'index.html',
   BASE + 'manifest.json',
-  BASE + 'icon-192.png'   // añadimos el icono para que también se actualice
+  BASE + 'icon-192.png'
 ];
 
 // ===== INSTALACIÓN =====
@@ -19,46 +18,45 @@ self.addEventListener('install', event => {
   );
 });
 
-// ===== ACTIVACIÓN (borra cachés antiguos) =====
+// ===== ACTIVACIÓN =====
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(
-        keys.map(key => key !== CACHE_NAME && caches.delete(key))
-      )
+      Promise.all(keys.map(key => key !== CACHE_NAME && caches.delete(key)))
     ).then(() => self.clients.claim())
   );
 });
 
-// ===== FETCH (estrategia network-first para index.html + cache para el resto) =====
+// ===== FETCH =====
 self.addEventListener('fetch', event => {
-  // Para el index.html siempre intentamos traer la versión más nueva
-  if (event.request.url.endsWith('index.html') || event.request.mode === 'navigate') {
+  if (event.request.mode === 'navigate' || event.request.url.endsWith('index.html')) {
+    // Para la página principal siempre intentamos traer la versión fresca
     event.respondWith(
-      fetch(event.request)
-        .then(res => {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return res;
-        })
-        .catch(() => caches.match(event.request))
+      fetch(event.request).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        return res;
+      }).catch(() => caches.match(event.request))
     );
     return;
   }
 
-  // Para el resto de archivos: cache-first (más rápido)
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
-
       return fetch(event.request)
         .then(res => {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, res.clone());
-            return res;
-          });
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, res.clone()));
+          return res;
         })
         .catch(() => new Response("Offline", { status: 503 }));
     })
   );
+});
+
+// ===== ESCUCHAR MENSAJE PARA FORZAR ACTUALIZACIÓN =====
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
