@@ -59,11 +59,11 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .empty-title{font-size:15px;font-weight:600;color:var(--text2)}
 .empty-sub{font-size:13px}
 
-/* =================== HORARIO =================== */
+/* HORARIO */
 .schedule-grid{display:flex;flex-direction:column;gap:1px;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--bg3)}
-.schedule-header{display:grid;grid-template-columns:52px repeat(5,1fr);background:var(--bg2)}
+.schedule-header{background:var(--bg2)}
 .schedule-header-cell{padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.5px}
-.schedule-row{display:grid;grid-template-columns:52px repeat(5,1fr);background:var(--bg0)}
+.schedule-row{background:var(--bg0)}
 .schedule-time{padding:8px 4px;font-size:10px;color:var(--text3);font-weight:500;text-align:center;display:flex;align-items:center;justify-content:center;background:var(--bg1)}
 .schedule-cell{padding:2px;position:relative;min-height:56px}
 .block{width:100%;height:100%;min-height:52px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 2px;cursor:pointer;transition:filter .15s;text-align:center}
@@ -74,7 +74,7 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .empty-block:active{background:var(--bg3)}
 .add-icon{font-size:16px;color:var(--bg3)}
 
-/* =================== AGENDA =================== */
+/* AGENDA */
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .month-title{font-size:16px;font-weight:700}
 .month-btn{width:32px;height:32px;border-radius:var(--radius-sm);background:var(--bg2);border:1px solid var(--bg3);color:var(--text2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
@@ -89,14 +89,11 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .cal-dots{display:flex;flex-wrap:wrap;gap:2px;margin-top:2px}
 .cal-dot{width:10px;height:10px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#fff;flex-shrink:0;position:relative}
 .cal-dot-badge{position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#ef4444;font-size:6px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:1px solid var(--bg0)}
-
 .pending-list{display:flex;flex-direction:column;gap:8px}
 .pending-item{background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius-sm);padding:12px;display:flex;align-items:center;gap:12px}
 .pending-color{width:4px;height:40px;border-radius:4px;flex-shrink:0}
 .pending-info{flex:1;min-width:0}
 .pending-subject{font-size:13px;font-weight:600;color:var(--text1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pending-meta{font-size:11px;color:var(--text3);margin-top:2px}
-.pending-date{font-size:11px;font-weight:600;color:var(--text2);text-align:right;flex-shrink:0}
 .pending-type{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.3px}
 .type-exam{background:#fee2e2;color:#991b1b}
 .type-deber{background:#fef9c3;color:#854d0e}
@@ -110,7 +107,6 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .pending-item.done .pending-subject{text-decoration:line-through;color:var(--text3)}
 .done-section-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:4px 0;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
 .done-section-title::after{content:'';flex:1;height:1px;background:var(--bg3)}
-/* Modal centrado para pendientes */
 #modal-overlay.centered{align-items:center}
 #modal-overlay.centered #modal{border-radius:16px;max-height:85vh;width:calc(100% - 32px);max-width:400px}
 .section-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:4px 0}
@@ -119,13 +115,27 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .days-soon{background:#fef9c3;color:#854d0e}
 .days-ok{background:#dcfce7;color:#166534}
 
-/* =================== EDITOR =================== */
+/* MATERIAS */
 .subject-chip{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius-sm)}
 .chip-color{width:12px;height:12px;border-radius:50%;flex-shrink:0}
 .chip-info{flex:1;min-width:0}
 .chip-name{font-size:13px;font-weight:700;color:var(--text1)}
 .chip-detail{font-size:11px;color:var(--text3)}
 .chip-actions{display:flex;gap:6px}
+
+/* TOGGLE */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+.toggle-label{font-size:13px;font-weight:600;color:var(--text2)}
+.toggle-desc{font-size:11px;color:var(--text3);margin-top:2px}
+.toggle{position:relative;width:44px;height:26px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:var(--bg3);border-radius:13px;cursor:pointer;transition:background .2s}
+.toggle-slider:before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle input:checked+.toggle-slider{background:var(--accent)}
+.toggle input:checked+.toggle-slider:before{transform:translateX(18px)}
+
+/* PERFIL */
+.profile-avatar{width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0}
 
 /* MODAL */
 #modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
@@ -148,7 +158,7 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 #toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg3);color:var(--text1);padding:10px 20px;border-radius:99px;font-size:13px;font-weight:600;z-index:200;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* DETAIL POP-UP */
+/* DETAIL POP */
 #detail-pop{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) scale(.9);background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius);padding:16px;z-index:90;display:none;min-width:220px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,.5)}
 #detail-pop.show{display:block;animation:popIn .2s ease}
 @keyframes popIn{from{transform:translateX(-50%) scale(.9);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
@@ -156,9 +166,48 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .detail-subject{font-size:15px;font-weight:700;margin-bottom:8px;padding-right:24px}
 .detail-row{display:flex;gap:8px;font-size:12px;color:var(--text2);margin-top:4px;align-items:center}
 .detail-icon{color:var(--text3);font-size:13px}
+
+/* BIENVENIDA */
+#welcome-screen{position:fixed;inset:0;background:var(--bg0);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:0;max-width:430px;margin:0 auto}
+#welcome-screen.hidden{display:none}
+.welcome-logo{font-size:72px;margin-bottom:24px}
+.welcome-title{font-size:28px;font-weight:700;color:var(--text1);text-align:center;margin-bottom:8px}
+.welcome-sub{font-size:15px;color:var(--text3);text-align:center;margin-bottom:36px;line-height:1.6}
+.welcome-steps{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
+.welcome-step{display:flex;align-items:center;gap:14px;background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius);padding:14px}
+.welcome-step-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.welcome-step-text{font-size:13px;color:var(--text2);line-height:1.4}
+.welcome-step-text strong{color:var(--text1)}
 </style>
 </head>
 <body>
+
+<!-- BIENVENIDA -->
+<div id="welcome-screen" class="hidden">
+  <div class="welcome-logo">📅</div>
+  <div class="welcome-title">Mi Agenda</div>
+  <div class="welcome-sub">Tu horario escolar o universitario,<br>siempre a mano.</div>
+  <div class="welcome-steps">
+    <div class="welcome-step">
+      <div class="welcome-step-num">1</div>
+      <div class="welcome-step-text"><strong>Completa tu perfil</strong> — nombre e institución.</div>
+    </div>
+    <div class="welcome-step">
+      <div class="welcome-step-num">2</div>
+      <div class="welcome-step-text"><strong>Crea tus materias</strong> con docente y aula.</div>
+    </div>
+    <div class="welcome-step">
+      <div class="welcome-step-num">3</div>
+      <div class="welcome-step-text"><strong>Arma tu horario</strong> asignando cada materia a su bloque.</div>
+    </div>
+    <div class="welcome-step">
+      <div class="welcome-step-num">4</div>
+      <div class="welcome-step-text"><strong>Registra pendientes</strong> — exámenes, deberes y más.</div>
+    </div>
+  </div>
+  <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:15px" onclick="startSetup()">Comenzar →</button>
+</div>
+
 <div id="app">
   <div id="views">
 
@@ -198,11 +247,25 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
       <div class="pending-list" id="done-list" style="display:none"></div>
     </div>
 
-    <!-- EDITOR -->
-    <div class="view" id="view-editor">
+    <!-- MATERIAS -->
+    <div class="view" id="view-materias">
       <div class="view-header">
-        <div><div class="view-title">Editor Maestro</div></div>
+        <div><div class="view-title">Materias</div></div>
       </div>
+
+      <!-- PERFIL -->
+      <div class="card card-sm">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div class="profile-avatar" id="profile-avatar">?</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:700;color:var(--text1)" id="profile-name-display">Sin configurar</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:3px" id="profile-detail-display">Toca ✏️ para editar tu perfil</div>
+          </div>
+          <button class="btn btn-ghost btn-sm btn-icon" onclick="openEditProfile()">✏️</button>
+        </div>
+      </div>
+
+      <!-- LISTA MATERIAS -->
       <div class="card card-sm">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <span style="font-size:13px;font-weight:700;color:var(--text2)">MATERIAS</span>
@@ -210,6 +273,23 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
         </div>
         <div id="subjects-list" style="display:flex;flex-direction:column;gap:8px"></div>
       </div>
+
+      <!-- CONFIGURACIÓN -->
+      <div class="card card-sm">
+        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:4px">CONFIGURACIÓN</div>
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Incluir sábado</div>
+            <div class="toggle-desc">Muestra sábado en el horario semanal</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-sabado" onchange="toggleSabado(this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ZONA DE PELIGRO -->
       <div class="card card-sm">
         <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px">ZONA DE PELIGRO</div>
         <button class="btn btn-danger btn-sm" onclick="confirmReset()" style="width:100%;justify-content:center">
@@ -229,9 +309,9 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
       <span class="nav-icon">🗓️</span>
       <span class="nav-label">AGENDA</span>
     </button>
-    <button class="nav-btn" onclick="switchView('editor',this)">
-      <span class="nav-icon">⚙️</span>
-      <span class="nav-label">EDITOR</span>
+    <button class="nav-btn" onclick="switchView('materias',this)">
+      <span class="nav-icon">📚</span>
+      <span class="nav-label">MATERIAS</span>
     </button>
   </nav>
 </div>
@@ -253,9 +333,10 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 <div id="toast"></div>
 
 <script>
-const COLORS=['#6366f1','#f43f5e','#10b981','#f59e0b','#3b82f6','#8b5cf6','#ec4899','#14b8a6','#f97316','#84cc16','#06b6d4','#a855f7'];
-const DAYS=['LU','MA','MI','JU','VI'];
-const DAYS_FULL=['Lunes','Martes','Miércoles','Jueves','Viernes'];
+/* ============================================================
+   CONSTANTES
+   ============================================================ */
+const COLORS=['#e53e3e','#dd6b20','#d69e2e','#38a169','#2b6cb0','#6b46c1','#d53f8c','#00a3c4','#2d3748','#c05621','#276749','#9b2335'];
 const HOURS=['07:00','08:00','09:00','10:00','11:00','12:00'];
 const HOURS_END=['08:00','09:00','10:00','11:00','12:00','13:00'];
 const TYPE_LABELS={exam:'EXAMEN',deber:'DEBER',leccion:'LECCIÓN',practica:'PRÁCTICA',proyecto:'PROYECTO',taller:'TALLER',exposicion:'EXPOSICIÓN',otro:'OTRO'};
@@ -263,80 +344,236 @@ const TYPE_CLASS={exam:'type-exam',deber:'type-deber',leccion:'type-leccion',pra
 const MONTH_NAMES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 const DAY_NAMES=['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
 
-let state={subjects:[],schedule:{},pendings:[]};
-let calendarDate=new Date();
-let pendingEditId=null;
-let blockTarget=null;
+/* ============================================================
+   SISTEMA DE VERSIONES Y MIGRACIÓN
+   ─────────────────────────────────────────────────────────────
+   Regla: cada vez que cambie la estructura de `state`, subir
+   DATA_VERSION y escribir una función migrateVx_to_Vy().
+   El loader sube automáticamente los datos del usuario hasta
+   la versión actual sin perder nada.
+   ============================================================ */
+const DATA_VERSION = 2;
+const STORAGE_KEY = 'mi_agenda_data';
+const STORAGE_VER_KEY = 'mi_agenda_version';
 
-function load(){
-  try{const d=localStorage.getItem('mi_agenda_v1');if(d)state=JSON.parse(d);}catch(e){}
-  renderAll();
+function migrateV1toV2(old) {
+  // V1: clave 'mi_agenda_v1' con {subjects, schedule, pendings}
+  // V2: agrega profile y config
+  return {
+    subjects:  old.subjects  || [],
+    schedule:  old.schedule  || {},
+    pendings:  old.pendings  || [],
+    profile:   { name:'', institution:'', course:'' },
+    config:    { sabado: false }
+  };
 }
-function save(){localStorage.setItem('mi_agenda_v1',JSON.stringify(state));}
-function renderAll(){renderSchedule();renderEditor();renderCalendar();renderPendings();}
 
-/* ====== HORARIO ====== */
-function renderSchedule(){
-  const c=document.getElementById('schedule-container');
-  const sub=document.getElementById('schedule-sub');
-  if(!state.subjects.length){
-    c.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-title">Sin materias aún</div><div class="empty-sub">Ve al Editor para crear tus materias</div></div>';
-    sub.textContent='Configura tus materias primero';return;
+function loadAndMigrate() {
+  // 1. Intentar datos en formato actual
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) {
+    // 2. Buscar formato V1 (clave antigua)
+    const oldRaw = localStorage.getItem('mi_agenda_v1');
+    if (oldRaw) {
+      try {
+        const migrated = migrateV1toV2(JSON.parse(oldRaw));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+        localStorage.setItem(STORAGE_VER_KEY, String(DATA_VERSION));
+        return migrated; // Datos viejos migrados — el usuario no pierde nada
+      } catch(e) {}
+    }
+    return null; // Primera vez de verdad
   }
-  const count=Object.values(state.schedule).filter(v=>v).length;
-  sub.textContent=`${count} bloques asignados`;
-  let h=`<div class="schedule-grid"><div class="schedule-header"><div class="schedule-header-cell"></div>`;
-  DAYS.forEach(d=>h+=`<div class="schedule-header-cell">${d}</div>`);
-  h+=`</div>`;
-  HOURS.forEach((hr,hi)=>{
-    h+=`<div class="schedule-row"><div class="schedule-time">${hr}</div>`;
-    for(let d=0;d<5;d++){
-      const key=`${d}_${hi}`;
-      const sid=state.schedule[key];
-      const sub=sid?state.subjects.find(s=>s.id===sid):null;
-      if(sub){
-        h+=`<div class="schedule-cell"><div class="block" style="background:${sub.color}" onclick="showBlockDetail('${key}')">
+  // 3. Hay datos modernos — aplicar migraciones pendientes si las hay
+  try {
+    let data = JSON.parse(raw);
+    // Garantizar campos nuevos aunque vengan de una versión intermedia
+    data.profile = data.profile || { name:'', institution:'', course:'' };
+    data.config  = data.config  || { sabado: false };
+    // Futuro: if(ver < 3) data = migrateV2toV3(data);
+    return data;
+  } catch(e) {
+    return null;
+  }
+}
+
+/* ============================================================
+   ESTADO GLOBAL
+   ============================================================ */
+let state = {
+  subjects: [], schedule: {}, pendings: [],
+  profile: { name:'', institution:'', course:'' },
+  config:  { sabado: false }
+};
+let calendarDate = new Date();
+let pendingEditId = null;
+let blockTarget = null;
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  localStorage.setItem(STORAGE_VER_KEY, String(DATA_VERSION));
+}
+function renderAll() {
+  renderSchedule(); renderEditor(); renderCalendar(); renderPendings();
+}
+
+function load() {
+  const loaded = loadAndMigrate();
+  if (loaded) state = loaded;
+
+  // Sincronizar toggle sábado
+  const tog = document.getElementById('toggle-sabado');
+  if (tog) tog.checked = state.config.sabado;
+
+  renderAll();
+  renderProfile();
+
+  // Pantalla de bienvenida: solo si no hay nombre ni materias
+  if (!state.profile.name && !state.subjects.length) {
+    document.getElementById('welcome-screen').classList.remove('hidden');
+  }
+}
+
+/* ============================================================
+   BIENVENIDA
+   ============================================================ */
+function startSetup() {
+  document.getElementById('welcome-screen').classList.add('hidden');
+  const btn = document.querySelector('#nav .nav-btn:nth-child(3)');
+  switchView('materias', btn);
+  setTimeout(() => openEditProfile(), 300);
+}
+
+/* ============================================================
+   PERFIL
+   ============================================================ */
+function renderProfile() {
+  const p = state.profile;
+  const nameEl   = document.getElementById('profile-name-display');
+  const detailEl = document.getElementById('profile-detail-display');
+  const avatarEl = document.getElementById('profile-avatar');
+  if (p.name) {
+    nameEl.textContent   = p.name;
+    const parts = [p.institution, p.course].filter(Boolean);
+    detailEl.textContent = parts.length ? parts.join(' · ') : 'Sin institución configurada';
+    avatarEl.textContent = p.name.charAt(0).toUpperCase();
+  } else {
+    nameEl.textContent   = 'Sin configurar';
+    detailEl.textContent = 'Toca ✏️ para editar tu perfil';
+    avatarEl.textContent = '?';
+  }
+}
+function openEditProfile() {
+  const p = state.profile;
+  showModal('Mi Perfil', `
+    <div class="form-group">
+      <label class="form-label">Nombre completo</label>
+      <input class="form-input" id="f-pname" placeholder="Ej: JUAN PÉREZ" value="${p.name||''}" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Institución</label>
+      <input class="form-input" id="f-pinst" placeholder="Ej: ESPOCH · UNIDAD EDU. BOLÍVAR" value="${p.institution||''}" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Curso / Carrera / Semestre</label>
+      <input class="form-input" id="f-pcourse" placeholder="Ej: 3RO BGU · ING. SISTEMAS 4TO SEM." value="${p.course||''}" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveProfile()">Guardar</button>
+    </div>`, true);
+}
+function saveProfile() {
+  const name       = document.getElementById('f-pname').value.trim();
+  const institution= document.getElementById('f-pinst').value.trim();
+  const course     = document.getElementById('f-pcourse').value.trim();
+  if (!name) { toast('Ingresa tu nombre'); return; }
+  state.profile = { name, institution, course };
+  save(); renderProfile(); closeModal(); toast('Perfil guardado ✓');
+}
+
+/* ============================================================
+   CONFIG — SÁBADO
+   ============================================================ */
+function toggleSabado(val) {
+  state.config.sabado = val;
+  save(); renderSchedule();
+  toast(val ? 'Sábado habilitado' : 'Sábado desactivado');
+}
+function getDays()     { return state.config.sabado ? ['LU','MA','MI','JU','VI','SA'] : ['LU','MA','MI','JU','VI']; }
+function getDaysFull() { return state.config.sabado ? ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'] : ['Lunes','Martes','Miércoles','Jueves','Viernes']; }
+
+/* ============================================================
+   HORARIO
+   ============================================================ */
+function renderSchedule() {
+  const c    = document.getElementById('schedule-container');
+  const subEl= document.getElementById('schedule-sub');
+  if (!state.subjects.length) {
+    c.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-title">Sin materias aún</div><div class="empty-sub">Ve a Materias para crearlas</div></div>';
+    subEl.textContent='Configura tus materias primero'; return;
+  }
+  const DAYS   = getDays();
+  const numD   = DAYS.length;
+  const cols   = `52px repeat(${numD},1fr)`;
+  const count  = Object.values(state.schedule).filter(v=>v).length;
+  subEl.textContent = `${count} bloques asignados`;
+
+  let h = `<div class="schedule-grid">
+    <div class="schedule-header" style="display:grid;grid-template-columns:${cols}">
+      <div class="schedule-header-cell"></div>`;
+  DAYS.forEach(d => h += `<div class="schedule-header-cell">${d}</div>`);
+  h += `</div>`;
+
+  HOURS.forEach((hr, hi) => {
+    h += `<div class="schedule-row" style="display:grid;grid-template-columns:${cols}">
+      <div class="schedule-time">${hr}</div>`;
+    for (let d=0; d<numD; d++) {
+      const key = `${d}_${hi}`;
+      const sid = state.schedule[key];
+      const sub = sid ? state.subjects.find(s=>s.id===sid) : null;
+      if (sub) {
+        h += `<div class="schedule-cell"><div class="block" style="background:${sub.color}" onclick="showBlockDetail('${key}')">
           <div class="block-name">${sub.name.substring(0,12)}</div>
           <div class="block-code">${sub.building}${sub.room}</div>
         </div></div>`;
       } else {
-        h+=`<div class="schedule-cell"><div class="empty-block" onclick="openAssignBlock(${d},${hi})"><div class="add-icon">+</div></div></div>`;
+        h += `<div class="schedule-cell"><div class="empty-block" onclick="openAssignBlock(${d},${hi})"><div class="add-icon">+</div></div></div>`;
       }
     }
-    h+=`</div>`;
+    h += `</div>`;
   });
-  h+=`</div>`;
-  c.innerHTML=h;
+  h += `</div>`;
+  c.innerHTML = h;
 }
 
-function showBlockDetail(key){
-  const sid=state.schedule[key];
-  if(!sid)return;
-  const sub=state.subjects.find(s=>s.id===sid);
-  if(!sub)return;
-  const [di,hi]=key.split('_').map(Number);
-  const pop=document.getElementById('detail-pop');
+function showBlockDetail(key) {
+  const sid = state.schedule[key]; if(!sid) return;
+  const sub = state.subjects.find(s=>s.id===sid); if(!sub) return;
+  const [di,hi] = key.split('_').map(Number);
   document.getElementById('detail-content').innerHTML=`
     <div class="detail-subject" style="color:${sub.color}">${sub.name}</div>
-    <div class="detail-row"><span class="detail-icon">🕐</span>${HOURS[hi]} - ${HOURS_END[hi]}</div>
-    <div class="detail-row"><span class="detail-icon">📍</span>${sub.building}${sub.room} · Edificio ${sub.building}, Aula ${sub.room}</div>
+    <div class="detail-row"><span class="detail-icon">🕐</span>${HOURS[hi]} – ${HOURS_END[hi]}</div>
+    <div class="detail-row"><span class="detail-icon">📍</span>Edificio ${sub.building}, Aula ${sub.room}</div>
     <div class="detail-row"><span class="detail-icon">👤</span>${sub.teacher}</div>
     <div style="display:flex;gap:8px;margin-top:12px">
       <button class="btn btn-ghost btn-sm" style="flex:1;justify-content:center" onclick="closeDetail();openAssignBlock(${di},${hi})">Cambiar</button>
       <button class="btn btn-sm" style="flex:1;justify-content:center;background:#ef4444;color:#fff;border:none" onclick="removeBlock('${key}')">Quitar</button>
     </div>`;
-  pop.classList.add('show');
+  document.getElementById('detail-pop').classList.add('show');
 }
-function closeDetail(){document.getElementById('detail-pop').classList.remove('show')}
-function removeBlock(key){state.schedule[key]=null;save();renderSchedule();closeDetail();toast('Bloque eliminado')}
+function closeDetail(){ document.getElementById('detail-pop').classList.remove('show'); }
+function removeBlock(key){ state.schedule[key]=null; save(); renderSchedule(); closeDetail(); toast('Bloque eliminado'); }
 
-/* ====== EDITOR ====== */
-function renderEditor(){
-  const el=document.getElementById('subjects-list');
-  if(!state.subjects.length){
-    el.innerHTML='<div style="text-align:center;color:var(--text3);font-size:13px;padding:16px">No hay materias aún</div>';return;
+/* ============================================================
+   EDITOR DE MATERIAS
+   ============================================================ */
+function renderEditor() {
+  const el = document.getElementById('subjects-list');
+  if (!state.subjects.length) {
+    el.innerHTML='<div style="text-align:center;color:var(--text3);font-size:13px;padding:16px">No hay materias aún</div>'; return;
   }
-  el.innerHTML=state.subjects.map(s=>`
+  el.innerHTML = state.subjects.map(s=>`
     <div class="subject-chip">
       <div class="chip-color" style="background:${s.color}"></div>
       <div class="chip-info">
@@ -349,19 +586,19 @@ function renderEditor(){
       </div>
     </div>`).join('');
 }
-
-function openAddSubject(){
-  pendingEditId=null;
-  showModal('Nueva Materia',buildSubjectForm(null));
+function openAddSubject() {
+  pendingEditId = null;
+  showModal('Nueva Materia', buildSubjectForm(null), true);
 }
-function openEditSubject(id){
-  const s=state.subjects.find(x=>x.id===id);
-  if(!s)return;
-  pendingEditId=id;
-  showModal('Editar Materia',buildSubjectForm(s));
+function openEditSubject(id) {
+  const s = state.subjects.find(x=>x.id===id); if(!s) return;
+  pendingEditId = id;
+  showModal('Editar Materia', buildSubjectForm(s), true);
 }
-function buildSubjectForm(s){
-  const selColors=COLORS.map((c,i)=>`<div class="color-swatch${s&&s.color===c?' selected':(!s&&i===0?' selected':'')}" style="background:${c}" onclick="selectColor(this,'${c}')"></div>`).join('');
+function buildSubjectForm(s) {
+  const selColors = COLORS.map((c,i)=>
+    `<div class="color-swatch${s&&s.color===c?' selected':(!s&&i===0?' selected':'')}" style="background:${c}" onclick="selectColor(this,'${c}')"></div>`
+  ).join('');
   return `
     <div class="form-group">
       <label class="form-label">Nombre de la materia</label>
@@ -373,17 +610,17 @@ function buildSubjectForm(s){
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div class="form-group">
-        <label class="form-label">Edificio (Letra)</label>
+        <label class="form-label">Edificio</label>
         <input class="form-input" id="f-building" placeholder="F" maxlength="2" value="${s?s.building:''}" oninput="this.value=this.value.toUpperCase()">
       </div>
       <div class="form-group">
-        <label class="form-label">Aula (Número)</label>
+        <label class="form-label">Aula</label>
         <input class="form-input" id="f-room" placeholder="301" maxlength="4" value="${s?s.room:''}">
       </div>
     </div>
     <div class="form-group">
       <label class="form-label">Color identificador</label>
-      <div class="color-grid" id="color-grid">${selColors}</div>
+      <div class="color-grid">${selColors}</div>
     </div>
     <input type="hidden" id="f-color" value="${s?s.color:COLORS[0]}">
     <div class="modal-actions">
@@ -391,64 +628,70 @@ function buildSubjectForm(s){
       <button class="btn btn-primary" onclick="saveSubject()">Guardar</button>
     </div>`;
 }
-function selectColor(el,color){
-  document.getElementById('f-color').value=color;
+function selectColor(el, color) {
+  document.getElementById('f-color').value = color;
   document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
   el.classList.add('selected');
 }
-function saveSubject(){
-  const name=document.getElementById('f-name').value.trim();
-  const teacher=document.getElementById('f-teacher').value.trim();
-  const building=document.getElementById('f-building').value.trim();
-  const room=document.getElementById('f-room').value.trim();
-  const color=document.getElementById('f-color').value;
-  if(!name||!teacher||!building||!room){toast('Completa todos los campos');return;}
-  if(pendingEditId){
-    const s=state.subjects.find(x=>x.id===pendingEditId);
-    Object.assign(s,{name,teacher,building,room,color});
+function saveSubject() {
+  const name     = document.getElementById('f-name').value.trim();
+  const teacher  = document.getElementById('f-teacher').value.trim();
+  const building = document.getElementById('f-building').value.trim();
+  const room     = document.getElementById('f-room').value.trim();
+  const color    = document.getElementById('f-color').value;
+  if (!name||!teacher||!building||!room) { toast('Completa todos los campos'); return; }
+  if (pendingEditId) {
+    Object.assign(state.subjects.find(x=>x.id===pendingEditId), {name,teacher,building,room,color});
   } else {
     state.subjects.push({id:'s'+Date.now(),name,teacher,building,room,color});
   }
-  save();renderAll();closeModal();toast(pendingEditId?'Materia actualizada':'Materia creada');
+  save(); renderAll(); closeModal();
+  toast(pendingEditId ? 'Materia actualizada' : 'Materia creada');
 }
-function deleteSubject(id){
-  if(!confirm('¿Eliminar esta materia?'))return;
-  state.subjects=state.subjects.filter(s=>s.id!==id);
-  Object.keys(state.schedule).forEach(k=>{if(state.schedule[k]===id)state.schedule[k]=null;});
-  state.pendings=state.pendings.filter(p=>p.subjectId!==id);
-  save();renderAll();toast('Materia eliminada');
+function deleteSubject(id) {
+  if (!confirm('¿Eliminar esta materia?')) return;
+  state.subjects = state.subjects.filter(s=>s.id!==id);
+  Object.keys(state.schedule).forEach(k=>{ if(state.schedule[k]===id) state.schedule[k]=null; });
+  state.pendings = state.pendings.filter(p=>p.subjectId!==id);
+  save(); renderAll(); toast('Materia eliminada');
 }
 
-/* ====== ASIGNAR BLOQUE ====== */
-function openAssignBlock(d,h){
-  blockTarget={d,h};
-  const key=`${d}_${h}`;
-  const cur=state.schedule[key];
-  const opts=state.subjects.map(s=>`
+/* ============================================================
+   ASIGNAR BLOQUE
+   ============================================================ */
+function openAssignBlock(d, h) {
+  blockTarget = {d, h};
+  const key = `${d}_${h}`;
+  const cur = state.schedule[key];
+  const DAYS_FULL = getDaysFull();
+  const opts = state.subjects.map(s=>`
     <div class="subject-chip" style="cursor:pointer;border:2px solid ${cur===s.id?s.color:'transparent'}" onclick="assignBlock('${s.id}')">
       <div class="chip-color" style="background:${s.color}"></div>
       <div class="chip-info"><div class="chip-name">${s.name}</div><div class="chip-detail">${s.teacher}</div></div>
     </div>`).join('');
   showModal(`${DAYS_FULL[d]} · ${HOURS[h]}–${HOURS_END[h]}`,`
-    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">${opts||'<div style="color:var(--text3);text-align:center;padding:16px">Crea materias primero en el Editor</div>'}</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">${opts||'<div style="color:var(--text3);text-align:center;padding:16px">Crea materias primero</div>'}</div>
+    ${cur?`<button class="btn btn-ghost" onclick="removeBlock('${key}');closeModal()" style="width:100%;justify-content:center;margin-bottom:8px;color:#ef4444;border-color:#ef4444">Quitar bloque</button>`:''}
     <button class="btn btn-ghost" onclick="closeModal()" style="width:100%;justify-content:center">Cancelar</button>`);
 }
-function assignBlock(sid){
-  if(!blockTarget)return;
-  const key=`${blockTarget.d}_${blockTarget.h}`;
-  state.schedule[key]=sid;
-  save();renderSchedule();closeModal();toast('Bloque asignado');
+function assignBlock(sid) {
+  if (!blockTarget) return;
+  state.schedule[`${blockTarget.d}_${blockTarget.h}`] = sid;
+  save(); renderSchedule(); closeModal(); toast('Bloque asignado');
 }
 
-/* ====== PENDIENTES ====== */
-function openAddPending(){
-  pendingEditId=null;
-  if(!state.subjects.length){toast('Crea materias primero');return;}
-  showModal('Nuevo Pendiente',buildPendingForm(null),true);
+/* ============================================================
+   PENDIENTES
+   ============================================================ */
+function openAddPending() {
+  pendingEditId = null;
+  if (!state.subjects.length) { toast('Crea materias primero'); return; }
+  showModal('Nuevo Pendiente', buildPendingForm(null), true);
 }
-function buildPendingForm(p){
-  const subOpts=state.subjects.map(s=>`<option value="${s.id}"${p&&p.subjectId===s.id?' selected':''}>${s.name}</option>`).join('');
-  const today=new Date().toISOString().split('T')[0];
+function buildPendingForm(p) {
+  const subOpts = state.subjects.map(s=>
+    `<option value="${s.id}"${p&&p.subjectId===s.id?' selected':''}>${s.name}</option>`).join('');
+  const today = new Date().toISOString().split('T')[0];
   return `
     <div class="form-group">
       <label class="form-label">Tipo</label>
@@ -480,111 +723,51 @@ function buildPendingForm(p){
       <button class="btn btn-primary" onclick="savePending()">Guardar</button>
     </div>`;
 }
-function savePending(){
-  const type=document.getElementById('f-type').value;
-  const subjectId=document.getElementById('f-subject').value;
-  const desc=document.getElementById('f-desc').value.trim();
-  const date=document.getElementById('f-date').value;
-  if(!subjectId||!date){toast('Completa los campos requeridos');return;}
-  if(pendingEditId){
-    const p=state.pendings.find(x=>x.id===pendingEditId);
-    Object.assign(p,{type,subjectId,desc,date});
+function savePending() {
+  const type      = document.getElementById('f-type').value;
+  const subjectId = document.getElementById('f-subject').value;
+  const desc      = document.getElementById('f-desc').value.trim();
+  const date      = document.getElementById('f-date').value;
+  if (!subjectId||!date) { toast('Completa los campos requeridos'); return; }
+  if (pendingEditId) {
+    Object.assign(state.pendings.find(x=>x.id===pendingEditId), {type,subjectId,desc,date});
   } else {
     state.pendings.push({id:'p'+Date.now(),type,subjectId,desc,date,done:false});
   }
-  save();renderCalendar();renderPendings();closeModal();toast('Pendiente guardado');
+  save(); renderCalendar(); renderPendings(); closeModal(); toast('Pendiente guardado');
 }
-function deletePending(id){
-  state.pendings=state.pendings.filter(p=>p.id!==id);
-  save();renderCalendar();renderPendings();toast('Eliminado');
+function deletePending(id) {
+  state.pendings = state.pendings.filter(p=>p.id!==id);
+  save(); renderCalendar(); renderPendings(); toast('Eliminado');
 }
-function completePending(id){
-  const p=state.pendings.find(x=>x.id===id);
-  if(!p)return;
-  p.done=!p.done;
-  save();renderCalendar();renderPendings();
-  toast(p.done?'¡Cumplido! ✓':'Marcado como pendiente');
+function completePending(id) {
+  const p = state.pendings.find(x=>x.id===id); if(!p) return;
+  p.done = !p.done;
+  save(); renderCalendar(); renderPendings();
+  toast(p.done ? '¡Cumplido! ✓' : 'Marcado como pendiente');
 }
-let doneVisible=false;
-function toggleDone(){
-  doneVisible=!doneVisible;
-  document.getElementById('done-list').style.display=doneVisible?'flex':'none';
+let doneVisible = false;
+function toggleDone() {
+  doneVisible = !doneVisible;
+  document.getElementById('done-list').style.display = doneVisible ? 'flex' : 'none';
 }
+function renderPendings() {
+  const elActive  = document.getElementById('pending-list');
+  const elDone    = document.getElementById('done-list');
+  const doneCount = document.getElementById('done-count');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const active = [...state.pendings].filter(p=>!p.done).sort((a,b)=>a.date.localeCompare(b.date));
+  const done   = [...state.pendings].filter(p=>p.done).sort((a,b)=>b.date.localeCompare(a.date));
+  doneCount.textContent = done.length || '';
+  document.getElementById('done-toggle').style.display = done.length ? 'flex' : 'none';
 
-/* ====== CALENDARIO ====== */
-function renderCalendar(){
-  const year=calendarDate.getFullYear();
-  const month=calendarDate.getMonth();
-  document.getElementById('month-title').textContent=`${MONTH_NAMES[month]} ${year}`;
-  const grid=document.getElementById('cal-grid');
-  let h=DAY_NAMES.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
-  const first=new Date(year,month,1).getDay();
-  const days=new Date(year,month+1,0).getDate();
-  const today=new Date();
-  for(let i=0;i<first;i++){
-    const d=new Date(year,month,1-first+i);
-    h+=`<div class="cal-day other-month"><div class="cal-day-num">${d.getDate()}</div></div>`;
-  }
-  for(let d=1;d<=days;d++){
-    const date=new Date(year,month,d);
-    const dow=date.getDay();
-    const isToday=d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
-    const dateStr=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const scheduleIdx=dow>=1&&dow<=5?dow-1:-1;
-    let dots='';
-    if(scheduleIdx>=0){
-      const subjectsToday=new Set();
-      for(let hi=0;hi<6;hi++){
-        const sid=state.schedule[`${scheduleIdx}_${hi}`];
-        if(sid)subjectsToday.add(sid);
-      }
-      subjectsToday.forEach(sid=>{
-        const sub=state.subjects.find(s=>s.id===sid);
-        if(!sub)return;
-        const pendCount=state.pendings.filter(p=>p.subjectId===sid&&p.date===dateStr).length;
-        const badge=pendCount?`<div class="cal-dot-badge">${pendCount}</div>`:'';
-        dots+=`<div class="cal-dot" style="background:${sub.color}">${badge}</div>`;
-      });
-    }
-    const extraPendings=state.pendings.filter(p=>p.date===dateStr);
-    if(scheduleIdx<0){
-      extraPendings.forEach(p=>{
-        const sub=state.subjects.find(s=>s.id===p.subjectId);
-        if(!sub)return;
-        dots+=`<div class="cal-dot" style="background:${sub.color}"><div class="cal-dot-badge">!</div></div>`;
-      });
-    }
-    h+=`<div class="cal-day${isToday?' today':''}">
-      <div class="cal-day-num">${d}</div>
-      <div class="cal-dots">${dots}</div>
-    </div>`;
-  }
-  grid.innerHTML=h;
-}
-function changeMonth(dir){
-  calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+dir,1);
-  renderCalendar();
-}
-
-function renderPendings(){
-  const elActive=document.getElementById('pending-list');
-  const elDone=document.getElementById('done-list');
-  const doneCount=document.getElementById('done-count');
-  const today=new Date();today.setHours(0,0,0,0);
-
-  const active=[...state.pendings].filter(p=>!p.done).sort((a,b)=>a.date.localeCompare(b.date));
-  const done=[...state.pendings].filter(p=>p.done).sort((a,b)=>b.date.localeCompare(a.date));
-
-  doneCount.textContent=done.length||'';
-  document.getElementById('done-toggle').style.display=done.length?'flex':'none';
-
-  function buildItem(p,isDone){
-    const sub=state.subjects.find(s=>s.id===p.subjectId);if(!sub)return'';
-    const date=new Date(p.date+'T00:00:00');
-    const diff=Math.round((date-today)/(1000*60*60*24));
-    const diffLabel=isDone?'Cumplido':diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
-    const diffClass=isDone?'days-ok':diff<0||diff===0?'days-urgent':diff<=3?'days-soon':'days-ok';
-    const dateLabel=date.toLocaleDateString('es-EC',{day:'numeric',month:'short'});
+  function buildItem(p, isDone) {
+    const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return '';
+    const date = new Date(p.date+'T00:00:00');
+    const diff = Math.round((date-today)/(1000*60*60*24));
+    const diffLabel = isDone?'Cumplido':diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
+    const diffClass = isDone?'days-ok':diff<0||diff===0?'days-urgent':diff<=3?'days-soon':'days-ok';
+    const dateLabel = date.toLocaleDateString('es-EC',{day:'numeric',month:'short'});
     return `<div class="pending-item${isDone?' done':''}">
       <div class="pending-color" style="background:${sub.color}"></div>
       <div class="pending-info">
@@ -606,58 +789,111 @@ function renderPendings(){
       </div>
     </div>`;
   }
-
-  if(!active.length){
-    elActive.innerHTML='<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes activos</div><div class="empty-sub">¡Todo al día!</div></div>';
-  } else {
-    elActive.innerHTML=active.map(p=>buildItem(p,false)).join('');
-  }
-  elDone.style.flexDirection='column';
-  elDone.style.gap='8px';
-  elDone.innerHTML=done.map(p=>buildItem(p,true)).join('');
+  elActive.innerHTML = active.length
+    ? active.map(p=>buildItem(p,false)).join('')
+    : '<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes activos</div><div class="empty-sub">¡Todo al día!</div></div>';
+  elDone.style.cssText = 'flex-direction:column;gap:8px';
+  elDone.innerHTML = done.map(p=>buildItem(p,true)).join('');
 }
 
-/* ====== UTILS ====== */
-function switchView(name,btn){
+/* ============================================================
+   CALENDARIO
+   ============================================================ */
+function renderCalendar() {
+  const year  = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+  document.getElementById('month-title').textContent = `${MONTH_NAMES[month]} ${year}`;
+  const grid  = document.getElementById('cal-grid');
+  let h = DAY_NAMES.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
+  const first = new Date(year,month,1).getDay();
+  const days  = new Date(year,month+1,0).getDate();
+  const today = new Date();
+  for (let i=0; i<first; i++) {
+    const d = new Date(year,month,1-first+i);
+    h += `<div class="cal-day other-month"><div class="cal-day-num">${d.getDate()}</div></div>`;
+  }
+  for (let d=1; d<=days; d++) {
+    const date    = new Date(year,month,d);
+    const dow     = date.getDay();
+    const isToday = d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    // Mapear día de semana a índice de columna (sábado = 5 si está habilitado)
+    let scheduleIdx = -1;
+    if (dow>=1&&dow<=5) scheduleIdx = dow-1;
+    else if (dow===6 && state.config.sabado) scheduleIdx = 5;
+    let dots = '';
+    if (scheduleIdx>=0) {
+      const subjectsToday = new Set();
+      for (let hi=0; hi<HOURS.length; hi++) {
+        const sid = state.schedule[`${scheduleIdx}_${hi}`];
+        if (sid) subjectsToday.add(sid);
+      }
+      subjectsToday.forEach(sid=>{
+        const sub = state.subjects.find(s=>s.id===sid); if(!sub) return;
+        const pendCount = state.pendings.filter(p=>p.subjectId===sid&&p.date===dateStr).length;
+        const badge = pendCount?`<div class="cal-dot-badge">${pendCount}</div>`:'';
+        dots += `<div class="cal-dot" style="background:${sub.color}">${badge}</div>`;
+      });
+    }
+    if (scheduleIdx<0) {
+      state.pendings.filter(p=>p.date===dateStr).forEach(p=>{
+        const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return;
+        dots += `<div class="cal-dot" style="background:${sub.color}"><div class="cal-dot-badge">!</div></div>`;
+      });
+    }
+    h += `<div class="cal-day${isToday?' today':''}">
+      <div class="cal-day-num">${d}</div>
+      <div class="cal-dots">${dots}</div>
+    </div>`;
+  }
+  grid.innerHTML = h;
+}
+function changeMonth(dir) {
+  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+dir, 1);
+  renderCalendar();
+}
+
+/* ============================================================
+   UTILS
+   ============================================================ */
+function switchView(name, btn) {
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   closeDetail();
 }
-function showModal(title,content,centered=false){
-  const overlay=document.getElementById('modal-overlay');
-  const modal=document.getElementById('modal');
-  document.getElementById('modal-content').innerHTML=`<div class="modal-title">${title}</div>${content}`;
-  if(centered){
-    overlay.classList.add('centered');
-    modal.style.borderRadius='16px';
-  } else {
-    overlay.classList.remove('centered');
-    modal.style.borderRadius='20px 20px 0 0';
-  }
+function showModal(title, content, centered=false) {
+  const overlay = document.getElementById('modal-overlay');
+  const modal   = document.getElementById('modal');
+  document.getElementById('modal-content').innerHTML = `<div class="modal-title">${title}</div>${content}`;
+  if (centered) { overlay.classList.add('centered'); modal.style.borderRadius='16px'; }
+  else          { overlay.classList.remove('centered'); modal.style.borderRadius='20px 20px 0 0'; }
   overlay.classList.add('open');
 }
-function closeModal(e){
-  if(e&&e.target!==document.getElementById('modal-overlay'))return;
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal-overlay')) return;
   document.getElementById('modal-overlay').classList.remove('open');
 }
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
 }
-function confirmReset(){
-  if(confirm('¿Resetear TODO? Se eliminarán materias, horario y pendientes.')){
-    state={subjects:[],schedule:{},pendings:[]};
-    save();renderAll();toast('Sistema reseteado');
-  }
+function confirmReset() {
+  if (!confirm('¿Resetear TODO? Se eliminarán materias, horario, pendientes y perfil.')) return;
+  state = { subjects:[], schedule:{}, pendings:[], profile:{name:'',institution:'',course:''}, config:{sabado:false} };
+  document.getElementById('toggle-sabado').checked = false;
+  save(); renderAll(); renderProfile(); toast('Sistema reseteado');
 }
+
+/* ============================================================
+   INICIO
+   ============================================================ */
 load();
 
-/* ====== SERVICE WORKER REGISTRATION ====== */
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(()=>{});
   });
 }
