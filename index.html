@@ -53,12 +53,6 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .card{background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius);padding:16px}
 .card-sm{padding:12px}
 
-/* EMPTY STATE */
-.empty{display:flex;flex-direction:column;align-items:center;gap:12px;padding:48px 16px;color:var(--text3);text-align:center}
-.empty-icon{font-size:40px;opacity:.4}
-.empty-title{font-size:15px;font-weight:600;color:var(--text2)}
-.empty-sub{font-size:13px}
-
 /* HORARIO */
 .schedule-grid{display:flex;flex-direction:column;gap:1px;background:var(--bg3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--bg3)}
 .schedule-header{background:var(--bg2)}
@@ -107,8 +101,6 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .pending-item.done .pending-subject{text-decoration:line-through;color:var(--text3)}
 .done-section-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:4px 0;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
 .done-section-title::after{content:'';flex:1;height:1px;background:var(--bg3)}
-#modal-overlay.centered{align-items:center}
-#modal-overlay.centered #modal{border-radius:16px;max-height:85vh;width:calc(100% - 32px);max-width:400px}
 .section-title{font-size:13px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:4px 0}
 .days-until{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
 .days-urgent{background:#fee2e2;color:#991b1b}
@@ -138,8 +130,9 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .profile-avatar{width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0}
 
 /* MODAL */
-#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 #modal-overlay.open{display:flex}
+#modal-overlay.centered #modal{border-radius:16px;max-height:85vh;width:calc(100% - 32px);max-width:400px}
 #modal{background:var(--bg1);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 20px env(safe-area-inset-bottom,20px);max-height:90vh;overflow-y:auto;border-top:1px solid var(--bg3)}
 .modal-handle{width:36px;height:4px;background:var(--bg3);border-radius:2px;margin:0 auto 16px}
 .modal-title{font-size:17px;font-weight:700;margin-bottom:16px}
@@ -168,8 +161,8 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .detail-icon{color:var(--text3);font-size:13px}
 
 /* BIENVENIDA */
-#welcome-screen{position:fixed;inset:0;background:var(--bg0);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:0;max-width:430px;margin:0 auto}
-#welcome-screen.hidden{display:none}
+#welcome-screen{position:fixed;inset:0;background:var(--bg0);z-index:300;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:0;max-width:430px;margin:0 auto}
+#welcome-screen.active{display:flex}
 .welcome-logo{font-size:72px;margin-bottom:24px}
 .welcome-title{font-size:28px;font-weight:700;color:var(--text1);text-align:center;margin-bottom:8px}
 .welcome-sub{font-size:15px;color:var(--text3);text-align:center;margin-bottom:36px;line-height:1.6}
@@ -183,27 +176,15 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 <body>
 
 <!-- BIENVENIDA -->
-<div id="welcome-screen" class="hidden">
+<div id="welcome-screen">
   <div class="welcome-logo">📅</div>
   <div class="welcome-title">Mi Agenda</div>
-  <div class="welcome-sub">Tu horario escolar o universitario,<br>siempre a mano.</div>
+  <div class="welcome-sub">Tu horario universitario y pendientes,<br>siempre a mano.</div>
   <div class="welcome-steps">
-    <div class="welcome-step">
-      <div class="welcome-step-num">1</div>
-      <div class="welcome-step-text"><strong>Completa tu perfil</strong> — nombre e institución.</div>
-    </div>
-    <div class="welcome-step">
-      <div class="welcome-step-num">2</div>
-      <div class="welcome-step-text"><strong>Crea tus materias</strong> con docente y aula.</div>
-    </div>
-    <div class="welcome-step">
-      <div class="welcome-step-num">3</div>
-      <div class="welcome-step-text"><strong>Arma tu horario</strong> asignando cada materia a su bloque.</div>
-    </div>
-    <div class="welcome-step">
-      <div class="welcome-step-num">4</div>
-      <div class="welcome-step-text"><strong>Registra pendientes</strong> — exámenes, deberes y más.</div>
-    </div>
+    <div class="welcome-step"><div class="welcome-step-num">1</div><div class="welcome-step-text"><strong>Completa tu perfil</strong> — nombre e institución.</div></div>
+    <div class="welcome-step"><div class="welcome-step-num">2</div><div class="welcome-step-text"><strong>Crea tus materias</strong> con docente y aula.</div></div>
+    <div class="welcome-step"><div class="welcome-step-num">3</div><div class="welcome-step-text"><strong>Arma tu horario</strong> asignando cada materia a su bloque.</div></div>
+    <div class="welcome-step"><div class="welcome-step-num">4</div><div class="welcome-step-text"><strong>Registra pendientes</strong> — exámenes, deberes y más.</div></div>
   </div>
   <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:15px" onclick="startSetup()">Comenzar →</button>
 </div>
@@ -277,15 +258,38 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
       <!-- CONFIGURACIÓN -->
       <div class="card card-sm">
         <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:4px">CONFIGURACIÓN</div>
+        
         <div class="toggle-row">
           <div>
             <div class="toggle-label">Incluir sábado</div>
-            <div class="toggle-desc">Muestra sábado en el horario semanal</div>
+            <div class="toggle-desc">Muestra la columna de sábado en el horario</div>
           </div>
           <label class="toggle">
             <input type="checkbox" id="toggle-sabado" onchange="toggleSabado(this.checked)">
             <span class="toggle-slider"></span>
           </label>
+        </div>
+
+        <!-- RANGO DE HORAS -->
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--bg3)">
+          <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">Rango de horas del horario</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="form-group">
+              <label class="form-label">Hora de inicio</label>
+              <select class="form-select" id="start-hour" onchange="saveHourConfig()"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hora de fin</label>
+              <select class="form-select" id="end-hour" onchange="saveHourConfig()"></select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actualizar aplicación -->
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--bg3)">
+          <button onclick="updateApp()" class="btn btn-ghost" style="width:100%;justify-content:center;gap:8px">
+            🔄 Actualizar aplicación
+          </button>
         </div>
       </div>
 
@@ -330,250 +334,196 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
   <div id="detail-content"></div>
 </div>
 
+<!-- TOAST -->
 <div id="toast"></div>
 
 <script>
-/* ============================================================
-   CONSTANTES
-   ============================================================ */
-const COLORS=['#e53e3e','#dd6b20','#d69e2e','#38a169','#2b6cb0','#6b46c1','#d53f8c','#00a3c4','#2d3748','#c05621','#276749','#9b2335'];
-const HOURS=['07:00','08:00','09:00','10:00','11:00','12:00'];
-const HOURS_END=['08:00','09:00','10:00','11:00','12:00','13:00'];
-const TYPE_LABELS={exam:'EXAMEN',deber:'DEBER',leccion:'LECCIÓN',practica:'PRÁCTICA',proyecto:'PROYECTO',taller:'TALLER',exposicion:'EXPOSICIÓN',otro:'OTRO'};
-const TYPE_CLASS={exam:'type-exam',deber:'type-deber',leccion:'type-leccion',practica:'type-practica',proyecto:'type-proyecto',taller:'type-taller',exposicion:'type-exposicion',otro:'type-otro'};
-const MONTH_NAMES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const DAY_NAMES=['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
-
-/* ============================================================
-   SISTEMA DE VERSIONES Y MIGRACIÓN
-   ─────────────────────────────────────────────────────────────
-   Regla: cada vez que cambie la estructura de `state`, subir
-   DATA_VERSION y escribir una función migrateVx_to_Vy().
-   El loader sube automáticamente los datos del usuario hasta
-   la versión actual sin perder nada.
-   ============================================================ */
+// ==================== CONSTANTES ====================
 const DATA_VERSION = 2;
 const STORAGE_KEY = 'mi_agenda_data';
-const STORAGE_VER_KEY = 'mi_agenda_version';
 
-function migrateV1toV2(old) {
-  // V1: clave 'mi_agenda_v1' con {subjects, schedule, pendings}
-  // V2: agrega profile y config
-  return {
-    subjects:  old.subjects  || [],
-    schedule:  old.schedule  || {},
-    pendings:  old.pendings  || [],
-    profile:   { name:'', institution:'', course:'' },
-    config:    { sabado: false }
-  };
-}
+const ALL_HOURS = ["07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"];
+const HOURS_END = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
 
-function loadAndMigrate() {
-  // 1. Intentar datos en formato actual
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) {
-    // 2. Buscar formato V1 (clave antigua)
-    const oldRaw = localStorage.getItem('mi_agenda_v1');
-    if (oldRaw) {
-      try {
-        const migrated = migrateV1toV2(JSON.parse(oldRaw));
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
-        localStorage.setItem(STORAGE_VER_KEY, String(DATA_VERSION));
-        return migrated; // Datos viejos migrados — el usuario no pierde nada
-      } catch(e) {}
-    }
-    return null; // Primera vez de verdad
-  }
-  // 3. Hay datos modernos — aplicar migraciones pendientes si las hay
-  try {
-    let data = JSON.parse(raw);
-    // Garantizar campos nuevos aunque vengan de una versión intermedia
-    data.profile = data.profile || { name:'', institution:'', course:'' };
-    data.config  = data.config  || { sabado: false };
-    // Futuro: if(ver < 3) data = migrateV2toV3(data);
-    return data;
-  } catch(e) {
-    return null;
-  }
-}
+const MONTH_NAMES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+const DAY_NAMES = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
 
-/* ============================================================
-   ESTADO GLOBAL
-   ============================================================ */
+const COLORS = ["#6366f1","#ec4899","#14b8a6","#f59e0b","#8b5cf6","#ef4444","#10b981","#3b82f6"]; // 8 colores completos
+
+const TYPE_LABELS = {exam:"Examen",deber:"Deber",leccion:"Lección",practica:"Práctica",proyecto:"Proyecto",taller:"Taller",exposicion:"Exposición",otro:"Otro"};
+const TYPE_CLASS = {exam:"type-exam",deber:"type-deber",leccion:"type-leccion",practica:"type-practica",proyecto:"type-proyecto",taller:"type-taller",exposicion:"type-exposicion",otro:"type-otro"};
+
+// ==================== ESTADO ====================
 let state = {
-  subjects: [], schedule: {}, pendings: [],
-  profile: { name:'', institution:'', course:'' },
-  config:  { sabado: false }
+  version: DATA_VERSION,
+  subjects: [],
+  schedule: {},
+  pendings: [],
+  profile: { name: '', institution: '', course: '' },
+  config: { sabado: false, startHour: 7, endHour: 13 }
 };
+
 let calendarDate = new Date();
 let pendingEditId = null;
 let blockTarget = null;
+let swRegistration = null;
+
+// ==================== PERSISTENCIA ====================
+function load() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    let data = JSON.parse(saved);
+    if (!data.version || data.version < DATA_VERSION) data.version = DATA_VERSION;
+    state = {...state, ...data};
+  }
+  document.getElementById('toggle-sabado').checked = state.config.sabado;
+  populateHourSelects();
+  renderAll();
+  checkFirstTime();
+}
 
 function save() {
+  state.version = DATA_VERSION;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  localStorage.setItem(STORAGE_VER_KEY, String(DATA_VERSION));
-}
-function renderAll() {
-  renderSchedule(); renderEditor(); renderCalendar(); renderPendings();
 }
 
-function load() {
-  const loaded = loadAndMigrate();
-  if (loaded) state = loaded;
-
-  // Sincronizar toggle sábado
-  const tog = document.getElementById('toggle-sabado');
-  if (tog) tog.checked = state.config.sabado;
-
-  renderAll();
-  renderProfile();
-
-  // Pantalla de bienvenida: solo si no hay nombre ni materias
-  if (!state.profile.name && !state.subjects.length) {
-    document.getElementById('welcome-screen').classList.remove('hidden');
+// ==================== BIENVENIDA ====================
+function checkFirstTime() {
+  const welcome = document.getElementById('welcome-screen');
+  if (!state.profile.name && state.subjects.length === 0) {
+    welcome.classList.add('active');
+  } else {
+    welcome.classList.remove('active');
   }
 }
 
-/* ============================================================
-   BIENVENIDA
-   ============================================================ */
 function startSetup() {
-  document.getElementById('welcome-screen').classList.add('hidden');
-  const btn = document.querySelector('#nav .nav-btn:nth-child(3)');
-  switchView('materias', btn);
-  setTimeout(() => openEditProfile(), 300);
+  document.getElementById('welcome-screen').classList.remove('active');
+  switchView('materias', document.querySelector('.nav-btn[onclick*="materias"]'));
+  setTimeout(openEditProfile, 300);
 }
 
-/* ============================================================
-   PERFIL
-   ============================================================ */
+// ==================== PERFIL ====================
 function renderProfile() {
-  const p = state.profile;
-  const nameEl   = document.getElementById('profile-name-display');
+  const nameEl = document.getElementById('profile-name-display');
   const detailEl = document.getElementById('profile-detail-display');
   const avatarEl = document.getElementById('profile-avatar');
-  if (p.name) {
-    nameEl.textContent   = p.name;
-    const parts = [p.institution, p.course].filter(Boolean);
-    detailEl.textContent = parts.length ? parts.join(' · ') : 'Sin institución configurada';
-    avatarEl.textContent = p.name.charAt(0).toUpperCase();
+  if (state.profile.name) {
+    avatarEl.textContent = state.profile.name.charAt(0).toUpperCase();
+    nameEl.textContent = state.profile.name;
+    detailEl.textContent = `${state.profile.institution || '-'} • ${state.profile.course || '-'}`;
   } else {
-    nameEl.textContent   = 'Sin configurar';
-    detailEl.textContent = 'Toca ✏️ para editar tu perfil';
     avatarEl.textContent = '?';
+    nameEl.textContent = 'Sin configurar';
+    detailEl.textContent = 'Toca ✏️ para editar tu perfil';
   }
 }
+
 function openEditProfile() {
   const p = state.profile;
-  showModal('Mi Perfil', `
-    <div class="form-group">
-      <label class="form-label">Nombre completo</label>
-      <input class="form-input" id="f-pname" placeholder="Ej: JUAN PÉREZ" value="${p.name||''}" oninput="this.value=this.value.toUpperCase()">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Institución</label>
-      <input class="form-input" id="f-pinst" placeholder="Ej: ESPOCH · UNIDAD EDU. BOLÍVAR" value="${p.institution||''}" oninput="this.value=this.value.toUpperCase()">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Curso / Carrera / Semestre</label>
-      <input class="form-input" id="f-pcourse" placeholder="Ej: 3RO BGU · ING. SISTEMAS 4TO SEM." value="${p.course||''}" oninput="this.value=this.value.toUpperCase()">
-    </div>
+  showModal('Perfil del Estudiante', `
+    <div class="form-group"><label class="form-label">Nombre completo</label><input class="form-input" id="p-name" value="${p.name||''}" placeholder="Juan Pérez"></div>
+    <div class="form-group"><label class="form-label">Institución</label><input class="form-input" id="p-institution" value="${p.institution||''}"></div>
+    <div class="form-group"><label class="form-label">Curso / Semestre</label><input class="form-input" id="p-course" value="${p.course||''}"></div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveProfile()">Guardar</button>
-    </div>`, true);
+      <button class="btn btn-primary" onclick="saveProfile()">Guardar Perfil</button>
+    </div>
+  `, true);
 }
+
 function saveProfile() {
-  const name       = document.getElementById('f-pname').value.trim();
-  const institution= document.getElementById('f-pinst').value.trim();
-  const course     = document.getElementById('f-pcourse').value.trim();
-  if (!name) { toast('Ingresa tu nombre'); return; }
-  state.profile = { name, institution, course };
-  save(); renderProfile(); closeModal(); toast('Perfil guardado ✓');
+  state.profile.name = document.getElementById('p-name').value.trim();
+  state.profile.institution = document.getElementById('p-institution').value.trim();
+  state.profile.course = document.getElementById('p-course').value.trim();
+  save();
+  renderProfile();
+  closeModal();
+  toast('Perfil guardado');
+  checkFirstTime();
 }
 
-/* ============================================================
-   CONFIG — SÁBADO
-   ============================================================ */
-function toggleSabado(val) {
-  state.config.sabado = val;
-  save(); renderSchedule();
-  toast(val ? 'Sábado habilitado' : 'Sábado desactivado');
+// ==================== RANGO DE HORAS ====================
+function populateHourSelects() {
+  const startSel = document.getElementById('start-hour');
+  const endSel = document.getElementById('end-hour');
+  startSel.innerHTML = endSel.innerHTML = '';
+  ALL_HOURS.forEach((h, i) => {
+    startSel.innerHTML += `<option value="${i}" ${i===state.config.startHour?'selected':''}>${h}</option>`;
+    endSel.innerHTML += `<option value="${i}" ${i===state.config.endHour?'selected':''}>${h}</option>`;
+  });
 }
-function getDays()     { return state.config.sabado ? ['LU','MA','MI','JU','VI','SA'] : ['LU','MA','MI','JU','VI']; }
-function getDaysFull() { return state.config.sabado ? ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'] : ['Lunes','Martes','Miércoles','Jueves','Viernes']; }
 
-/* ============================================================
-   HORARIO
-   ============================================================ */
+function saveHourConfig() {
+  let start = parseInt(document.getElementById('start-hour').value);
+  let end = parseInt(document.getElementById('end-hour').value);
+  if (start >= end) end = start + 1;
+  state.config.startHour = start;
+  state.config.endHour = end;
+  document.getElementById('end-hour').value = end;
+  save();
+  renderSchedule();
+  toast('Rango de horas actualizado');
+}
+
+// ==================== TOGGLE SÁBADO ====================
+function toggleSabado(checked) {
+  state.config.sabado = checked;
+  save();
+  renderSchedule();
+  toast(checked ? 'Sábado activado' : 'Sábado desactivado');
+}
+
+function getNumDays() { return state.config.sabado ? 6 : 5; }
+function getDaysFull() { return state.config.sabado ? ['LUN','MAR','MIÉ','JUE','VIE','SÁB'] : ['LUN','MAR','MIÉ','JUE','VIE']; }
+
+// ==================== HORARIO ====================
 function renderSchedule() {
-  const c    = document.getElementById('schedule-container');
-  const subEl= document.getElementById('schedule-sub');
-  if (!state.subjects.length) {
-    c.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-title">Sin materias aún</div><div class="empty-sub">Ve a Materias para crearlas</div></div>';
-    subEl.textContent='Configura tus materias primero'; return;
-  }
-  const DAYS   = getDays();
-  const numD   = DAYS.length;
-  const cols   = `52px repeat(${numD},1fr)`;
-  const count  = Object.values(state.schedule).filter(v=>v).length;
-  subEl.textContent = `${count} bloques asignados`;
+  const c = document.getElementById('schedule-container');
+  const numD = getNumDays();
+  const days = getDaysFull();
+  const start = state.config.startHour;
+  const end = state.config.endHour;
+  const activeHours = ALL_HOURS.slice(start, end + 1);
 
-  let h = `<div class="schedule-grid">
-    <div class="schedule-header" style="display:grid;grid-template-columns:${cols}">
-      <div class="schedule-header-cell"></div>`;
-  DAYS.forEach(d => h += `<div class="schedule-header-cell">${d}</div>`);
-  h += `</div>`;
+  let html = `<div class="schedule-grid">`;
+  html += `<div class="schedule-row schedule-header" style="display:grid;grid-template-columns:60px repeat(${numD},1fr)">`;
+  html += `<div class="schedule-time"></div>`;
+  days.forEach(d => html += `<div class="schedule-header-cell">${d}</div>`);
+  html += `</div>`;
 
-  HOURS.forEach((hr, hi) => {
-    h += `<div class="schedule-row" style="display:grid;grid-template-columns:${cols}">
-      <div class="schedule-time">${hr}</div>`;
-    for (let d=0; d<numD; d++) {
+  activeHours.forEach((hr, idx) => {
+    const hi = start + idx;
+    html += `<div class="schedule-row" style="display:grid;grid-template-columns:60px repeat(${numD},1fr)">`;
+    html += `<div class="schedule-time">${hr}</div>`;
+    for (let d = 0; d < numD; d++) {
       const key = `${d}_${hi}`;
       const sid = state.schedule[key];
-      const sub = sid ? state.subjects.find(s=>s.id===sid) : null;
+      const sub = sid ? state.subjects.find(s => s.id === sid) : null;
       if (sub) {
-        h += `<div class="schedule-cell"><div class="block" style="background:${sub.color}" onclick="showBlockDetail('${key}')">
+        html += `<div class="schedule-cell"><div class="block" style="background:${sub.color}" onclick="showBlockDetail('${key}')">
           <div class="block-name">${sub.name.substring(0,12)}</div>
           <div class="block-code">${sub.building}${sub.room}</div>
         </div></div>`;
       } else {
-        h += `<div class="schedule-cell"><div class="empty-block" onclick="openAssignBlock(${d},${hi})"><div class="add-icon">+</div></div></div>`;
+        html += `<div class="schedule-cell"><div class="empty-block" onclick="openAssignBlock(${d},${hi})"><div class="add-icon">+</div></div></div>`;
       }
     }
-    h += `</div>`;
+    html += `</div>`;
   });
-  h += `</div>`;
-  c.innerHTML = h;
+  html += `</div>`;
+  c.innerHTML = html;
+  document.getElementById('schedule-sub').textContent = `${activeHours.length} horas • ${numD} días`;
 }
 
-function showBlockDetail(key) {
-  const sid = state.schedule[key]; if(!sid) return;
-  const sub = state.subjects.find(s=>s.id===sid); if(!sub) return;
-  const [di,hi] = key.split('_').map(Number);
-  document.getElementById('detail-content').innerHTML=`
-    <div class="detail-subject" style="color:${sub.color}">${sub.name}</div>
-    <div class="detail-row"><span class="detail-icon">🕐</span>${HOURS[hi]} – ${HOURS_END[hi]}</div>
-    <div class="detail-row"><span class="detail-icon">📍</span>Edificio ${sub.building}, Aula ${sub.room}</div>
-    <div class="detail-row"><span class="detail-icon">👤</span>${sub.teacher}</div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="btn btn-ghost btn-sm" style="flex:1;justify-content:center" onclick="closeDetail();openAssignBlock(${di},${hi})">Cambiar</button>
-      <button class="btn btn-sm" style="flex:1;justify-content:center;background:#ef4444;color:#fff;border:none" onclick="removeBlock('${key}')">Quitar</button>
-    </div>`;
-  document.getElementById('detail-pop').classList.add('show');
-}
-function closeDetail(){ document.getElementById('detail-pop').classList.remove('show'); }
-function removeBlock(key){ state.schedule[key]=null; save(); renderSchedule(); closeDetail(); toast('Bloque eliminado'); }
-
-/* ============================================================
-   EDITOR DE MATERIAS
-   ============================================================ */
+// ==================== MATERIAS ====================
 function renderEditor() {
   const el = document.getElementById('subjects-list');
   if (!state.subjects.length) {
-    el.innerHTML='<div style="text-align:center;color:var(--text3);font-size:13px;padding:16px">No hay materias aún</div>'; return;
+    el.innerHTML = '<div style="text-align:center;color:var(--text3);font-size:13px;padding:16px">No hay materias aún</div>';
+    return;
   }
-  el.innerHTML = state.subjects.map(s=>`
+  el.innerHTML = state.subjects.map(s => `
     <div class="subject-chip">
       <div class="chip-color" style="background:${s.color}"></div>
       <div class="chip-info">
@@ -586,259 +536,273 @@ function renderEditor() {
       </div>
     </div>`).join('');
 }
+
 function openAddSubject() {
   pendingEditId = null;
   showModal('Nueva Materia', buildSubjectForm(null), true);
 }
+
 function openEditSubject(id) {
-  const s = state.subjects.find(x=>x.id===id); if(!s) return;
+  const s = state.subjects.find(x => x.id === id);
+  if (!s) return;
   pendingEditId = id;
   showModal('Editar Materia', buildSubjectForm(s), true);
 }
+
 function buildSubjectForm(s) {
-  const selColors = COLORS.map((c,i)=>
-    `<div class="color-swatch${s&&s.color===c?' selected':(!s&&i===0?' selected':'')}" style="background:${c}" onclick="selectColor(this,'${c}')"></div>`
-  ).join('');
+  const selColors = COLORS.map((c,i) => `
+    <div class="color-swatch${s&&s.color===c?' selected':(!s&&i===0?' selected':'')}" style="background:${c}" onclick="selectColor(this,'${c}')"></div>
+  `).join('');
   return `
-    <div class="form-group">
-      <label class="form-label">Nombre de la materia</label>
-      <input class="form-input" id="f-name" placeholder="Ej: CÁLCULO I" value="${s?s.name:''}" oninput="this.value=this.value.toUpperCase()">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Docente</label>
-      <input class="form-input" id="f-teacher" placeholder="APELLIDO NOMBRE" value="${s?s.teacher:''}" oninput="this.value=this.value.toUpperCase()">
-    </div>
+    <div class="form-group"><label class="form-label">Nombre de la materia</label><input class="form-input" id="f-name" value="${s?s.name:''}" oninput="this.value=this.value.toUpperCase()"></div>
+    <div class="form-group"><label class="form-label">Docente</label><input class="form-input" id="f-teacher" value="${s?s.teacher:''}" oninput="this.value=this.value.toUpperCase()"></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="form-group">
-        <label class="form-label">Edificio</label>
-        <input class="form-input" id="f-building" placeholder="F" maxlength="2" value="${s?s.building:''}" oninput="this.value=this.value.toUpperCase()">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Aula</label>
-        <input class="form-input" id="f-room" placeholder="301" maxlength="4" value="${s?s.room:''}">
-      </div>
+      <div class="form-group"><label class="form-label">Edificio</label><input class="form-input" id="f-building" value="${s?s.building:''}" maxlength="2" oninput="this.value=this.value.toUpperCase()"></div>
+      <div class="form-group"><label class="form-label">Aula</label><input class="form-input" id="f-room" value="${s?s.room:''}" maxlength="4"></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Color identificador</label>
-      <div class="color-grid">${selColors}</div>
-    </div>
+    <div class="form-group"><label class="form-label">Color identificador</label><div class="color-grid">${selColors}</div></div>
     <input type="hidden" id="f-color" value="${s?s.color:COLORS[0]}">
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
       <button class="btn btn-primary" onclick="saveSubject()">Guardar</button>
     </div>`;
 }
+
 function selectColor(el, color) {
   document.getElementById('f-color').value = color;
-  document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
+  document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
   el.classList.add('selected');
 }
+
 function saveSubject() {
-  const name     = document.getElementById('f-name').value.trim();
-  const teacher  = document.getElementById('f-teacher').value.trim();
+  const name = document.getElementById('f-name').value.trim();
+  const teacher = document.getElementById('f-teacher').value.trim();
   const building = document.getElementById('f-building').value.trim();
-  const room     = document.getElementById('f-room').value.trim();
-  const color    = document.getElementById('f-color').value;
-  if (!name||!teacher||!building||!room) { toast('Completa todos los campos'); return; }
+  const room = document.getElementById('f-room').value.trim();
+  const color = document.getElementById('f-color').value;
+  if (!name || !teacher || !building || !room) return toast('Completa todos los campos');
+
   if (pendingEditId) {
-    Object.assign(state.subjects.find(x=>x.id===pendingEditId), {name,teacher,building,room,color});
+    Object.assign(state.subjects.find(x => x.id === pendingEditId), {name, teacher, building, room, color});
   } else {
-    state.subjects.push({id:'s'+Date.now(),name,teacher,building,room,color});
+    state.subjects.push({id:'s'+Date.now(), name, teacher, building, room, color});
   }
-  save(); renderAll(); closeModal();
+  save();
+  renderAll();
+  closeModal();
   toast(pendingEditId ? 'Materia actualizada' : 'Materia creada');
-}
-function deleteSubject(id) {
-  if (!confirm('¿Eliminar esta materia?')) return;
-  state.subjects = state.subjects.filter(s=>s.id!==id);
-  Object.keys(state.schedule).forEach(k=>{ if(state.schedule[k]===id) state.schedule[k]=null; });
-  state.pendings = state.pendings.filter(p=>p.subjectId!==id);
-  save(); renderAll(); toast('Materia eliminada');
+  checkFirstTime();
 }
 
-/* ============================================================
-   ASIGNAR BLOQUE
-   ============================================================ */
+function deleteSubject(id) {
+  if (!confirm('¿Eliminar esta materia?')) return;
+  state.subjects = state.subjects.filter(s => s.id !== id);
+  Object.keys(state.schedule).forEach(k => { if(state.schedule[k]===id) state.schedule[k]=null; });
+  state.pendings = state.pendings.filter(p => p.subjectId !== id);
+  save();
+  renderAll();
+  toast('Materia eliminada');
+  checkFirstTime();
+}
+
+// ==================== ASIGNAR BLOQUE ====================
 function openAssignBlock(d, h) {
   blockTarget = {d, h};
   const key = `${d}_${h}`;
   const cur = state.schedule[key];
   const DAYS_FULL = getDaysFull();
-  const opts = state.subjects.map(s=>`
+  const opts = state.subjects.map(s => `
     <div class="subject-chip" style="cursor:pointer;border:2px solid ${cur===s.id?s.color:'transparent'}" onclick="assignBlock('${s.id}')">
       <div class="chip-color" style="background:${s.color}"></div>
       <div class="chip-info"><div class="chip-name">${s.name}</div><div class="chip-detail">${s.teacher}</div></div>
     </div>`).join('');
-  showModal(`${DAYS_FULL[d]} · ${HOURS[h]}–${HOURS_END[h]}`,`
+  showModal(`${DAYS_FULL[d]} · ${ALL_HOURS[h]}–${HOURS_END[h]}`, `
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">${opts||'<div style="color:var(--text3);text-align:center;padding:16px">Crea materias primero</div>'}</div>
-    ${cur?`<button class="btn btn-ghost" onclick="removeBlock('${key}');closeModal()" style="width:100%;justify-content:center;margin-bottom:8px;color:#ef4444;border-color:#ef4444">Quitar bloque</button>`:''}
-    <button class="btn btn-ghost" onclick="closeModal()" style="width:100%;justify-content:center">Cancelar</button>`);
+    ${cur?`<button class="btn btn-ghost" onclick="removeBlock('${key}');closeModal()" style="width:100%;color:#ef4444">Quitar bloque</button>`:''}
+    <button class="btn btn-ghost" onclick="closeModal()" style="width:100%">Cancelar</button>
+  `, false);
 }
+
 function assignBlock(sid) {
   if (!blockTarget) return;
   state.schedule[`${blockTarget.d}_${blockTarget.h}`] = sid;
-  save(); renderSchedule(); closeModal(); toast('Bloque asignado');
+  save();
+  renderSchedule();
+  closeModal();
+  toast('Bloque asignado');
 }
 
-/* ============================================================
-   PENDIENTES
-   ============================================================ */
+function showBlockDetail(key) {
+  const sid = state.schedule[key]; if(!sid) return;
+  const sub = state.subjects.find(s=>s.id===sid); if(!sub) return;
+  const [di,hi] = key.split('_').map(Number);
+  document.getElementById('detail-content').innerHTML=`
+    <div class="detail-subject" style="color:${sub.color}">${sub.name}</div>
+    <div class="detail-row"><span class="detail-icon">🕐</span>${ALL_HOURS[hi]} – ${HOURS_END[hi]}</div>
+    <div class="detail-row"><span class="detail-icon">📍</span>Edificio ${sub.building}, Aula ${sub.room}</div>
+    <div class="detail-row"><span class="detail-icon">👤</span>${sub.teacher}</div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeDetail();openAssignBlock(${di},${hi})">Cambiar</button>
+      <button class="btn btn-sm" style="flex:1;background:#ef4444;color:#fff" onclick="removeBlock('${key}')">Quitar</button>
+    </div>`;
+  document.getElementById('detail-pop').classList.add('show');
+}
+
+function closeDetail(){ document.getElementById('detail-pop').classList.remove('show'); }
+function removeBlock(key){ state.schedule[key]=null; save(); renderSchedule(); closeDetail(); toast('Bloque eliminado'); }
+
+// ==================== PENDIENTES ====================
 function openAddPending() {
+  if (!state.subjects.length) return toast('Crea materias primero');
   pendingEditId = null;
-  if (!state.subjects.length) { toast('Crea materias primero'); return; }
   showModal('Nuevo Pendiente', buildPendingForm(null), true);
 }
+
 function buildPendingForm(p) {
-  const subOpts = state.subjects.map(s=>
-    `<option value="${s.id}"${p&&p.subjectId===s.id?' selected':''}>${s.name}</option>`).join('');
+  const subOpts = state.subjects.map(s => `<option value="${s.id}"${p&&p.subjectId===s.id?' selected':''}>${s.name}</option>`).join('');
   const today = new Date().toISOString().split('T')[0];
   return `
-    <div class="form-group">
-      <label class="form-label">Tipo</label>
-      <select class="form-select" id="f-type">
-        <option value="exam"${p&&p.type==='exam'?' selected':''}>Examen</option>
-        <option value="deber"${p&&p.type==='deber'?' selected':''}>Deber</option>
-        <option value="leccion"${p&&p.type==='leccion'?' selected':''}>Lección</option>
-        <option value="practica"${p&&p.type==='practica'?' selected':''}>Práctica</option>
-        <option value="proyecto"${p&&p.type==='proyecto'?' selected':''}>Proyecto</option>
-        <option value="taller"${p&&p.type==='taller'?' selected':''}>Taller</option>
-        <option value="exposicion"${p&&p.type==='exposicion'?' selected':''}>Exposición</option>
-        <option value="otro"${p&&p.type==='otro'?' selected':''}>Otro</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Materia</label>
-      <select class="form-select" id="f-subject">${subOpts}</select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Descripción (opcional)</label>
-      <input class="form-input" id="f-desc" placeholder="Ej: CAPÍTULOS 1-3" value="${p?p.desc||'':''}" oninput="this.value=this.value.toUpperCase()">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Fecha</label>
-      <input class="form-input" id="f-date" type="date" value="${p?p.date:today}">
-    </div>
+    <div class="form-group"><label class="form-label">Tipo</label><select class="form-select" id="f-type">
+      <option value="exam">Examen</option><option value="deber">Deber</option><option value="leccion">Lección</option>
+      <option value="practica">Práctica</option><option value="proyecto">Proyecto</option><option value="taller">Taller</option>
+      <option value="exposicion">Exposición</option><option value="otro">Otro</option>
+    </select></div>
+    <div class="form-group"><label class="form-label">Materia</label><select class="form-select" id="f-subject">${subOpts}</select></div>
+    <div class="form-group"><label class="form-label">Descripción (opcional)</label><input class="form-input" id="f-desc" value="${p?p.desc||'' : ''}" oninput="this.value=this.value.toUpperCase()"></div>
+    <div class="form-group"><label class="form-label">Fecha</label><input class="form-input" id="f-date" type="date" value="${p?p.date:today}"></div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
       <button class="btn btn-primary" onclick="savePending()">Guardar</button>
     </div>`;
 }
+
 function savePending() {
-  const type      = document.getElementById('f-type').value;
+  const type = document.getElementById('f-type').value;
   const subjectId = document.getElementById('f-subject').value;
-  const desc      = document.getElementById('f-desc').value.trim();
-  const date      = document.getElementById('f-date').value;
-  if (!subjectId||!date) { toast('Completa los campos requeridos'); return; }
+  const desc = document.getElementById('f-desc').value.trim();
+  const date = document.getElementById('f-date').value;
+  if (!subjectId || !date) return toast('Completa los campos requeridos');
+
   if (pendingEditId) {
-    Object.assign(state.pendings.find(x=>x.id===pendingEditId), {type,subjectId,desc,date});
+    Object.assign(state.pendings.find(x => x.id === pendingEditId), {type, subjectId, desc, date});
   } else {
-    state.pendings.push({id:'p'+Date.now(),type,subjectId,desc,date,done:false});
+    state.pendings.push({id:'p'+Date.now(), type, subjectId, desc, date, done:false});
   }
-  save(); renderCalendar(); renderPendings(); closeModal(); toast('Pendiente guardado');
+  save();
+  renderCalendar();
+  renderPendings();
+  closeModal();
+  toast('Pendiente guardado');
 }
+
 function deletePending(id) {
-  state.pendings = state.pendings.filter(p=>p.id!==id);
-  save(); renderCalendar(); renderPendings(); toast('Eliminado');
+  state.pendings = state.pendings.filter(p => p.id !== id);
+  save();
+  renderCalendar();
+  renderPendings();
+  toast('Eliminado');
 }
+
 function completePending(id) {
-  const p = state.pendings.find(x=>x.id===id); if(!p) return;
+  const p = state.pendings.find(x => x.id === id);
+  if (!p) return;
   p.done = !p.done;
-  save(); renderCalendar(); renderPendings();
-  toast(p.done ? '¡Cumplido! ✓' : 'Marcado como pendiente');
+  save();
+  renderCalendar();
+  renderPendings();
+  toast(p.done ? '¡Cumplido!' : 'Marcado como pendiente');
 }
+
 let doneVisible = false;
 function toggleDone() {
   doneVisible = !doneVisible;
   document.getElementById('done-list').style.display = doneVisible ? 'flex' : 'none';
 }
+
 function renderPendings() {
-  const elActive  = document.getElementById('pending-list');
-  const elDone    = document.getElementById('done-list');
+  const elActive = document.getElementById('pending-list');
+  const elDone = document.getElementById('done-list');
   const doneCount = document.getElementById('done-count');
   const today = new Date(); today.setHours(0,0,0,0);
-  const active = [...state.pendings].filter(p=>!p.done).sort((a,b)=>a.date.localeCompare(b.date));
-  const done   = [...state.pendings].filter(p=>p.done).sort((a,b)=>b.date.localeCompare(a.date));
+
+  const active = [...state.pendings].filter(p => !p.done).sort((a,b) => a.date.localeCompare(b.date));
+  const done = [...state.pendings].filter(p => p.done).sort((a,b) => b.date.localeCompare(a.date));
+
   doneCount.textContent = done.length || '';
   document.getElementById('done-toggle').style.display = done.length ? 'flex' : 'none';
 
   function buildItem(p, isDone) {
-    const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return '';
-    const date = new Date(p.date+'T00:00:00');
-    const diff = Math.round((date-today)/(1000*60*60*24));
-    const diffLabel = isDone?'Cumplido':diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
-    const diffClass = isDone?'days-ok':diff<0||diff===0?'days-urgent':diff<=3?'days-soon':'days-ok';
+    const sub = state.subjects.find(s => s.id === p.subjectId);
+    if (!sub) return '';
+    const date = new Date(p.date);
+    const diff = Math.round((date - today) / (1000*60*60*24));
+    const diffLabel = isDone ? 'Cumplido' : diff < 0 ? 'Vencido' : diff === 0 ? 'Hoy' : diff === 1 ? 'Mañana' : `${diff} días`;
+    const diffClass = isDone ? 'days-ok' : (diff <= 0) ? 'days-urgent' : diff <= 3 ? 'days-soon' : 'days-ok';
     const dateLabel = date.toLocaleDateString('es-EC',{day:'numeric',month:'short'});
+
     return `<div class="pending-item${isDone?' done':''}">
       <div class="pending-color" style="background:${sub.color}"></div>
       <div class="pending-info">
         <div class="pending-subject">${sub.name}</div>
         <div style="display:flex;gap:6px;align-items:center;margin-top:4px">
           <span class="pending-type ${TYPE_CLASS[p.type]||'type-otro'}">${TYPE_LABELS[p.type]||p.type}</span>
-          ${p.desc?`<span style="font-size:11px;color:var(--text3)">${p.desc}</span>`:''}
+          ${p.desc ? `<span style="font-size:11px;color:var(--text3)">${p.desc}</span>` : ''}
         </div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
         <div class="pending-date">${dateLabel}</div>
         <div class="days-until ${diffClass}">${diffLabel}</div>
         <div style="display:flex;gap:4px;margin-top:2px">
-          <button onclick="completePending('${p.id}')" title="${isDone?'Desmarcar':'Marcar cumplido'}"
-            style="width:26px;height:26px;border-radius:6px;border:1px solid ${isDone?'#10b981':'var(--bg3)'};background:${isDone?'rgba(16,185,129,.15)':'var(--bg2)'};color:${isDone?'#10b981':'var(--text3)'};cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px">✓</button>
-          <button onclick="deletePending('${p.id}')"
-            style="width:26px;height:26px;border-radius:6px;border:1px solid var(--bg3);background:var(--bg2);color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px">✕</button>
+          <button onclick="completePending('${p.id}')" style="width:26px;height:26px;border-radius:6px;border:1px solid ${isDone?'#10b981':'var(--bg3)'};background:${isDone?'rgba(16,185,129,.15)':'var(--bg2)'};color:${isDone?'#10b981':'var(--text3)'};font-size:13px">✓</button>
+          <button onclick="deletePending('${p.id}')" style="width:26px;height:26px;border-radius:6px;border:1px solid var(--bg3);background:var(--bg2);color:var(--text3);font-size:11px">✕</button>
         </div>
       </div>
     </div>`;
   }
-  elActive.innerHTML = active.length
-    ? active.map(p=>buildItem(p,false)).join('')
-    : '<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes activos</div><div class="empty-sub">¡Todo al día!</div></div>';
-  elDone.style.cssText = 'flex-direction:column;gap:8px';
-  elDone.innerHTML = done.map(p=>buildItem(p,true)).join('');
+
+  elActive.innerHTML = active.length ? active.map(p => buildItem(p, false)).join('') : '<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes activos</div><div class="empty-sub">¡Todo al día!</div></div>';
+  elDone.innerHTML = done.map(p => buildItem(p, true)).join('');
 }
 
-/* ============================================================
-   CALENDARIO
-   ============================================================ */
+// ==================== CALENDARIO COMPLETO ====================
 function renderCalendar() {
-  const year  = calendarDate.getFullYear();
+  const year = calendarDate.getFullYear();
   const month = calendarDate.getMonth();
   document.getElementById('month-title').textContent = `${MONTH_NAMES[month]} ${year}`;
-  const grid  = document.getElementById('cal-grid');
-  let h = DAY_NAMES.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
-  const first = new Date(year,month,1).getDay();
-  const days  = new Date(year,month+1,0).getDate();
+  const grid = document.getElementById('cal-grid');
+  let h = DAY_NAMES.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+  const first = new Date(year, month, 1).getDay();
+  const days = new Date(year, month + 1, 0).getDate();
   const today = new Date();
-  for (let i=0; i<first; i++) {
-    const d = new Date(year,month,1-first+i);
+
+  for (let i = 0; i < first; i++) {
+    const d = new Date(year, month, 1 - first + i);
     h += `<div class="cal-day other-month"><div class="cal-day-num">${d.getDate()}</div></div>`;
   }
-  for (let d=1; d<=days; d++) {
-    const date    = new Date(year,month,d);
-    const dow     = date.getDay();
-    const isToday = d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
+
+  for (let d = 1; d <= days; d++) {
+    const date = new Date(year, month, d);
+    const dow = date.getDay();
+    const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    // Mapear día de semana a índice de columna (sábado = 5 si está habilitado)
+
     let scheduleIdx = -1;
-    if (dow>=1&&dow<=5) scheduleIdx = dow-1;
-    else if (dow===6 && state.config.sabado) scheduleIdx = 5;
+    if (dow >= 1 && dow <= 5) scheduleIdx = dow - 1;
+    else if (dow === 6 && state.config.sabado) scheduleIdx = 5;
+
     let dots = '';
-    if (scheduleIdx>=0) {
+    if (scheduleIdx >= 0) {
       const subjectsToday = new Set();
-      for (let hi=0; hi<HOURS.length; hi++) {
+      for (let hi = state.config.startHour; hi <= state.config.endHour; hi++) {
         const sid = state.schedule[`${scheduleIdx}_${hi}`];
         if (sid) subjectsToday.add(sid);
       }
-      subjectsToday.forEach(sid=>{
-        const sub = state.subjects.find(s=>s.id===sid); if(!sub) return;
-        const pendCount = state.pendings.filter(p=>p.subjectId===sid&&p.date===dateStr).length;
-        const badge = pendCount?`<div class="cal-dot-badge">${pendCount}</div>`:'';
+      subjectsToday.forEach(sid => {
+        const sub = state.subjects.find(s => s.id === sid);
+        if (!sub) return;
+        const pendCount = state.pendings.filter(p => p.subjectId === sid && p.date === dateStr).length;
+        const badge = pendCount ? `<div class="cal-dot-badge">${pendCount}</div>` : '';
         dots += `<div class="cal-dot" style="background:${sub.color}">${badge}</div>`;
-      });
-    }
-    if (scheduleIdx<0) {
-      state.pendings.filter(p=>p.date===dateStr).forEach(p=>{
-        const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return;
-        dots += `<div class="cal-dot" style="background:${sub.color}"><div class="cal-dot-badge">!</div></div>`;
       });
     }
     h += `<div class="cal-day${isToday?' today':''}">
@@ -848,55 +812,81 @@ function renderCalendar() {
   }
   grid.innerHTML = h;
 }
+
 function changeMonth(dir) {
-  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+dir, 1);
+  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + dir, 1);
   renderCalendar();
 }
 
-/* ============================================================
-   UTILS
-   ============================================================ */
-function switchView(name, btn) {
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+name).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  closeDetail();
-}
-function showModal(title, content, centered=false) {
+// ==================== MODALES CENTRADOS ====================
+function showModal(title, content, centered = true) {
   const overlay = document.getElementById('modal-overlay');
-  const modal   = document.getElementById('modal');
   document.getElementById('modal-content').innerHTML = `<div class="modal-title">${title}</div>${content}`;
-  if (centered) { overlay.classList.add('centered'); modal.style.borderRadius='16px'; }
-  else          { overlay.classList.remove('centered'); modal.style.borderRadius='20px 20px 0 0'; }
+  if (centered) overlay.classList.add('centered');
+  else overlay.classList.remove('centered');
   overlay.classList.add('open');
 }
+
 function closeModal(e) {
   if (e && e.target !== document.getElementById('modal-overlay')) return;
   document.getElementById('modal-overlay').classList.remove('open');
 }
+
 function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2200);
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
+
 function confirmReset() {
-  if (!confirm('¿Resetear TODO? Se eliminarán materias, horario, pendientes y perfil.')) return;
-  state = { subjects:[], schedule:{}, pendings:[], profile:{name:'',institution:'',course:''}, config:{sabado:false} };
+  if (!confirm('¿Resetear TODO?')) return;
+  state = {subjects:[], schedule:{}, pendings:[], profile:{name:'',institution:'',course:''}, config:{sabado:false, startHour:7, endHour:13}};
   document.getElementById('toggle-sabado').checked = false;
-  save(); renderAll(); renderProfile(); toast('Sistema reseteado');
+  populateHourSelects();
+  save();
+  renderAll();
+  toast('Sistema reseteado');
 }
 
-/* ============================================================
-   INICIO
-   ============================================================ */
-load();
+function switchView(name, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+function renderAll() {
+  renderProfile();
+  renderEditor();
+  renderSchedule();
+  renderCalendar();
+  renderPendings();
+  checkFirstTime();
+}
+
+// ==================== ACTUALIZAR APLICACIÓN ====================
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(reg => swRegistration = reg).catch(() => {});
+  }
+}
+
+function updateApp() {
+  if (!swRegistration) return toast('Service Worker no disponible');
+  toast('Buscando actualizaciones...');
+  swRegistration.update().then(() => {
+    if (swRegistration.waiting) {
+      swRegistration.waiting.postMessage({type: 'SKIP_WAITING'});
+      setTimeout(() => window.location.reload(), 400);
+    } else {
+      toast('Ya tienes la versión más reciente');
+    }
   });
 }
+
+// ==================== INICIO ====================
+load();
+registerServiceWorker();
 </script>
 </body>
 </html>
