@@ -91,6 +91,11 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .next-banner-name{font-size:14px;font-weight:700;color:var(--text1);margin-top:1px}
 .next-banner-time{font-size:11px;color:var(--text3);margin-top:1px}
 
+/* NOTAS RÁPIDAS */
+.note-item{background:var(--bg2);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text2);display:flex;gap:8px;align-items:flex-start}
+.note-text{flex:1;line-height:1.5}
+.note-date{font-size:10px;color:var(--text3);flex-shrink:0;margin-top:2px}
+
 /* AGENDA */
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .month-title{font-size:16px;font-weight:700}
@@ -132,22 +137,20 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .days-soon{background:#fef9c3;color:#854d0e}
 .days-ok{background:#dcfce7;color:#166534}
 
-/* PRIORIDAD */
-.prio-high{color:#ef4444}
-.prio-med{color:#f59e0b}
-.prio-low{color:#64748b}
-
-/* FILTRO MATERIAS */
-.filter-chips{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+/* FILTRO MATERIAS — fijo encima de pendientes */
+.filter-bar{background:var(--bg0);padding-bottom:2px}
+.filter-chips{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
 .filter-chips::-webkit-scrollbar{display:none}
-.filter-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--bg3);background:var(--bg2);color:var(--text3);white-space:nowrap;transition:all .15s;flex-shrink:0}
+.filter-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:99px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--bg3);background:var(--bg2);color:var(--text3);white-space:nowrap;transition:all .15s;flex-shrink:0}
 .filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .filter-chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
-/* NOTAS RÁPIDAS */
-.note-item{background:var(--bg2);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text2);display:flex;gap:8px;align-items:flex-start}
-.note-text{flex:1;line-height:1.5}
-.note-date{font-size:10px;color:var(--text3);flex-shrink:0;margin-top:2px}
+/* PRIORIDAD */
+.prio-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.prio-btn{padding:8px;border-radius:var(--radius-sm);border:2px solid var(--bg3);background:var(--bg2);color:var(--text3);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
+.prio-btn.selected-high{border-color:#ef4444;background:rgba(239,68,68,.1);color:#ef4444}
+.prio-btn.selected-med{border-color:#f59e0b;background:rgba(245,158,11,.1);color:#f59e0b}
+.prio-btn.selected-low{border-color:#64748b;background:rgba(100,116,139,.1);color:#94a3b8}
 
 /* MATERIAS */
 .subject-chip{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius-sm)}
@@ -171,11 +174,17 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 /* PERFIL */
 .profile-avatar{width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0}
 
-/* MODAL */
+/* TIPO ESTUDIANTE SELECTOR */
+.student-type-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.student-type-btn{padding:10px 8px;border-radius:var(--radius-sm);border:2px solid var(--bg3);background:var(--bg2);color:var(--text3);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
+.student-type-btn.selected{border-color:var(--accent);background:rgba(99,102,241,.12);color:var(--accent)}
+.student-type-btn.disabled{opacity:.4;cursor:not-allowed}
+
+/* MODAL — márgenes simétricos */
 #modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 #modal-overlay.open{display:flex}
-#modal-overlay.centered #modal{border-radius:16px;max-height:85vh;width:calc(100% - 32px);max-width:400px}
-#modal{background:var(--bg1);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 20px env(safe-area-inset-bottom,20px);max-height:90vh;overflow-y:auto;border-top:1px solid var(--bg3)}
+#modal-overlay.centered #modal{border-radius:16px;max-height:88vh;width:calc(100% - 32px);max-width:400px}
+#modal{background:var(--bg1);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 20px 28px;max-height:90vh;overflow-y:auto;border-top:1px solid var(--bg3)}
 .modal-handle{width:36px;height:4px;background:var(--bg3);border-radius:2px;margin:0 auto 16px}
 .modal-title{font-size:17px;font-weight:700;margin-bottom:16px}
 .form-group{margin-bottom:14px}
@@ -183,25 +192,18 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .form-input{width:100%;padding:10px 12px;background:var(--bg2);border:1px solid var(--bg3);border-radius:var(--radius-sm);color:var(--text1);font-family:var(--font);font-size:14px;outline:none;transition:border .15s}
 .form-input:focus{border-color:var(--accent)}
 .form-select{width:100%;padding:10px 12px;background:var(--bg2);border:1px solid var(--bg3);border-radius:var(--radius-sm);color:var(--text1);font-family:var(--font);font-size:14px;outline:none;appearance:none}
-.color-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.color-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
 .color-swatch{width:100%;aspect-ratio:1;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:transform .15s}
 .color-swatch.selected{border-color:#fff;transform:scale(1.15)}
-.modal-actions{display:flex;gap:8px;margin-top:16px}
+.modal-actions{display:flex;gap:8px;margin-top:16px;padding-bottom:4px}
 .modal-actions .btn{flex:1;justify-content:center}
 
-/* PRIO SELECTOR */
-.prio-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.prio-btn{padding:8px;border-radius:var(--radius-sm);border:2px solid var(--bg3);background:var(--bg2);color:var(--text3);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
-.prio-btn.selected-high{border-color:#ef4444;background:rgba(239,68,68,.1);color:#ef4444}
-.prio-btn.selected-med{border-color:#f59e0b;background:rgba(245,158,11,.1);color:#f59e0b}
-.prio-btn.selected-low{border-color:#64748b;background:rgba(100,116,139,.1);color:#94a3b8}
-
 /* TOAST */
-#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg3);color:var(--text1);padding:10px 20px;border-radius:99px;font-size:13px;font-weight:600;z-index:200;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+#toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg3);color:var(--text1);padding:10px 20px;border-radius:99px;font-size:13px;font-weight:600;z-index:200;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* DETAIL POP */
-#detail-pop{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) scale(.9);background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius);padding:16px;z-index:90;display:none;min-width:220px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+#detail-pop{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) scale(.9);background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius);padding:16px 16px 20px;z-index:90;display:none;min-width:220px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,.5)}
 #detail-pop.show{display:block;animation:popIn .2s ease}
 @keyframes popIn{from{transform:translateX(-50%) scale(.9);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
 .detail-close{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--bg3);border:none;color:var(--text2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
@@ -216,64 +218,175 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 .exam-mode-label{font-size:10px;font-weight:700;color:#ef4444;text-transform:uppercase;letter-spacing:.5px}
 .exam-mode-name{font-size:14px;font-weight:700;color:var(--text1);margin-top:1px}
 .exam-mode-time{font-size:11px;color:var(--text3);margin-top:1px}
+
 /* IMPORTAR/EXPORTAR */
 .data-action-row{display:flex;gap:8px}
 .data-action-row .btn{flex:1;justify-content:center;font-size:12px}
+
 /* SHARE SHEET */
 #share-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:150;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
 #share-overlay.open{display:flex}
-#share-sheet{background:var(--bg1);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 20px env(safe-area-inset-bottom,24px);border-top:1px solid var(--bg3)}
+#share-sheet{background:var(--bg1);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 20px 32px;border-top:1px solid var(--bg3)}
 .share-handle{width:36px;height:4px;background:var(--bg3);border-radius:2px;margin:0 auto 16px}
 .share-title{font-size:15px;font-weight:700;margin-bottom:16px;color:var(--text1)}
 .share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .share-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border-radius:var(--radius-sm);background:var(--bg2);border:1px solid var(--bg3);cursor:pointer;font-family:var(--font);color:var(--text2);font-size:11px;font-weight:600;transition:all .15s}
 .share-btn:active{transform:scale(.95);background:var(--bg3)}
 .share-btn-icon{font-size:24px;line-height:1}
-#welcome-screen{position:fixed;inset:0;background:var(--bg0);z-index:300;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:0;max-width:430px;margin:0 auto}
+
+/* BIENVENIDA / SETUP */
+#welcome-screen{position:fixed;inset:0;background:var(--bg0);z-index:300;display:none;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;padding:0;max-width:430px;margin:0 auto}
 #welcome-screen.active{display:flex}
-.welcome-logo{font-size:72px;margin-bottom:24px}
-.welcome-title{font-size:28px;font-weight:700;color:var(--text1);text-align:center;margin-bottom:8px}
-.welcome-sub{font-size:15px;color:var(--text3);text-align:center;margin-bottom:36px;line-height:1.6}
-.welcome-steps{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
-.welcome-step{display:flex;align-items:center;gap:14px;background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius);padding:14px}
-.welcome-step-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.welcome-step-text{font-size:13px;color:var(--text2);line-height:1.4}
-.welcome-step-text strong{color:var(--text1)}
+.setup-step{display:none;flex-direction:column;align-items:center;width:100%;min-height:100vh;padding:40px 24px 32px}
+.setup-step.active{display:flex}
+.setup-logo{font-size:64px;margin-bottom:20px}
+.setup-title{font-size:26px;font-weight:700;color:var(--text1);text-align:center;margin-bottom:8px}
+.setup-sub{font-size:14px;color:var(--text3);text-align:center;margin-bottom:32px;line-height:1.6}
+.setup-card{background:var(--bg1);border:1px solid var(--bg3);border-radius:var(--radius);padding:20px;width:100%;margin-bottom:16px}
+.setup-step-indicator{display:flex;gap:6px;margin-bottom:28px}
+.setup-dot{width:8px;height:8px;border-radius:50%;background:var(--bg3)}
+.setup-dot.active{background:var(--accent);width:20px;border-radius:4px}
+.setup-dot.done{background:var(--accent)}
 </style>
 </head>
 <body>
 
-<!-- BIENVENIDA -->
+<!-- SETUP / BIENVENIDA (multi-paso) -->
 <div id="welcome-screen">
-  <div class="welcome-logo">📅</div>
-  <div class="welcome-title">Mi Agenda</div>
-  <div class="welcome-sub">Tu horario escolar o universitario,<br>siempre a mano.</div>
-  <div class="welcome-steps">
-    <div class="welcome-step"><div class="welcome-step-num">1</div><div class="welcome-step-text"><strong>Completa tu perfil</strong> — nombre e institución.</div></div>
-    <div class="welcome-step"><div class="welcome-step-num">2</div><div class="welcome-step-text"><strong>Crea tus materias</strong> con docente y aula.</div></div>
-    <div class="welcome-step"><div class="welcome-step-num">3</div><div class="welcome-step-text"><strong>Arma tu horario</strong> asignando cada materia a su bloque.</div></div>
-    <div class="welcome-step"><div class="welcome-step-num">4</div><div class="welcome-step-text"><strong>Registra pendientes</strong> — exámenes, deberes y más.</div></div>
+  <!-- PASO 1: Bienvenida + Perfil -->
+  <div class="setup-step active" id="setup-step-1">
+    <div class="setup-logo">📅</div>
+    <div class="setup-title">Mi Agenda</div>
+    <div class="setup-sub">Tu horario escolar o universitario,<br>siempre a mano. Vamos a configurar todo.</div>
+    <div style="display:flex;gap:6px;margin-bottom:28px">
+      <div class="setup-dot active"></div>
+      <div class="setup-dot"></div>
+      <div class="setup-dot"></div>
+    </div>
+    <div class="setup-card" style="flex:0">
+      <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:14px">TU PERFIL</div>
+      <div class="form-group">
+        <label class="form-label">Nombre completo</label>
+        <input class="form-input" id="s1-name" placeholder="JUAN PÉREZ" oninput="this.value=this.value.toUpperCase()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Institución</label>
+        <input class="form-input" id="s1-inst" placeholder="ESPOCH, UTPL..." oninput="this.value=this.value.toUpperCase()">
+      </div>
+      <div class="form-group" style="margin-bottom:6px">
+        <label class="form-label">Tipo de estudiante</label>
+        <div class="student-type-btns">
+          <button class="student-type-btn disabled" onclick="" title="Próximamente">🏫 Colegio<br><span style="font-size:10px;font-weight:400;opacity:.6">Próximamente</span></button>
+          <button class="student-type-btn selected" id="s1-type-uni" onclick="selectStudentType('universidad')">🎓 Universidad</button>
+        </div>
+        <input type="hidden" id="s1-type" value="universidad">
+      </div>
+      <div class="form-group" id="s1-semester-group">
+        <label class="form-label">Semestre / Nivel</label>
+        <select class="form-select" id="s1-semester">
+          <option value="NIVELACIÓN">Nivelación</option>
+          <option value="1ER SEMESTRE">1er Semestre</option>
+          <option value="2DO SEMESTRE">2do Semestre</option>
+          <option value="3ER SEMESTRE">3er Semestre</option>
+          <option value="4TO SEMESTRE">4to Semestre</option>
+          <option value="5TO SEMESTRE">5to Semestre</option>
+          <option value="6TO SEMESTRE">6to Semestre</option>
+          <option value="7MO SEMESTRE">7mo Semestre</option>
+          <option value="8VO SEMESTRE">8vo Semestre</option>
+          <option value="9NO SEMESTRE">9no Semestre</option>
+          <option value="10MO SEMESTRE">10mo Semestre</option>
+        </select>
+      </div>
+      <div class="form-group" id="s1-career-group">
+        <label class="form-label">Carrera</label>
+        <input class="form-input" id="s1-career" placeholder="ING. SISTEMAS, MEDICINA..." oninput="this.value=this.value.toUpperCase()">
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:15px;margin-top:auto" onclick="setupStep1Next()">Siguiente →</button>
   </div>
-  <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:15px" onclick="startSetup()">Comenzar →</button>
+
+  <!-- PASO 2: Configuración -->
+  <div class="setup-step" id="setup-step-2">
+    <div class="setup-logo">⚙️</div>
+    <div class="setup-title">Configuración</div>
+    <div class="setup-sub">Ajusta tu horario según cómo<br>funciona tu institución.</div>
+    <div style="display:flex;gap:6px;margin-bottom:28px">
+      <div class="setup-dot done"></div>
+      <div class="setup-dot active"></div>
+      <div class="setup-dot"></div>
+    </div>
+    <div class="setup-card">
+      <div class="toggle-row" style="padding-top:0">
+        <div>
+          <div class="toggle-label">Incluir sábado</div>
+          <div class="toggle-desc">Muestra sábado en el horario semanal</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="s2-sabado">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div style="padding-top:14px;border-top:1px solid var(--bg3);margin-top:6px">
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px">Rango de horas del horario</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Hora de inicio</label>
+            <select class="form-select" id="s2-start"></select>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Hora de fin</label>
+            <select class="form-select" id="s2-end"></select>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:14px;border-top:1px solid var(--bg3);margin-top:14px">
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">Notificaciones</div>
+        <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="requestNotifPermission()">🔔 Activar notificaciones</button>
+        <div style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Recibirás avisos de pendientes próximos</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;width:100%;margin-top:auto">
+      <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="showSetupStep(1)">← Atrás</button>
+      <button class="btn btn-primary" style="flex:2;justify-content:center;padding:14px;font-size:15px" onclick="setupStep2Next()">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- PASO 3: Listo -->
+  <div class="setup-step" id="setup-step-3">
+    <div class="setup-logo">🎉</div>
+    <div class="setup-title">¡Todo listo!</div>
+    <div class="setup-sub">Ahora agrega tus materias<br>y arma tu horario.</div>
+    <div style="display:flex;gap:6px;margin-bottom:28px">
+      <div class="setup-dot done"></div>
+      <div class="setup-dot done"></div>
+      <div class="setup-dot active"></div>
+    </div>
+    <div class="setup-card">
+      <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px">QUÉ HACER AHORA</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+          <div style="font-size:13px;color:var(--text2)">Ve a <strong style="color:var(--text1)">Materias</strong> y crea tus materias con docente y aula.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+          <div style="font-size:13px;color:var(--text2)">Ve a <strong style="color:var(--text1)">Horario</strong> y asigna cada materia a su bloque horario.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
+          <div style="font-size:13px;color:var(--text2)">Usa <strong style="color:var(--text1)">Agenda</strong> para registrar exámenes, deberes y más.</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:15px;margin-top:auto" onclick="finishSetup()">Empezar →</button>
+  </div>
 </div>
 
 <div id="app">
   <div id="views">
 
-    <!-- HORARIO -->
-    <div class="view active" id="view-horario">
-      <div class="view-header">
-        <div>
-          <div class="view-title">Mi Horario</div>
-          <div class="view-sub" id="schedule-sub">Configura tus materias primero</div>
-        </div>
-        <button class="btn btn-ghost btn-sm" onclick="switchView('hoy',navBtn('hoy'))">Ver hoy ☀️</button>
-      </div>
-      <div id="schedule-container"></div>
-    </div>
-
-    <!-- HOY -->
-    <div class="view" id="view-hoy">
+    <!-- HOY (pantalla predeterminada) -->
+    <div class="view active" id="view-hoy">
       <div class="view-header">
         <div>
           <div class="view-title" id="hoy-title">Hoy</div>
@@ -284,6 +397,25 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
       <div id="next-banner-container"></div>
       <div id="hoy-classes-container"></div>
       <div id="hoy-pendings-container"></div>
+      <!-- NOTAS RÁPIDAS en HOY -->
+      <div class="card card-sm">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <span style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px">Notas rápidas</span>
+          <button class="btn btn-ghost btn-sm" onclick="openAddNote()">+ Nota</button>
+        </div>
+        <div id="notes-list" style="display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+    </div>
+
+    <!-- HORARIO -->
+    <div class="view" id="view-horario">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Mi Horario</div>
+          <div class="view-sub" id="schedule-sub">Configura tus materias primero</div>
+        </div>
+      </div>
+      <div id="schedule-container"></div>
     </div>
 
     <!-- AGENDA -->
@@ -304,8 +436,10 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
         </div>
         <div class="cal-grid" id="cal-grid"></div>
       </div>
-      <!-- FILTRO POR MATERIA -->
-      <div class="filter-chips" id="filter-chips"></div>
+      <!-- FILTRO fijo, separado visualmente -->
+      <div class="filter-bar">
+        <div class="filter-chips" id="filter-chips"></div>
+      </div>
       <div class="section-title">Próximos pendientes</div>
       <div class="pending-list" id="pending-list"></div>
       <div class="done-section-title" id="done-toggle" onclick="toggleDone()" style="margin-top:4px;display:none">
@@ -319,6 +453,7 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
       <div class="view-header">
         <div><div class="view-title">Materias</div></div>
       </div>
+      <!-- PERFIL -->
       <div class="card card-sm">
         <div style="display:flex;align-items:center;gap:14px">
           <div class="profile-avatar" id="profile-avatar">?</div>
@@ -329,6 +464,7 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
           <button class="btn btn-ghost btn-sm btn-icon" onclick="openEditProfile()">✏️</button>
         </div>
       </div>
+      <!-- LISTA MATERIAS -->
       <div class="card card-sm">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <span style="font-size:13px;font-weight:700;color:var(--text2)">MATERIAS</span>
@@ -336,50 +472,14 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
         </div>
         <div id="subjects-list" style="display:flex;flex-direction:column;gap:8px"></div>
       </div>
-      <!-- NOTAS RÁPIDAS -->
+      <!-- MODO EXÁMENES -->
       <div class="card card-sm">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <span style="font-size:13px;font-weight:700;color:var(--text2)">NOTAS RÁPIDAS</span>
-          <button class="btn btn-ghost btn-sm" onclick="openAddNote()">+ Nota</button>
-        </div>
-        <div id="notes-list" style="display:flex;flex-direction:column;gap:6px"></div>
-      </div>
-      <div class="card card-sm">
-        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:4px">CONFIGURACIÓN</div>
-        <div class="toggle-row">
-          <div>
-            <div class="toggle-label">Incluir sábado</div>
-            <div class="toggle-desc">Muestra la columna de sábado en el horario</div>
-          </div>
-          <label class="toggle">
-            <input type="checkbox" id="toggle-sabado" onchange="toggleSabado(this.checked)">
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--bg3)">
-          <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">Rango de horas del horario</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div class="form-group">
-              <label class="form-label">Hora de inicio</label>
-              <select class="form-select" id="start-hour" onchange="saveHourConfig()"></select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Hora de fin</label>
-              <select class="form-select" id="end-hour" onchange="saveHourConfig()"></select>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--bg3)">
-          <button onclick="updateApp()" class="btn btn-ghost" style="width:100%;justify-content:center;margin-bottom:8px">🔄 Actualizar aplicación</button>
-          <button onclick="requestNotifPermission()" class="btn btn-ghost" style="width:100%;justify-content:center">🔔 Activar notificaciones</button>
-        </div>
-      </div>
-      <div class="card card-sm">
-        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px">MODO EXÁMENES</div>
-        <div style="font-size:12px;color:var(--text3);margin-bottom:10px">Activa un contador regresivo para tu próximo examen y aparecerá en la Agenda.</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:8px">MODO EXÁMENES</div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:10px">Activa un contador regresivo para tu próximo examen.</div>
         <button class="btn btn-ghost btn-sm" onclick="openExamMode()" style="width:100%;justify-content:center">🎯 Configurar modo exámenes</button>
         <div id="exam-mode-status" style="margin-top:8px"></div>
       </div>
+      <!-- DATOS -->
       <div class="card card-sm">
         <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px">DATOS</div>
         <div class="data-action-row" style="margin-bottom:8px">
@@ -388,22 +488,22 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
         </div>
         <button class="btn btn-ghost btn-sm" onclick="exportScheduleImage()" style="width:100%;justify-content:center;margin-top:4px">🖼️ Guardar horario como imagen</button>
       </div>
-      <div class="card card-sm">
-        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px">ZONA DE PELIGRO</div>
-        <button class="btn btn-danger btn-sm" onclick="confirmReset()" style="width:100%;justify-content:center">Resetear todo el sistema</button>
-      </div>
+      <!-- CONFIGURACIÓN (botón que abre modal) -->
+      <button class="btn btn-ghost" onclick="openConfigModal()" style="width:100%;justify-content:center;gap:8px">
+        ⚙️ Configuración
+      </button>
     </div>
 
   </div>
 
   <nav id="nav">
-    <button class="nav-btn active" data-view="horario" onclick="switchView('horario',this)">
-      <span class="nav-icon">📅</span>
-      <span class="nav-label">HORARIO</span>
-    </button>
-    <button class="nav-btn" data-view="hoy" onclick="switchView('hoy',this)">
+    <button class="nav-btn active" data-view="hoy" onclick="switchView('hoy',this)">
       <span class="nav-icon">☀️</span>
       <span class="nav-label">HOY</span>
+    </button>
+    <button class="nav-btn" data-view="horario" onclick="switchView('horario',this)">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">HORARIO</span>
     </button>
     <button class="nav-btn" data-view="agenda" onclick="switchView('agenda',this)">
       <span class="nav-icon">🗓️</span>
@@ -442,19 +542,24 @@ html,body{height:100%;background:var(--bg0);color:var(--text1);font-family:var(-
 
 <div id="toast"></div>
 <input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImportFile(event)">
-<canvas id="export-canvas" style="display:none"></canvas>
 
 <script>
 // ==================== CONSTANTES ====================
-const DATA_VERSION = 3;
-const STORAGE_KEY = 'mi_agenda_data';
+const DATA_VERSION = 4;
+const STORAGE_KEY  = 'mi_agenda_data';
 
 const ALL_HOURS  = ["07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"];
 const HOURS_END  = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
 const MONTH_NAMES= ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const DAY_NAMES  = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
 const DAY_FULL   = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-const COLORS     = ["#c0392b","#e67e22","#f1c40f","#27ae60","#1abc9c","#2980b9","#8e44ad","#d35400","#16a085","#2c3e50","#b7950b","#884ea0","#1f618d","#a93226","#117a65","#935116"];
+
+// 14 colores distintos (7×2 grilla simétrica)
+const COLORS = [
+  "#e53e3e","#dd6b20","#d69e2e","#38a169","#2b6cb0","#6b46c1","#d53f8c",
+  "#00a3c4","#c05621","#276749","#9b2335","#2d3748","#b7791f","#1a365d"
+];
+
 const TYPE_LABELS= {exam:"Examen",deber:"Deber",leccion:"Lección",practica:"Práctica",proyecto:"Proyecto",taller:"Taller",exposicion:"Exposición",otro:"Otro"};
 const TYPE_CLASS = {exam:"type-exam",deber:"type-deber",leccion:"type-leccion",practica:"type-practica",proyecto:"type-proyecto",taller:"type-taller",exposicion:"type-exposicion",otro:"type-otro"};
 const PRIO_ICON  = {high:'🔴',med:'🟡',low:'⚪'};
@@ -463,12 +568,9 @@ const PRIO_LABEL = {high:'Alta',med:'Media',low:'Baja'};
 // ==================== ESTADO ====================
 let state = {
   version: DATA_VERSION,
-  subjects: [],
-  schedule: {},
-  pendings: [],
-  notes: [],
-  profile: { name:'', institution:'', course:'' },
-  config: { sabado:false, startHour:7, endHour:13 },
+  subjects: [], schedule: {}, pendings: [], notes: [],
+  profile: { name:'', institution:'', course:'', type:'universidad', semester:'' },
+  config:  { sabado:false, startHour:7, endHour:13 },
   examMode: null
 };
 
@@ -479,51 +581,44 @@ let swRegistration= null;
 let filterSubject = 'all';
 let doneVisible   = false;
 
-// Auto-refresh vista HOY cada minuto
+// Auto-refresh HOY cada minuto
 setInterval(() => {
   if (document.querySelector('.view.active')?.id === 'view-hoy') renderHoy();
 }, 60000);
 
 // ==================== PERSISTENCIA ====================
-const LEGACY_KEYS = ['mi_agenda_v1','mi_agenda_v2','mi_agenda_v3'];
-
 function load() {
-  // --- Migración desde claves antiguas ---
+  const legacy = ['mi_agenda_v1','mi_agenda_v2','mi_agenda_v3'];
   if (!localStorage.getItem(STORAGE_KEY)) {
-    for (const oldKey of LEGACY_KEYS) {
-      const old = localStorage.getItem(oldKey);
+    for (const k of legacy) {
+      const old = localStorage.getItem(k);
       if (old) {
         try {
-          const oldData = JSON.parse(old);
-          // Trasladar lo que exista al nuevo formato
-          if (oldData.subjects) state.subjects = oldData.subjects;
-          if (oldData.schedule) state.schedule = oldData.schedule;
-          if (oldData.pendings) state.pendings = oldData.pendings;
-          // Guardar en nueva clave y borrar la antigua
-          save();
-          localStorage.removeItem(oldKey);
+          const d = JSON.parse(old);
+          if (d.subjects) state.subjects = d.subjects;
+          if (d.schedule) state.schedule = d.schedule;
+          if (d.pendings) state.pendings = d.pendings;
+          save(); localStorage.removeItem(k);
         } catch(e) {}
         break;
       }
     }
   }
-
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     try {
-      const data = JSON.parse(saved);
-      // Migración: asegurar que campos nuevos existan
-      data.notes   = data.notes   || [];
-      data.profile = data.profile || { name:'', institution:'', course:'' };
-      data.config  = data.config  || { sabado:false, startHour:7, endHour:13 };
-      data.examMode = data.examMode || null;
-      // Migrar pendientes sin prioridad ni done
-      data.pendings = (data.pendings || []).map(p => ({priority:'med', done:false, ...p}));
-      state = { ...state, ...data };
+      const d = JSON.parse(saved);
+      d.notes    = d.notes    || [];
+      d.profile  = d.profile  || { name:'', institution:'', course:'', type:'universidad', semester:'' };
+      d.profile.type     = d.profile.type     || 'universidad';
+      d.profile.semester = d.profile.semester || '';
+      d.profile.course   = d.profile.course   || '';
+      d.config   = d.config   || { sabado:false, startHour:7, endHour:13 };
+      d.examMode = d.examMode || null;
+      d.pendings = (d.pendings||[]).map(p => ({priority:'med', done:false, ...p}));
+      state = { ...state, ...d };
     } catch(e) {}
   }
-  document.getElementById('toggle-sabado').checked = state.config.sabado;
-  populateHourSelects();
   renderAll();
   checkFirstTime();
 }
@@ -542,15 +637,12 @@ function renderAll() {
   renderCalendar();
   renderPendings();
   updateAgendaBadge();
-  checkFirstTime();
   renderExamBanner();
   renderExamModeStatus();
 }
 
 // ==================== HELPERS ====================
-function navBtn(view) {
-  return document.querySelector(`.nav-btn[data-view="${view}"]`);
-}
+function navBtn(view) { return document.querySelector(`.nav-btn[data-view="${view}"]`); }
 
 function switchView(name, btn) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -560,20 +652,75 @@ function switchView(name, btn) {
   if (name === 'hoy') renderHoy();
 }
 
-// ==================== BIENVENIDA ====================
+function toDateStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// ==================== SETUP MULTI-PASO ====================
 function checkFirstTime() {
   const seen = localStorage.getItem('mi_agenda_welcomed');
   const w = document.getElementById('welcome-screen');
-  (!seen && !state.profile.name && !state.subjects.length)
-    ? w.classList.add('active')
-    : w.classList.remove('active');
+  if (!seen && !state.profile.name && !state.subjects.length) {
+    w.classList.add('active');
+    populateSetupHourSelects();
+  } else {
+    w.classList.remove('active');
+  }
 }
 
-function startSetup() {
+function populateSetupHourSelects() {
+  const s = document.getElementById('s2-start');
+  const e = document.getElementById('s2-end');
+  if (!s || !e) return;
+  s.innerHTML = e.innerHTML = '';
+  ALL_HOURS.forEach((h, i) => {
+    s.innerHTML += `<option value="${i}" ${i===7?'selected':''}>${h}</option>`;
+    e.innerHTML += `<option value="${i}" ${i===13?'selected':''}>${h}</option>`;
+  });
+}
+
+function showSetupStep(n) {
+  document.querySelectorAll('.setup-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('setup-step-' + n).classList.add('active');
+}
+
+function selectStudentType(type) {
+  document.getElementById('s1-type').value = type;
+  // Solo universidad activo de momento
+}
+
+function setupStep1Next() {
+  const name = document.getElementById('s1-name').value.trim();
+  if (!name) return toast('Ingresa tu nombre para continuar');
+  showSetupStep(2);
+  populateSetupHourSelects();
+}
+
+function setupStep2Next() {
+  showSetupStep(3);
+}
+
+function finishSetup() {
+  // Guardar perfil
+  const name     = document.getElementById('s1-name').value.trim();
+  const inst     = document.getElementById('s1-inst').value.trim();
+  const type     = document.getElementById('s1-type').value;
+  const semester = document.getElementById('s1-semester').value;
+  const career   = document.getElementById('s1-career').value.trim();
+  state.profile  = { name, institution: inst, course: semester, type, semester, career };
+
+  // Guardar config
+  const sabado = document.getElementById('s2-sabado').checked;
+  let startH   = parseInt(document.getElementById('s2-start').value);
+  let endH     = parseInt(document.getElementById('s2-end').value);
+  if (startH >= endH) endH = startH + 1;
+  state.config = { sabado, startHour: startH, endHour: endH };
+
   localStorage.setItem('mi_agenda_welcomed', '1');
   document.getElementById('welcome-screen').classList.remove('active');
+  save();
+  renderAll();
   switchView('materias', navBtn('materias'));
-  setTimeout(openEditProfile, 300);
 }
 
 // ==================== PERFIL ====================
@@ -581,20 +728,45 @@ function renderProfile() {
   const p = state.profile;
   document.getElementById('profile-avatar').textContent = p.name ? p.name.charAt(0).toUpperCase() : '?';
   document.getElementById('profile-name-display').textContent = p.name || 'Sin configurar';
-  document.getElementById('profile-detail-display').textContent = p.name
-    ? `${p.institution||'-'} · ${p.course||'-'}`
-    : 'Toca ✏️ para editar tu perfil';
+  const details = [];
+  if (p.institution) details.push(p.institution);
+  if (p.semester || p.course) details.push(p.semester || p.course);
+  if (p.career) details.push(p.career);
+  document.getElementById('profile-detail-display').textContent =
+    p.name ? (details.join(' · ') || 'Sin detalles') : 'Toca ✏️ para editar tu perfil';
 }
 
 function openEditProfile() {
   const p = state.profile;
   showModal('Perfil del Estudiante', `
-    <div class="form-group"><label class="form-label">Nombre completo</label>
-      <input class="form-input" id="p-name" value="${p.name||''}" placeholder="Juan Pérez"></div>
-    <div class="form-group"><label class="form-label">Institución</label>
-      <input class="form-input" id="p-institution" value="${p.institution||''}"></div>
-    <div class="form-group"><label class="form-label">Curso / Semestre</label>
-      <input class="form-input" id="p-course" value="${p.course||''}"></div>
+    <div class="form-group">
+      <label class="form-label">Nombre completo</label>
+      <input class="form-input" id="p-name" value="${p.name||''}" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Institución</label>
+      <input class="form-input" id="p-inst" value="${p.institution||''}" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tipo de estudiante</label>
+      <div class="student-type-btns">
+        <button class="student-type-btn disabled" title="Próximamente">🏫 Colegio<br><span style="font-size:10px;font-weight:400;opacity:.6">Próximamente</span></button>
+        <button class="student-type-btn selected" id="p-type-uni">🎓 Universidad</button>
+      </div>
+      <input type="hidden" id="p-type" value="universidad">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Semestre / Nivel</label>
+      <select class="form-select" id="p-semester">
+        ${['NIVELACIÓN','1ER SEMESTRE','2DO SEMESTRE','3ER SEMESTRE','4TO SEMESTRE','5TO SEMESTRE',
+           '6TO SEMESTRE','7MO SEMESTRE','8VO SEMESTRE','9NO SEMESTRE','10MO SEMESTRE']
+          .map(s=>`<option value="${s}" ${(p.semester||p.course)===s?'selected':''}>${s.charAt(0)+s.slice(1).toLowerCase()}</option>`).join('')}
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Carrera</label>
+      <input class="form-input" id="p-career" value="${p.career||''}" oninput="this.value=this.value.toUpperCase()">
+    </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
       <button class="btn btn-primary" onclick="saveProfile()">Guardar</button>
@@ -602,50 +774,80 @@ function openEditProfile() {
 }
 
 function saveProfile() {
-  state.profile.name        = document.getElementById('p-name').value.trim();
-  state.profile.institution = document.getElementById('p-institution').value.trim();
-  state.profile.course      = document.getElementById('p-course').value.trim();
-  save(); renderProfile(); closeModal(); toast('Perfil guardado'); checkFirstTime();
+  const name     = document.getElementById('p-name').value.trim();
+  const inst     = document.getElementById('p-inst').value.trim();
+  const semester = document.getElementById('p-semester').value;
+  const career   = document.getElementById('p-career').value.trim();
+  if (!name) return toast('Ingresa tu nombre');
+  state.profile = { name, institution: inst, course: semester, type:'universidad', semester, career };
+  save(); renderProfile(); closeModal(); toast('Perfil guardado');
 }
 
-// ==================== RANGO DE HORAS ====================
-function populateHourSelects() {
-  const s = document.getElementById('start-hour');
-  const e = document.getElementById('end-hour');
-  s.innerHTML = e.innerHTML = '';
-  ALL_HOURS.forEach((h, i) => {
-    s.innerHTML += `<option value="${i}" ${i===state.config.startHour?'selected':''}>${h}</option>`;
-    e.innerHTML += `<option value="${i}" ${i===state.config.endHour?'selected':''}>${h}</option>`;
-  });
+// ==================== CONFIGURACIÓN (modal) ====================
+function openConfigModal() {
+  showModal('Configuración', `
+    <div class="toggle-row" style="padding-top:0">
+      <div>
+        <div class="toggle-label">Incluir sábado</div>
+        <div class="toggle-desc">Muestra sábado en el horario</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="cfg-sabado" ${state.config.sabado?'checked':''} onchange="cfgSabado(this.checked)">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div style="padding-top:14px;border-top:1px solid var(--bg3);margin-top:6px">
+      <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px">Rango de horas</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">Inicio</label>
+          <select class="form-select" id="cfg-start" onchange="cfgHours()">${ALL_HOURS.map((h,i)=>`<option value="${i}" ${i===state.config.startHour?'selected':''}>${h}</option>`).join('')}</select>
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">Fin</label>
+          <select class="form-select" id="cfg-end" onchange="cfgHours()">${ALL_HOURS.map((h,i)=>`<option value="${i}" ${i===state.config.endHour?'selected':''}>${h}</option>`).join('')}</select>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:14px;border-top:1px solid var(--bg3);margin-top:14px">
+      <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-bottom:8px" onclick="requestNotifPermission()">🔔 Activar notificaciones</button>
+      <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="updateApp()">🔄 Actualizar aplicación</button>
+    </div>
+    <div style="padding-top:14px;border-top:1px solid var(--bg3);margin-top:14px">
+      <div style="font-size:12px;font-weight:700;color:#ef4444;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Zona de peligro</div>
+      <button class="btn btn-danger btn-sm" onclick="confirmReset()" style="width:100%;justify-content:center">Resetear todo el sistema</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()" style="width:100%;justify-content:center">Cerrar</button>
+    </div>`, true);
 }
 
-function saveHourConfig() {
-  let start = parseInt(document.getElementById('start-hour').value);
-  let end   = parseInt(document.getElementById('end-hour').value);
-  if (start >= end) end = start + 1;
-  state.config.startHour = start;
-  state.config.endHour   = end;
-  document.getElementById('end-hour').value = end;
+function cfgSabado(v) {
+  state.config.sabado = v;
+  // también actualizar toggle principal si existe
+  const t = document.getElementById('toggle-sabado');
+  if (t) t.checked = v;
+  save(); renderSchedule(); toast(v?'Sábado activado':'Sábado desactivado');
+}
+
+function cfgHours() {
+  let s = parseInt(document.getElementById('cfg-start').value);
+  let e = parseInt(document.getElementById('cfg-end').value);
+  if (s >= e) { e = s + 1; document.getElementById('cfg-end').value = e; }
+  state.config.startHour = s;
+  state.config.endHour   = e;
   save(); renderSchedule(); toast('Rango actualizado');
 }
 
-// ==================== TOGGLE SÁBADO ====================
-function toggleSabado(checked) {
-  state.config.sabado = checked;
-  save(); renderSchedule();
-  toast(checked ? 'Sábado activado' : 'Sábado desactivado');
-}
-
-function getNumDays()  { return state.config.sabado ? 6 : 5; }
-function getDayLabels(){ return state.config.sabado ? ['LUN','MAR','MIÉ','JUE','VIE','SÁB'] : ['LUN','MAR','MIÉ','JUE','VIE']; }
-
-// ==================== HORARIO (Bloque 2) ====================
+// ==================== HORARIO ====================
 function getTodayColIdx() {
   const dow = new Date().getDay();
   if (dow >= 1 && dow <= 5) return dow - 1;
   if (dow === 6 && state.config.sabado) return 5;
   return -1;
 }
+function getNumDays()   { return state.config.sabado ? 6 : 5; }
+function getDayLabels() { return state.config.sabado ? ['LUN','MAR','MIÉ','JUE','VIE','SÁB'] : ['LUN','MAR','MIÉ','JUE','VIE']; }
 
 function renderSchedule() {
   const c      = document.getElementById('schedule-container');
@@ -657,7 +859,6 @@ function renderSchedule() {
   const todayC = getTodayColIdx();
   const ROW_H  = 58;
 
-  // Pre-calcular spans por columna
   const spanMap = {};
   for (let d = 0; d < numD; d++) {
     spanMap[d] = {};
@@ -666,7 +867,7 @@ function renderSchedule() {
       const sid = state.schedule[`${d}_${hi}`];
       if (sid) {
         let span = 1;
-        while (hi + span <= end && state.schedule[`${d}_${hi+span}`] === sid) span++;
+        while (hi+span <= end && state.schedule[`${d}_${hi+span}`] === sid) span++;
         spanMap[d][hi] = span;
         for (let s = 1; s < span; s++) spanMap[d][hi+s] = 0;
         hi += span;
@@ -678,9 +879,7 @@ function renderSchedule() {
   let html = `<div class="schedule-grid">`;
   html += `<div style="display:grid;grid-template-columns:${cols};background:var(--bg2)">`;
   html += `<div class="schedule-time" style="background:var(--bg2)"></div>`;
-  days.forEach((d, di) =>
-    html += `<div class="schedule-header-cell${di===todayC?' today-col':''}">${d}</div>`
-  );
+  days.forEach((d,di) => html += `<div class="schedule-header-cell${di===todayC?' today-col':''}">${d}</div>`);
   html += `</div>`;
 
   hours.forEach((hr, idx) => {
@@ -689,11 +888,11 @@ function renderSchedule() {
     html += `<div class="schedule-time">${hr}</div>`;
     for (let d = 0; d < numD; d++) {
       const isToday = d === todayC;
-      const sv      = spanMap[d][hi];
+      const sv = spanMap[d][hi];
       if (sv === 0) { html += `<div class="schedule-cell${isToday?' today-col':''}"></div>`; continue; }
       const key = `${d}_${hi}`;
       const sid = state.schedule[key];
-      const sub = sid ? state.subjects.find(s => s.id === sid) : null;
+      const sub = sid ? state.subjects.find(s=>s.id===sid) : null;
       if (sub && sv > 1) {
         const h = sv * ROW_H - 4;
         html += `<div class="schedule-cell${isToday?' today-col':''}" style="position:relative;height:${ROW_H}px">
@@ -720,10 +919,10 @@ function renderSchedule() {
   document.getElementById('schedule-sub').textContent = `${hours.length} horas · ${numD} días`;
 }
 
-// ==================== VISTA HOY (Bloque 2) ====================
+// ==================== VISTA HOY ====================
 function renderHoy() {
-  const now  = new Date();
-  const dow  = now.getDay();
+  const now = new Date();
+  const dow = now.getDay();
   document.getElementById('hoy-title').textContent = DAY_FULL[dow];
   document.getElementById('hoy-sub').textContent   = `${now.getDate()} de ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}`;
 
@@ -735,7 +934,6 @@ function renderHoy() {
   const start  = state.config.startHour;
   const end    = state.config.endHour;
 
-  // Construir franjas colapsadas
   const slots = [];
   if (colIdx >= 0) {
     let hi = start;
@@ -744,7 +942,7 @@ function renderHoy() {
       if (sid) {
         let span = 1;
         while (hi+span <= end && state.schedule[`${colIdx}_${hi+span}`] === sid) span++;
-        const sub = state.subjects.find(s => s.id === sid);
+        const sub = state.subjects.find(s=>s.id===sid);
         if (sub) {
           const sH = parseInt(ALL_HOURS[hi]);
           const eH = parseInt(HOURS_END[hi+span-1]);
@@ -755,40 +953,34 @@ function renderHoy() {
     }
   }
 
-  // Banner próxima / en curso
-  const inClass = slots.find(s => s.startMin <= nowMin && s.endMin > nowMin);
-  const next    = slots.find(s => s.startMin > nowMin);
+  const inClass  = slots.find(s => s.startMin <= nowMin && s.endMin > nowMin);
+  const nextClass= slots.find(s => s.startMin > nowMin);
   const bannerEl = document.getElementById('next-banner-container');
-  if (inClass || next) {
-    const t = inClass || next;
+  if (inClass || nextClass) {
+    const t = inClass || nextClass;
     const isLive = !!inClass;
     bannerEl.innerHTML = `<div class="next-banner">
       <div class="next-banner-dot${isLive?' live':''}"></div>
       <div>
-        <div class="next-banner-label">${isLive ? 'En clase ahora' : 'Próxima clase'}</div>
+        <div class="next-banner-label">${isLive?'En clase ahora':'Próxima clase'}</div>
         <div class="next-banner-name">${t.sub.name}</div>
         <div class="next-banner-time">${ALL_HOURS[t.hi]} – ${HOURS_END[t.hi+t.span-1]} · Edif. ${t.sub.building}, Aula ${t.sub.room}</div>
       </div>
     </div>`;
   } else bannerEl.innerHTML = '';
 
-  // Lista de clases
   const classEl = document.getElementById('hoy-classes-container');
   if (!slots.length) {
-    // Mostrar próximos pendientes cuando no hay clases
     const today0 = new Date(); today0.setHours(0,0,0,0);
-    const upcoming = state.pendings
-      .filter(p => !p.done)
-      .sort((a,b) => a.date.localeCompare(b.date))
-      .slice(0, 5);
+    const upcoming = state.pendings.filter(p=>!p.done).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
     const upHtml = upcoming.length
       ? `<div class="section-title" style="margin-top:4px">Próximos pendientes</div>
          <div style="display:flex;flex-direction:column;gap:8px">` +
         upcoming.map(p => {
-          const sub = state.subjects.find(s => s.id === p.subjectId); if (!sub) return '';
-          const diff = Math.round((new Date(p.date+'T00:00:00') - today0) / 86400000);
-          const dl = diff < 0 ? 'Vencido' : diff === 0 ? 'Hoy' : diff === 1 ? 'Mañana' : `${diff} días`;
-          const dc = diff < 0 ? 'days-urgent' : diff <= 3 ? 'days-soon' : 'days-ok';
+          const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return '';
+          const diff = Math.round((new Date(p.date+'T00:00:00')-today0)/86400000);
+          const dl = diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
+          const dc = diff<0?'days-urgent':diff<=3?'days-soon':'days-ok';
           return `<div class="pending-item">
             <div class="pending-color" style="background:${sub.color}"></div>
             <div class="pending-info">
@@ -801,23 +993,20 @@ function renderHoy() {
             </div>
             <div class="days-until ${dc}">${dl}</div>
           </div>`;
-        }).join('') + `</div>`
-      : '';
+        }).join('') + `</div>` : '';
     classEl.innerHTML = `<div class="empty">
       <div class="empty-icon">${colIdx<0?'🌅':'📭'}</div>
       <div class="empty-title">${colIdx<0?'Sin clases hoy':'Sin clases asignadas'}</div>
       <div class="empty-sub">${colIdx<0?'Disfruta tu día libre':'Ve al Horario y asigna tus materias'}</div>
     </div>${upHtml}`;
   } else {
-    // Construir lista con línea de hora actual
     let listHtml = '';
     slots.forEach((s, si) => {
       const isCurrent = s.startMin <= nowMin && s.endMin > nowMin;
       const isPast    = s.endMin <= nowMin;
       const isNextUp  = !isPast && !isCurrent && si > 0 && slots[si-1].endMin <= nowMin;
-      // Línea roja entre clase pasada y la siguiente
       if (isNextUp) {
-        listHtml += `<div style="display:flex;align-items:center;gap:6px;margin:0">
+        listHtml += `<div style="display:flex;align-items:center;gap:6px">
           <span style="font-size:9px;font-weight:700;color:#ef4444;min-width:34px">${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}</span>
           <div style="flex:1;height:1.5px;background:#ef4444;border-radius:2px"></div>
         </div>`;
@@ -837,15 +1026,14 @@ function renderHoy() {
       <div style="display:flex;flex-direction:column;gap:8px">${listHtml}</div>`;
   }
 
-  // Pendientes de hoy
   const todayStr = toDateStr(now);
-  const todayP   = state.pendings.filter(p => p.date === todayStr && !p.done);
+  const todayP   = state.pendings.filter(p=>p.date===todayStr&&!p.done);
   const pendEl   = document.getElementById('hoy-pendings-container');
   if (todayP.length) {
     pendEl.innerHTML = `<div class="section-title">Pendientes de hoy</div>
       <div style="display:flex;flex-direction:column;gap:8px">` +
       todayP.map(p => {
-        const sub = state.subjects.find(s => s.id === p.subjectId); if(!sub) return '';
+        const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return '';
         return `<div class="pending-item">
           <div class="pending-color" style="background:${sub.color}"></div>
           <div class="pending-info">
@@ -863,7 +1051,61 @@ function renderHoy() {
   } else pendEl.innerHTML = '';
 }
 
-// ==================== HORARIO — ASIGNAR BLOQUE ====================
+// ==================== NOTAS ====================
+function renderNotes() {
+  const el = document.getElementById('notes-list');
+  if (!el) return;
+  if (!state.notes.length) {
+    el.innerHTML = '<div style="text-align:center;color:var(--text3);font-size:12px;padding:8px 0">Sin notas aún</div>';
+    return;
+  }
+  el.innerHTML = state.notes.slice().reverse().map(n => {
+    const sub = state.subjects.find(s=>s.id===n.subjectId);
+    return `<div class="note-item">
+      ${sub?`<div style="width:3px;border-radius:2px;background:${sub.color};flex-shrink:0;align-self:stretch;min-height:20px"></div>`:''}
+      <div class="note-text">
+        ${sub?`<div style="font-size:10px;font-weight:700;color:var(--text3);margin-bottom:3px">${sub.name}</div>`:''}
+        ${n.text}
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+        <div class="note-date">${new Date(n.date).toLocaleDateString('es-EC',{day:'numeric',month:'short'})}</div>
+        <button onclick="deleteNote('${n.id}')" style="width:22px;height:22px;border-radius:4px;border:1px solid var(--bg3);background:none;color:var(--text3);cursor:pointer;font-size:10px">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openAddNote() {
+  const subOpts = state.subjects.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+  showModal('Nueva Nota', `
+    <div class="form-group">
+      <label class="form-label">Materia (opcional)</label>
+      <select class="form-select" id="n-subject"><option value="">— Sin materia —</option>${subOpts}</select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nota</label>
+      <textarea class="form-input" id="n-text" rows="4" placeholder="Escribe tu nota aquí..." style="resize:none;line-height:1.5"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveNote()">Guardar</button>
+    </div>`, true);
+}
+
+function saveNote() {
+  const text      = document.getElementById('n-text').value.trim();
+  const subjectId = document.getElementById('n-subject').value;
+  if (!text) return toast('Escribe algo en la nota');
+  state.notes.push({id:'n'+Date.now(), text, subjectId, date: new Date().toISOString()});
+  save(); renderNotes(); closeModal(); toast('Nota guardada');
+}
+
+function deleteNote(id) {
+  state.notes = state.notes.filter(n=>n.id!==id);
+  save(); renderNotes(); toast('Nota eliminada');
+}
+
+// ==================== ASIGNAR BLOQUE ====================
 function showBlockDetail(key) {
   const sid = state.schedule[key]; if(!sid) return;
   const sub = state.subjects.find(s=>s.id===sid); if(!sub) return;
@@ -880,7 +1122,6 @@ function showBlockDetail(key) {
     <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;justify-content:center" onclick="closeDetail();openAddPendingForSubject('${sid}')">+ Pendiente para esta materia</button>`;
   document.getElementById('detail-pop').classList.add('show');
 }
-
 function closeDetail(){ document.getElementById('detail-pop').classList.remove('show'); }
 function removeBlock(key){ state.schedule[key]=null; save(); renderSchedule(); closeDetail(); toast('Bloque eliminado'); }
 
@@ -889,17 +1130,16 @@ function openAssignBlock(d, h) {
   const key  = `${d}_${h}`;
   const cur  = state.schedule[key];
   const days = getDayLabels();
-  const opts = state.subjects.map(s => `
+  const opts = state.subjects.map(s=>`
     <div class="subject-chip" style="cursor:pointer;border:2px solid ${cur===s.id?s.color:'transparent'}" onclick="assignBlock('${s.id}')">
       <div class="chip-color" style="background:${s.color}"></div>
       <div class="chip-info"><div class="chip-name">${s.name}</div><div class="chip-detail">${s.teacher}</div></div>
     </div>`).join('');
-  showModal(`${days[d]} · ${ALL_HOURS[h]}–${HOURS_END[h]}`, `
+  showModal(`${days[d]} · ${ALL_HOURS[h]}–${HOURS_END[h]}`,`
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">${opts||'<div style="color:var(--text3);text-align:center;padding:16px">Crea materias primero</div>'}</div>
     ${cur?`<button class="btn btn-ghost" onclick="removeBlock('${key}');closeModal()" style="width:100%;color:#ef4444;margin-bottom:8px">Quitar bloque</button>`:''}
     <button class="btn btn-ghost" onclick="closeModal()" style="width:100%">Cancelar</button>`, false);
 }
-
 function assignBlock(sid) {
   if (!blockTarget) return;
   state.schedule[`${blockTarget.d}_${blockTarget.h}`] = sid;
@@ -910,10 +1150,10 @@ function assignBlock(sid) {
 function renderEditor() {
   const el = document.getElementById('subjects-list');
   if (!state.subjects.length) {
-    el.innerHTML = '<div style="text-align:center;color:var(--text3);font-size:13px;padding:16px">No hay materias aún</div>';
+    el.innerHTML='<div style="text-align:center;color:var(--text3);font-size:13px;padding:16px">No hay materias aún</div>';
     return;
   }
-  el.innerHTML = state.subjects.map(s => `
+  el.innerHTML = state.subjects.map(s=>`
     <div class="subject-chip">
       <div class="chip-color" style="background:${s.color}"></div>
       <div class="chip-info">
@@ -927,11 +1167,10 @@ function renderEditor() {
     </div>`).join('');
 }
 
-function openAddSubject() { pendingEditId=null; showModal('Nueva Materia', buildSubjectForm(null), true); }
+function openAddSubject()  { pendingEditId=null; showModal('Nueva Materia',buildSubjectForm(null),true); }
 function openEditSubject(id) {
   const s = state.subjects.find(x=>x.id===id); if(!s) return;
-  pendingEditId = id;
-  showModal('Editar Materia', buildSubjectForm(s), true);
+  pendingEditId=id; showModal('Editar Materia',buildSubjectForm(s),true);
 }
 
 function buildSubjectForm(s) {
@@ -958,124 +1197,67 @@ function buildSubjectForm(s) {
     </div>`;
 }
 
-function selectColor(el, color) {
-  document.getElementById('f-color').value = color;
+function selectColor(el,color) {
+  document.getElementById('f-color').value=color;
   document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
   el.classList.add('selected');
 }
 
 function saveSubject() {
-  const name     = document.getElementById('f-name').value.trim();
-  const teacher  = document.getElementById('f-teacher').value.trim();
-  const building = document.getElementById('f-building').value.trim();
-  const room     = document.getElementById('f-room').value.trim();
-  const color    = document.getElementById('f-color').value;
-  if (!name||!teacher||!building||!room) return toast('Completa todos los campos');
-  if (pendingEditId) {
-    Object.assign(state.subjects.find(x=>x.id===pendingEditId), {name,teacher,building,room,color});
+  const name=document.getElementById('f-name').value.trim();
+  const teacher=document.getElementById('f-teacher').value.trim();
+  const building=document.getElementById('f-building').value.trim();
+  const room=document.getElementById('f-room').value.trim();
+  const color=document.getElementById('f-color').value;
+  if(!name||!teacher||!building||!room) return toast('Completa todos los campos');
+  if(pendingEditId) {
+    Object.assign(state.subjects.find(x=>x.id===pendingEditId),{name,teacher,building,room,color});
   } else {
-    state.subjects.push({id:'s'+Date.now(), name, teacher, building, room, color});
+    state.subjects.push({id:'s'+Date.now(),name,teacher,building,room,color});
   }
   save(); renderAll(); closeModal(); toast(pendingEditId?'Materia actualizada':'Materia creada');
 }
 
 function deleteSubject(id) {
-  if (!confirm('¿Eliminar esta materia?')) return;
-  state.subjects  = state.subjects.filter(s=>s.id!==id);
-  Object.keys(state.schedule).forEach(k=>{ if(state.schedule[k]===id) state.schedule[k]=null; });
-  state.pendings  = state.pendings.filter(p=>p.subjectId!==id);
+  if(!confirm('¿Eliminar esta materia?')) return;
+  state.subjects=state.subjects.filter(s=>s.id!==id);
+  Object.keys(state.schedule).forEach(k=>{if(state.schedule[k]===id)state.schedule[k]=null;});
+  state.pendings=state.pendings.filter(p=>p.subjectId!==id);
   save(); renderAll(); toast('Materia eliminada');
 }
 
-// ==================== NOTAS RÁPIDAS (Bloque 3) ====================
-function renderNotes() {
-  const el = document.getElementById('notes-list');
-  if (!state.notes.length) {
-    el.innerHTML = '<div style="text-align:center;color:var(--text3);font-size:12px;padding:8px">Sin notas aún</div>';
-    return;
-  }
-  el.innerHTML = state.notes.slice().reverse().map(n => {
-    const sub = state.subjects.find(s=>s.id===n.subjectId);
-    return `<div class="note-item">
-      ${sub?`<div style="width:3px;border-radius:2px;background:${sub.color};flex-shrink:0;align-self:stretch"></div>`:''}
-      <div class="note-text">
-        ${sub?`<div style="font-size:10px;font-weight:700;color:var(--text3);margin-bottom:3px">${sub.name}</div>`:''}
-        ${n.text}
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-        <div class="note-date">${new Date(n.date).toLocaleDateString('es-EC',{day:'numeric',month:'short'})}</div>
-        <button onclick="deleteNote('${n.id}')" style="width:22px;height:22px;border-radius:4px;border:1px solid var(--bg3);background:none;color:var(--text3);cursor:pointer;font-size:10px">✕</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function openAddNote() {
-  const subOpts = state.subjects.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
-  showModal('Nueva Nota', `
-    <div class="form-group"><label class="form-label">Materia (opcional)</label>
-      <select class="form-select" id="n-subject">
-        <option value="">— Sin materia —</option>${subOpts}
-      </select></div>
-    <div class="form-group"><label class="form-label">Nota</label>
-      <textarea class="form-input" id="n-text" rows="4" placeholder="Escribe tu nota aquí..." style="resize:none;line-height:1.5"></textarea></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveNote()">Guardar</button>
-    </div>`, true);
-}
-
-function saveNote() {
-  const text      = document.getElementById('n-text').value.trim();
-  const subjectId = document.getElementById('n-subject').value;
-  if (!text) return toast('Escribe algo en la nota');
-  state.notes.push({id:'n'+Date.now(), text, subjectId, date: new Date().toISOString()});
-  save(); renderNotes(); closeModal(); toast('Nota guardada');
-}
-
-function deleteNote(id) {
-  state.notes = state.notes.filter(n=>n.id!==id);
-  save(); renderNotes(); toast('Nota eliminada');
-}
-
-// ==================== PENDIENTES (Bloque 3) ====================
-function toDateStr(d) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-
+// ==================== PENDIENTES ====================
 function updateAgendaBadge() {
-  const today = new Date(); today.setHours(0,0,0,0);
-  const urgent = state.pendings.filter(p => {
-    if (p.done) return false;
-    const diff = Math.round((new Date(p.date) - today) / (1000*60*60*24));
-    return diff <= 3;
+  const today=new Date(); today.setHours(0,0,0,0);
+  const urgent=state.pendings.filter(p=>{
+    if(p.done) return false;
+    return Math.round((new Date(p.date)-today)/86400000)<=3;
   }).length;
-  const badge = document.getElementById('agenda-badge');
-  if (urgent > 0) { badge.textContent = urgent; badge.style.display='flex'; }
-  else badge.style.display = 'none';
+  const badge=document.getElementById('agenda-badge');
+  if(urgent>0){badge.textContent=urgent;badge.style.display='flex';}
+  else badge.style.display='none';
 }
 
 function openAddPending(preSubjectId) {
-  if (!state.subjects.length) return toast('Crea materias primero');
-  pendingEditId = null;
-  showModal('Nuevo Pendiente', buildPendingForm(null, preSubjectId), true);
+  if(!state.subjects.length) return toast('Crea materias primero');
+  pendingEditId=null;
+  showModal('Nuevo Pendiente',buildPendingForm(null,preSubjectId),true);
 }
-
 function openAddPendingFast() { openAddPending(); }
 function openAddPendingForSubject(sid) { openAddPending(sid); }
 
 function openEditPending(id) {
-  const p = state.pendings.find(x=>x.id===id); if(!p) return;
-  pendingEditId = id;
-  showModal('Editar Pendiente', buildPendingForm(p), true);
+  const p=state.pendings.find(x=>x.id===id); if(!p) return;
+  pendingEditId=id;
+  showModal('Editar Pendiente',buildPendingForm(p),true);
 }
 
-function buildPendingForm(p, preSubjectId) {
-  const subOpts = state.subjects.map(s =>
+function buildPendingForm(p,preSubjectId) {
+  const subOpts=state.subjects.map(s=>
     `<option value="${s.id}" ${(p&&p.subjectId===s.id)||(preSubjectId&&preSubjectId===s.id)?'selected':''}>${s.name}</option>`
   ).join('');
-  const today   = toDateStr(new Date());
-  const selPrio = p?.priority || 'med';
+  const today=toDateStr(new Date());
+  const selPrio=p?.priority||'med';
   return `
     <div class="form-group"><label class="form-label">Tipo</label>
       <select class="form-select" id="f-type">
@@ -1108,107 +1290,92 @@ function buildPendingForm(p, preSubjectId) {
     </div>`;
 }
 
-function selectPrio(el, prio) {
-  document.getElementById('f-priority').value = prio;
-  document.querySelectorAll('.prio-btn').forEach(b => b.className = 'prio-btn');
+function selectPrio(el,prio) {
+  document.getElementById('f-priority').value=prio;
+  document.querySelectorAll('.prio-btn').forEach(b=>b.className='prio-btn');
   el.classList.add(`selected-${prio}`);
 }
 
 function savePending() {
-  const type      = document.getElementById('f-type').value;
-  const subjectId = document.getElementById('f-subject').value;
-  const desc      = document.getElementById('f-desc').value.trim();
-  const date      = document.getElementById('f-date').value;
-  const priority  = document.getElementById('f-priority').value;
-  if (!subjectId||!date) return toast('Completa los campos requeridos');
-  if (pendingEditId) {
-    Object.assign(state.pendings.find(x=>x.id===pendingEditId), {type,subjectId,desc,date,priority});
+  const type=document.getElementById('f-type').value;
+  const subjectId=document.getElementById('f-subject').value;
+  const desc=document.getElementById('f-desc').value.trim();
+  const date=document.getElementById('f-date').value;
+  const priority=document.getElementById('f-priority').value;
+  if(!subjectId||!date) return toast('Completa los campos requeridos');
+  if(pendingEditId) {
+    Object.assign(state.pendings.find(x=>x.id===pendingEditId),{type,subjectId,desc,date,priority});
   } else {
-    state.pendings.push({id:'p'+Date.now(), type, subjectId, desc, date, priority, done:false});
+    state.pendings.push({id:'p'+Date.now(),type,subjectId,desc,date,priority,done:false});
   }
   save(); renderCalendar(); renderPendings(); updateAgendaBadge(); closeModal(); toast('Pendiente guardado');
 }
 
 function deletePending(id) {
-  state.pendings = state.pendings.filter(p=>p.id!==id);
+  state.pendings=state.pendings.filter(p=>p.id!==id);
   save(); renderCalendar(); renderPendings(); updateAgendaBadge(); toast('Eliminado');
 }
 
 function completePending(id) {
-  const p = state.pendings.find(x=>x.id===id); if(!p) return;
-  p.done = !p.done;
+  const p=state.pendings.find(x=>x.id===id); if(!p) return;
+  p.done=!p.done;
   save(); renderCalendar(); renderPendings(); updateAgendaBadge(); renderHoy();
   toast(p.done?'¡Cumplido! ✓':'Marcado como pendiente');
 }
 
 function toggleDone() {
-  doneVisible = !doneVisible;
-  document.getElementById('done-list').style.display = doneVisible ? 'flex' : 'none';
+  doneVisible=!doneVisible;
+  document.getElementById('done-list').style.display=doneVisible?'flex':'none';
 }
 
-// ==================== FILTRO POR MATERIA (Bloque 3) ====================
 function renderFilterChips() {
-  const el = document.getElementById('filter-chips');
-  if (!state.subjects.length) { el.innerHTML=''; return; }
-  let h = `<div class="filter-chip${filterSubject==='all'?' active':''}" onclick="setFilter('all')">Todas</div>`;
-  state.subjects.forEach(s => {
-    h += `<div class="filter-chip${filterSubject===s.id?' active':''}" onclick="setFilter('${s.id}')">
+  const el=document.getElementById('filter-chips');
+  if(!state.subjects.length){el.innerHTML='';return;}
+  let h=`<div class="filter-chip${filterSubject==='all'?' active':''}" onclick="setFilter('all')">Todas</div>`;
+  state.subjects.forEach(s=>{
+    h+=`<div class="filter-chip${filterSubject===s.id?' active':''}" onclick="setFilter('${s.id}')">
       <div class="filter-chip-dot" style="background:${s.color}"></div>${s.name}
     </div>`;
   });
-  el.innerHTML = h;
+  el.innerHTML=h;
 }
 
-function setFilter(sid) {
-  filterSubject = sid;
-  renderFilterChips();
-  renderPendings();
-}
+function setFilter(sid) { filterSubject=sid; renderFilterChips(); renderPendings(); }
 
 function renderPendings() {
   renderFilterChips();
-  const elActive  = document.getElementById('pending-list');
-  const elDone    = document.getElementById('done-list');
-  const doneCount = document.getElementById('done-count');
-  const today     = new Date(); today.setHours(0,0,0,0);
+  const elActive=document.getElementById('pending-list');
+  const elDone=document.getElementById('done-list');
+  const doneCount=document.getElementById('done-count');
+  const today=new Date(); today.setHours(0,0,0,0);
+  const PRIO_ORDER={high:0,med:1,low:2};
 
-  const PRIO_ORDER = {high:0, med:1, low:2};
-
-  let active = state.pendings.filter(p => !p.done);
-  let done   = state.pendings.filter(p => p.done);
-
-  if (filterSubject !== 'all') {
-    active = active.filter(p => p.subjectId === filterSubject);
-    done   = done.filter(p => p.subjectId === filterSubject);
+  let active=state.pendings.filter(p=>!p.done);
+  let done=state.pendings.filter(p=>p.done);
+  if(filterSubject!=='all'){
+    active=active.filter(p=>p.subjectId===filterSubject);
+    done=done.filter(p=>p.subjectId===filterSubject);
   }
+  active.sort((a,b)=>{const dd=a.date.localeCompare(b.date);return dd||((PRIO_ORDER[a.priority]??1)-(PRIO_ORDER[b.priority]??1));});
+  done.sort((a,b)=>b.date.localeCompare(a.date));
 
-  // Ordenar: primero por fecha, luego por prioridad
-  active.sort((a,b) => {
-    const dd = a.date.localeCompare(b.date);
-    if (dd !== 0) return dd;
-    return (PRIO_ORDER[a.priority]??1) - (PRIO_ORDER[b.priority]??1);
-  });
-  done.sort((a,b) => b.date.localeCompare(a.date));
+  doneCount.textContent=done.length||'';
+  document.getElementById('done-toggle').style.display=done.length?'flex':'none';
 
-  doneCount.textContent = done.length || '';
-  const doneToggle = document.getElementById('done-toggle');
-  doneToggle.style.display = done.length ? 'flex' : 'none';
-
-  function buildItem(p, isDone) {
-    const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return '';
-    const date  = new Date(p.date+'T00:00:00');
-    const diff  = Math.round((date-today)/(1000*60*60*24));
-    const diffL = isDone?'Cumplido':diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
-    const diffC = isDone?'days-ok':diff<=0?'days-urgent':diff<=3?'days-soon':'days-ok';
-    const dateL = date.toLocaleDateString('es-EC',{day:'numeric',month:'short'});
-    const prioIcon = PRIO_ICON[p.priority] || '';
+  function buildItem(p,isDone) {
+    const sub=state.subjects.find(s=>s.id===p.subjectId); if(!sub) return '';
+    const date=new Date(p.date+'T00:00:00');
+    const diff=Math.round((date-today)/(1000*60*60*24));
+    const diffL=isDone?'Cumplido':diff<0?'Vencido':diff===0?'Hoy':diff===1?'Mañana':`${diff} días`;
+    const diffC=isDone?'days-ok':diff<=0?'days-urgent':diff<=3?'days-soon':'days-ok';
+    const dateL=date.toLocaleDateString('es-EC',{day:'numeric',month:'short'});
     return `<div class="pending-item${isDone?' done':''}">
       <div class="pending-color" style="background:${sub.color}"></div>
       <div class="pending-info">
         <div class="pending-subject">${sub.name}</div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px">
           <span class="pending-type ${TYPE_CLASS[p.type]||'type-otro'}">${TYPE_LABELS[p.type]||p.type}</span>
-          <span style="font-size:12px" title="${PRIO_LABEL[p.priority]||''}">${prioIcon}</span>
+          <span style="font-size:12px">${PRIO_ICON[p.priority]||''}</span>
           ${p.desc?`<span style="font-size:11px;color:var(--text3)">${p.desc}</span>`:''}
         </div>
       </div>
@@ -1229,411 +1396,130 @@ function renderPendings() {
     </div>`;
   }
 
-  // Separar vencidos — van primero con banner de alerta
-  const today0 = new Date(); today0.setHours(0,0,0,0);
-  const overdue    = active.filter(p => Math.round((new Date(p.date+'T00:00:00') - today0) / 86400000) < 0);
-  const notOverdue = active.filter(p => Math.round((new Date(p.date+'T00:00:00') - today0) / 86400000) >= 0);
-
-  let activeHtml = '';
-  if (overdue.length) {
-    activeHtml += `<div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:var(--radius-sm)">
-      <span style="font-size:13px">⚠️</span>
-      <span style="font-size:11px;font-weight:700;color:#ef4444;letter-spacing:.3px">${overdue.length} PENDIENTE${overdue.length>1?'S':''} VENCIDO${overdue.length>1?'S':''}</span>
-    </div>` + overdue.map(p => buildItem(p, false)).join('');
+  const today0=new Date(); today0.setHours(0,0,0,0);
+  const overdue=active.filter(p=>Math.round((new Date(p.date+'T00:00:00')-today0)/86400000)<0);
+  const notOverdue=active.filter(p=>Math.round((new Date(p.date+'T00:00:00')-today0)/86400000)>=0);
+  let activeHtml='';
+  if(overdue.length) {
+    activeHtml+=`<div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:var(--radius-sm)">
+      <span>⚠️</span><span style="font-size:11px;font-weight:700;color:#ef4444">${overdue.length} PENDIENTE${overdue.length>1?'S':''} VENCIDO${overdue.length>1?'S':''}</span>
+    </div>`+overdue.map(p=>buildItem(p,false)).join('');
   }
-  activeHtml += notOverdue.map(p => buildItem(p, false)).join('');
-
-  elActive.innerHTML = active.length
-    ? activeHtml
-    : '<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes activos</div><div class="empty-sub">¡Todo al día!</div></div>';
-
-  elDone.style.cssText = 'flex-direction:column;gap:8px';
-  elDone.innerHTML = done.map(p=>buildItem(p,true)).join('');
+  activeHtml+=notOverdue.map(p=>buildItem(p,false)).join('');
+  elActive.innerHTML=active.length?activeHtml:'<div class="empty"><div class="empty-icon">✅</div><div class="empty-title">Sin pendientes activos</div><div class="empty-sub">¡Todo al día!</div></div>';
+  elDone.style.cssText='flex-direction:column;gap:8px';
+  elDone.innerHTML=done.map(p=>buildItem(p,true)).join('');
 }
 
 // ==================== CALENDARIO ====================
 function renderCalendar() {
-  const year  = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-  document.getElementById('month-title').textContent = `${MONTH_NAMES[month]} ${year}`;
-  const grid  = document.getElementById('cal-grid');
-  let h = DAY_NAMES.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
-  const first = new Date(year,month,1).getDay();
-  const days  = new Date(year,month+1,0).getDate();
-  const today = new Date();
-  for (let i=0; i<first; i++) {
-    const d = new Date(year,month,1-first+i);
-    h += `<div class="cal-day other-month"><div class="cal-day-num">${d.getDate()}</div></div>`;
+  const year=calendarDate.getFullYear();
+  const month=calendarDate.getMonth();
+  document.getElementById('month-title').textContent=`${MONTH_NAMES[month]} ${year}`;
+  const grid=document.getElementById('cal-grid');
+  let h=DAY_NAMES.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
+  const first=new Date(year,month,1).getDay();
+  const days=new Date(year,month+1,0).getDate();
+  const today=new Date();
+  for(let i=0;i<first;i++){
+    const d=new Date(year,month,1-first+i);
+    h+=`<div class="cal-day other-month"><div class="cal-day-num">${d.getDate()}</div></div>`;
   }
-  for (let d=1; d<=days; d++) {
-    const date    = new Date(year,month,d);
-    const dow     = date.getDay();
-    const isToday = d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
-    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    let colIdx = -1;
-    if (dow>=1&&dow<=5) colIdx = dow-1;
-    else if (dow===6&&state.config.sabado) colIdx = 5;
-    let dots = '';
-    if (colIdx>=0) {
-      const subSet = new Set();
-      for (let hi=state.config.startHour; hi<=state.config.endHour; hi++) {
-        const sid = state.schedule[`${colIdx}_${hi}`]; if(sid) subSet.add(sid);
+  for(let d=1;d<=days;d++){
+    const date=new Date(year,month,d);
+    const dow=date.getDay();
+    const isToday=d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
+    const dateStr=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    let colIdx=-1;
+    if(dow>=1&&dow<=5) colIdx=dow-1;
+    else if(dow===6&&state.config.sabado) colIdx=5;
+    let dots='';
+    if(colIdx>=0){
+      const subSet=new Set();
+      for(let hi=state.config.startHour;hi<=state.config.endHour;hi++){
+        const sid=state.schedule[`${colIdx}_${hi}`]; if(sid)subSet.add(sid);
       }
-      const subArr = [...subSet];
-      const MAX = 3;
-      subArr.slice(0, MAX).forEach(sid => {
-        const sub = state.subjects.find(s=>s.id===sid); if(!sub) return;
-        const cnt = state.pendings.filter(p=>p.subjectId===sid&&p.date===dateStr&&!p.done).length;
-        dots += `<div class="cal-dot" style="background:${sub.color}">${cnt?`<div class="cal-dot-badge">${cnt}</div>`:''}</div>`;
+      const subArr=[...subSet];
+      const MAX=3;
+      subArr.slice(0,MAX).forEach(sid=>{
+        const sub=state.subjects.find(s=>s.id===sid); if(!sub) return;
+        const cnt=state.pendings.filter(p=>p.subjectId===sid&&p.date===dateStr&&!p.done).length;
+        dots+=`<div class="cal-dot" style="background:${sub.color}">${cnt?`<div class="cal-dot-badge">${cnt}</div>`:''}</div>`;
       });
-      if (subArr.length > MAX) {
-        dots += `<div class="cal-dot" style="background:var(--bg3);font-size:6px">+${subArr.length-MAX}</div>`;
-      }
+      if(subArr.length>MAX) dots+=`<div class="cal-dot" style="background:var(--bg3);font-size:6px">+${subArr.length-MAX}</div>`;
     } else {
-      state.pendings.filter(p=>p.date===dateStr).forEach(p=>{
-        const sub = state.subjects.find(s=>s.id===p.subjectId); if(!sub) return;
-        dots += `<div class="cal-dot" style="background:${sub.color}"><div class="cal-dot-badge">!</div></div>`;
+      state.pendings.filter(p=>p.date===dateStr&&!p.done).forEach(p=>{
+        const sub=state.subjects.find(s=>s.id===p.subjectId); if(!sub) return;
+        dots+=`<div class="cal-dot" style="background:${sub.color}"><div class="cal-dot-badge">!</div></div>`;
       });
     }
-    h += `<div class="cal-day${isToday?' today':''}"><div class="cal-day-num">${d}</div><div class="cal-dots">${dots}</div></div>`;
+    h+=`<div class="cal-day${isToday?' today':''}"><div class="cal-day-num">${d}</div><div class="cal-dots">${dots}</div></div>`;
   }
-  grid.innerHTML = h;
+  grid.innerHTML=h;
 }
-
-function changeMonth(dir) {
-  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth()+dir, 1);
-  renderCalendar();
-}
+function changeMonth(dir){ calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+dir,1); renderCalendar(); }
 
 // ==================== MODALES ====================
-function showModal(title, content, centered=true) {
-  const overlay = document.getElementById('modal-overlay');
-  document.getElementById('modal-content').innerHTML = `<div class="modal-title">${title}</div>${content}`;
-  centered ? overlay.classList.add('centered') : overlay.classList.remove('centered');
+function showModal(title,content,centered=true) {
+  const overlay=document.getElementById('modal-overlay');
+  document.getElementById('modal-content').innerHTML=`<div class="modal-title">${title}</div>${content}`;
+  centered?overlay.classList.add('centered'):overlay.classList.remove('centered');
   overlay.classList.add('open');
 }
-
 function closeModal(e) {
-  if (e && e.target !== document.getElementById('modal-overlay')) return;
+  if(e&&e.target!==document.getElementById('modal-overlay')) return;
   document.getElementById('modal-overlay').classList.remove('open');
 }
-
 function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2200);
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
 }
 
-// ==================== BLOQUE 4 ====================
-
-// ----- NOTIFICACIONES LOCALES -----
-async function requestNotifPermission() {
-  if (!('Notification' in window)) return toast('Tu navegador no soporta notificaciones');
-  const perm = await Notification.requestPermission();
-  if (perm === 'granted') {
-    toast('¡Notificaciones activadas!');
-    scheduleUpcomingNotifs();
-  } else {
-    toast('Permiso denegado para notificaciones');
-  }
-}
-
-function scheduleUpcomingNotifs() {
-  if (!('Notification' in window) || Notification.permission !== 'granted') return;
-  const today = new Date(); today.setHours(0,0,0,0);
-  const soon = state.pendings.filter(p => {
-    if (p.done) return false;
-    const d = new Date(p.date + 'T00:00:00');
-    const diff = Math.round((d - today) / 86400000);
-    return diff >= 0 && diff <= 1;
-  });
-  soon.forEach(p => {
-    const sub = state.subjects.find(s => s.id === p.subjectId);
-    if (!sub) return;
-    const d = new Date(p.date + 'T08:00:00');
-    const delay = d - new Date();
-    if (delay > 0 && delay < 86400000 * 2) {
-      setTimeout(() => {
-        new Notification('Mi Agenda — ' + TYPE_LABELS[p.type], {
-          body: sub.name + (p.desc ? ' · ' + p.desc : ''),
-          icon: './icon-192.png'
-        });
-      }, Math.min(delay, 2147483647));
-    }
-  });
-}
-
-// ----- EXPORTAR DATOS -----
-function exportData() {
-  const blob = new Blob([JSON.stringify(state, null, 2)], {type: 'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'mi-agenda-backup-' + new Date().toISOString().split('T')[0] + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-  toast('Datos exportados ✓');
-}
-
-// ----- IMPORTAR DATOS -----
-function importData() {
-  document.getElementById('import-file').click();
-}
-
-function handleImportFile(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      const data = JSON.parse(ev.target.result);
-      if (!data.subjects && !data.pendings) throw new Error('Formato inválido');
-      if (!confirm('¿Importar datos? Esto reemplazará tu información actual.')) return;
-      data.notes    = data.notes    || [];
-      data.profile  = data.profile  || { name:'', institution:'', course:'' };
-      data.config   = data.config   || { sabado:false, startHour:7, endHour:13 };
-      data.pendings = (data.pendings||[]).map(p => ({priority:'med', done:false, ...p}));
-      state = { ...state, ...data };
-      save();
-      document.getElementById('toggle-sabado').checked = state.config.sabado;
-      populateHourSelects();
-      renderAll();
-      toast('Datos importados correctamente ✓');
-    } catch(err) {
-      toast('Error: archivo no válido');
-    }
-    e.target.value = '';
-  };
-  reader.readAsText(file);
-}
-
-// ----- EXPORTAR HORARIO COMO IMAGEN -----
-function exportScheduleImage() {
-  const numDays = getNumDays();
-  const dayLabels = getDayLabels();
-  const startH = state.config.startHour;
-  const endH   = state.config.endHour;
-  const hours  = [];
-  for (let h = startH; h < endH; h++) hours.push(h);
-
-  const cellW = 80, cellH = 52, timeW = 48, headerH = 36, pad = 16;
-  const W = pad*2 + timeW + cellW * numDays;
-  const H = pad*2 + headerH + cellH * hours.length;
-
-  const canvas = document.getElementById('export-canvas');
-  canvas.width = W; canvas.height = H;
-  const ctx = canvas.getContext('2d');
-
-  // background
-  ctx.fillStyle = '#0f172a';
-  ctx.fillRect(0, 0, W, H);
-
-  // title
-  ctx.fillStyle = '#f8fafc';
-  ctx.font = 'bold 13px sans-serif';
-  ctx.fillText('MI HORARIO', pad, pad + 14);
-
-  const gx = pad, gy = pad + headerH;
-
-  // time column background
-  ctx.fillStyle = '#1e293b';
-  ctx.fillRect(gx, gy, timeW, cellH * hours.length);
-
-  // day headers
-  dayLabels.forEach((d, i) => {
-    const x = gx + timeW + i * cellW;
-    ctx.fillStyle = '#1e293b';
-    ctx.fillRect(x, pad, cellW, headerH - 4);
-    ctx.fillStyle = '#64748b';
-    ctx.font = 'bold 11px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(d, x + cellW/2, pad + 16);
-  });
-
-  // hour rows and blocks
-  hours.forEach((hr, hi) => {
-    const y = gy + hi * cellH;
-    // time label
-    ctx.fillStyle = '#64748b';
-    ctx.font = '10px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(String(hr).padStart(2,'0')+':00', gx + timeW/2, y + cellH/2 + 4);
-    // grid line
-    ctx.strokeStyle = '#334155';
-    ctx.lineWidth = 0.5;
-    ctx.beginPath(); ctx.moveTo(gx, y); ctx.lineTo(gx + timeW + cellW * numDays, y); ctx.stroke();
-
-    for (let d = 0; d < numDays; d++) {
-      const sid = state.schedule[`${d}_${hi}`];
-      const sub = sid ? state.subjects.find(s => s.id === sid) : null;
-      const x = gx + timeW + d * cellW;
-      if (sub) {
-        // colored block
-        ctx.fillStyle = sub.color;
-        ctx.beginPath();
-        ctx.roundRect(x+2, y+2, cellW-4, cellH-4, 4);
-        ctx.fill();
-        // name
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 8px sans-serif';
-        ctx.textAlign = 'center';
-        const words = sub.name.split(' ');
-        let line = '', lines = [];
-        words.forEach(w => {
-          const test = line + (line?'  ':' ') + w;
-          ctx.measureText(test).width > cellW - 8 ? (lines.push(line), line = w) : line = test;
-        });
-        if (line) lines.push(line);
-        lines.slice(0,3).forEach((l, li) => ctx.fillText(l.trim(), x + cellW/2, y + cellH/2 - (lines.length-1)*5 + li*10));
-        // room code
-        ctx.fillStyle = 'rgba(255,255,255,.65)';
-        ctx.font = '7px sans-serif';
-        ctx.fillText(sub.building + sub.room, x + cellW/2, y + cellH - 6);
-      } else {
-        ctx.strokeStyle = '#1e293b';
-        ctx.lineWidth = 0.5;
-        ctx.strokeRect(x, y, cellW, cellH);
-      }
-    }
-  });
-
-  // vertical grid lines
-  for (let d = 0; d <= numDays; d++) {
-    const x = gx + timeW + d * cellW;
-    ctx.strokeStyle = '#334155'; ctx.lineWidth = 0.5;
-    ctx.beginPath(); ctx.moveTo(x, gy); ctx.lineTo(x, gy + cellH * hours.length); ctx.stroke();
-  }
-
-  // download
-  canvas.toBlob(blob => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'mi-horario.png';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast('Imagen guardada ✓');
-  });
-}
-
-// ----- COMPARTIR PENDIENTE -----
-function sharePending(id) {
-  const p = state.pendings.find(x => x.id === id);
-  if (!p) return;
-  const sub = state.subjects.find(s => s.id === p.subjectId);
-  if (!sub) return;
-  const dateLabel = new Date(p.date + 'T00:00:00').toLocaleDateString('es-EC', {weekday:'long', day:'numeric', month:'long'});
-  const text = `📚 *${sub.name}*\n${TYPE_LABELS[p.type] || p.type}${p.desc ? ' — ' + p.desc : ''}\n📅 ${dateLabel}\n\n_Enviado desde Mi Agenda_`;
-
-  openShareSheet('Compartir pendiente', [
-    {
-      icon: '💬',
-      label: 'WhatsApp',
-      action: () => window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank')
-    },
-    {
-      icon: '📋',
-      label: 'Copiar',
-      action: () => { navigator.clipboard?.writeText(text.replace(/\*/g,'').replace(/_/g,'')); toast('Copiado ✓'); closeShareSheet(); }
-    },
-    {
-      icon: '📤',
-      label: 'Compartir',
-      action: () => {
-        if (navigator.share) {
-          navigator.share({ title: 'Mi Agenda', text: text.replace(/\*/g,'').replace(/_/g,'') });
-        } else {
-          navigator.clipboard?.writeText(text.replace(/\*/g,'').replace(/_/g,''));
-          toast('Copiado ✓');
-        }
-        closeShareSheet();
-      }
-    }
-  ]);
-}
-
-function openShareSheet(title, actions) {
-  document.getElementById('share-title').textContent = title;
-  document.getElementById('share-grid').innerHTML = actions.map((a, i) =>
-    `<button class="share-btn" onclick="shareActions[${i}].action()">
-      <span class="share-btn-icon">${a.icon}</span>${a.label}
-    </button>`
-  ).join('');
-  window.shareActions = actions;
-  document.getElementById('share-overlay').classList.add('open');
-}
-
-function closeShareSheet(e) {
-  if (e && e.target !== document.getElementById('share-overlay')) return;
-  document.getElementById('share-overlay').classList.remove('open');
-}
-
-// ----- MODO EXÁMENES -----
+// ==================== MODO EXÁMENES ====================
 function openExamMode() {
-  if (!state.subjects.length) return toast('Crea materias primero');
-  const em = state.examMode;
-  const subOpts = state.subjects.map(s =>
-    `<option value="${s.id}"${em&&em.subjectId===s.id?' selected':''}>${s.name}</option>`
-  ).join('');
-  const today = new Date().toISOString().split('T')[0];
-  showModal('Modo Exámenes', `
+  if(!state.subjects.length) return toast('Crea materias primero');
+  const em=state.examMode;
+  const subOpts=state.subjects.map(s=>`<option value="${s.id}"${em&&em.subjectId===s.id?' selected':''}>${s.name}</option>`).join('');
+  const today=new Date().toISOString().split('T')[0];
+  showModal('Modo Exámenes',`
     <div style="font-size:13px;color:var(--text3);margin-bottom:14px;line-height:1.5">Define tu próximo examen y aparecerá un contador en la Agenda.</div>
-    <div class="form-group">
-      <label class="form-label">Materia del examen</label>
-      <select class="form-select" id="em-subject">${subOpts}</select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Fecha del examen</label>
-      <input class="form-input" id="em-date" type="date" value="${em?em.date:today}">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Nota adicional (opcional)</label>
-      <input class="form-input" id="em-label" placeholder="Ej: PARCIAL 2" value="${em?em.label:''}" oninput="this.value=this.value.toUpperCase()">
-    </div>
+    <div class="form-group"><label class="form-label">Materia del examen</label><select class="form-select" id="em-subject">${subOpts}</select></div>
+    <div class="form-group"><label class="form-label">Fecha del examen</label><input class="form-input" id="em-date" type="date" value="${em?em.date:today}"></div>
+    <div class="form-group"><label class="form-label">Nota adicional (opcional)</label><input class="form-input" id="em-label" placeholder="Ej: PARCIAL 2" value="${em?em.label:''}" oninput="this.value=this.value.toUpperCase()"></div>
     <div class="modal-actions">
       ${em?`<button class="btn btn-danger" onclick="clearExamMode()">Desactivar</button>`:''}
       <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
       <button class="btn btn-primary" onclick="saveExamMode()">Activar</button>
-    </div>
-  `);
+    </div>`);
 }
 
 function saveExamMode() {
-  const subjectId = document.getElementById('em-subject').value;
-  const date      = document.getElementById('em-date').value;
-  const label     = document.getElementById('em-label').value.trim();
-  if (!subjectId || !date) return toast('Completa los campos');
-  state.examMode = { subjectId, date, label };
-  save();
-  closeModal();
-  renderExamBanner();
-  renderExamModeStatus();
-  toast('Modo exámenes activado 🎯');
+  const subjectId=document.getElementById('em-subject').value;
+  const date=document.getElementById('em-date').value;
+  const label=document.getElementById('em-label').value.trim();
+  if(!subjectId||!date) return toast('Completa los campos');
+  state.examMode={subjectId,date,label};
+  save(); closeModal(); renderExamBanner(); renderExamModeStatus(); toast('Modo exámenes activado 🎯');
 }
 
 function clearExamMode() {
-  state.examMode = null;
-  save();
-  closeModal();
-  renderExamBanner();
-  renderExamModeStatus();
-  toast('Modo exámenes desactivado');
+  state.examMode=null; save(); closeModal(); renderExamBanner(); renderExamModeStatus(); toast('Modo exámenes desactivado');
 }
 
 function renderExamBanner() {
-  const el = document.getElementById('exam-banner');
-  if (!el) return;
-  const em = state.examMode;
-  if (!em) { el.style.display = 'none'; return; }
-  const sub = state.subjects.find(s => s.id === em.subjectId);
-  if (!sub) { el.style.display = 'none'; return; }
-  const today = new Date(); today.setHours(0,0,0,0);
-  const exam  = new Date(em.date + 'T00:00:00');
-  const diff  = Math.round((exam - today) / 86400000);
-  const cd    = diff < 0 ? '¡Ya pasó!' : diff === 0 ? '¡HOY!' : diff === 1 ? 'Mañana' : `${diff} días`;
-  const cdColor = diff <= 0 ? '#ef4444' : diff <= 3 ? '#f59e0b' : '#10b981';
-  el.style.display = 'block';
-  el.innerHTML = `<div class="exam-mode-banner">
+  const el=document.getElementById('exam-banner'); if(!el) return;
+  const em=state.examMode;
+  if(!em){el.style.display='none';return;}
+  const sub=state.subjects.find(s=>s.id===em.subjectId);
+  if(!sub){el.style.display='none';return;}
+  const today=new Date(); today.setHours(0,0,0,0);
+  const exam=new Date(em.date+'T00:00:00');
+  const diff=Math.round((exam-today)/86400000);
+  const cd=diff<0?'¡Ya pasó!':diff===0?'¡HOY!':diff===1?'Mañana':`${diff} días`;
+  const cdColor=diff<=0?'#ef4444':diff<=3?'#f59e0b':'#10b981';
+  el.style.display='block';
+  el.innerHTML=`<div class="exam-mode-banner">
     <div class="exam-mode-dot"></div>
     <div style="flex:1;min-width:0">
       <div class="exam-mode-label">🎯 MODO EXÁMENES</div>
@@ -1646,52 +1532,330 @@ function renderExamBanner() {
 }
 
 function renderExamModeStatus() {
-  const el = document.getElementById('exam-mode-status');
-  if (!el) return;
-  const em = state.examMode;
-  if (!em) { el.innerHTML = ''; return; }
-  const sub = state.subjects.find(s => s.id === em.subjectId);
-  if (!sub) { el.innerHTML = ''; return; }
-  const today = new Date(); today.setHours(0,0,0,0);
-  const diff  = Math.round((new Date(em.date+'T00:00:00') - today) / 86400000);
-  const cd    = diff < 0 ? '¡Ya pasó!' : diff === 0 ? '¡HOY!' : diff === 1 ? 'Mañana' : `${diff} días`;
-  el.innerHTML = `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg2);border-radius:var(--radius-sm);font-size:12px;color:var(--text2)">
+  const el=document.getElementById('exam-mode-status'); if(!el) return;
+  const em=state.examMode;
+  if(!em){el.innerHTML='';return;}
+  const sub=state.subjects.find(s=>s.id===em.subjectId); if(!sub){el.innerHTML='';return;}
+  const today=new Date(); today.setHours(0,0,0,0);
+  const diff=Math.round((new Date(em.date+'T00:00:00')-today)/86400000);
+  const cd=diff<0?'¡Ya pasó!':diff===0?'¡HOY!':diff===1?'Mañana':`${diff} días`;
+  el.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg2);border-radius:var(--radius-sm);font-size:12px;color:var(--text2)">
     <span style="color:${sub.color}">●</span>
     <span><strong>${sub.name}</strong>${em.label?' — '+em.label:''} · ${cd}</span>
     <button onclick="clearExamMode()" style="margin-left:auto;background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:0">✕</button>
   </div>`;
 }
 
+// ==================== DATOS ====================
+function exportData() {
+  // Exporta solo materias, horario y pendientes — NO el perfil (es personal)
+  const exportObj = {
+    exported: new Date().toISOString(),
+    subjects:  state.subjects,
+    schedule:  state.schedule,
+    pendings:  state.pendings,
+    notes:     state.notes
+  };
+  const blob=new Blob([JSON.stringify(exportObj,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='mi-agenda-backup-'+new Date().toISOString().split('T')[0]+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Datos exportados ✓');
+}
+
+function importData() { document.getElementById('import-file').click(); }
+
+function handleImportFile(e) {
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try {
+      const data=JSON.parse(ev.target.result);
+      if(!data.subjects&&!data.pendings) throw new Error('Formato inválido');
+      if(!confirm('¿Importar datos? Esto reemplazará materias, horario y pendientes actuales.')) return;
+      if(data.subjects)  state.subjects  = data.subjects;
+      if(data.schedule)  state.schedule  = data.schedule;
+      if(data.pendings)  state.pendings  = (data.pendings||[]).map(p=>({priority:'med',done:false,...p}));
+      if(data.notes)     state.notes     = data.notes;
+      save(); renderAll(); toast('Datos importados ✓');
+    } catch(err){ toast('Error: archivo no válido'); }
+    e.target.value='';
+  };
+  reader.readAsText(file);
+}
+
+// ==================== EXPORTAR HORARIO COMO IMAGEN (rehecho) ====================
+function exportScheduleImage() {
+  const numDays   = getNumDays();
+  const dayLabels = getDayLabels();
+  const startH    = state.config.startHour;
+  const endH      = state.config.endHour;
+
+  // Índices de horas a mostrar (startH..endH inclusive como inicio de slot)
+  const hourIdxs = [];
+  for (let h = startH; h <= endH; h++) hourIdxs.push(h);
+
+  // Dimensiones — alta resolución (2x)
+  const SCALE   = 2;
+  const TIME_W  = 52;
+  const HEAD_H  = 40;
+  const CELL_W  = 90;
+  const CELL_H  = 56;
+  const PAD     = 20;
+  const RADIUS  = 6;
+
+  const W = (PAD*2 + TIME_W + CELL_W * numDays) * SCALE;
+  const H = (PAD*2 + HEAD_H + CELL_H * hourIdxs.length + 30) * SCALE; // +30 para título
+
+  const canvas = document.createElement('canvas');
+  canvas.width  = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(SCALE, SCALE);
+
+  const CW = W / SCALE;
+  const CH = H / SCALE;
+
+  // Fondo
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, CW, CH);
+
+  // Título
+  const pName = state.profile.name || 'Mi Agenda';
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 13px "Segoe UI", Arial, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('MI HORARIO — ' + pName.toUpperCase(), PAD, PAD + 13);
+
+  // Origen de la grilla
+  const GX = PAD;
+  const GY = PAD + 30;
+
+  // Cabecera de días
+  ctx.fillStyle = '#1e293b';
+  ctx.fillRect(GX, GY, TIME_W + CELL_W * numDays, HEAD_H);
+
+  // Línea separadora cabecera
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(GX, GY + HEAD_H); ctx.lineTo(GX + TIME_W + CELL_W * numDays, GY + HEAD_H); ctx.stroke();
+
+  dayLabels.forEach((d, i) => {
+    const x = GX + TIME_W + i * CELL_W;
+    // Highlight hoy
+    const isToday = i === getTodayColIdx();
+    if (isToday) {
+      ctx.fillStyle = 'rgba(99,102,241,0.18)';
+      ctx.fillRect(x, GY, CELL_W, HEAD_H);
+    }
+    ctx.fillStyle = isToday ? '#818cf8' : '#64748b';
+    ctx.font = 'bold 11px "Segoe UI", Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(d, x + CELL_W/2, GY + HEAD_H/2 + 4);
+  });
+
+  // Columna de tiempo + filas
+  hourIdxs.forEach((hi, rowIdx) => {
+    const y = GY + HEAD_H + rowIdx * CELL_H;
+
+    // Fondo alternado de fila
+    ctx.fillStyle = rowIdx % 2 === 0 ? '#020617' : '#0a0f1e';
+    ctx.fillRect(GX + TIME_W, y, CELL_W * numDays, CELL_H);
+
+    // Celda de tiempo
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(GX, y, TIME_W, CELL_H);
+    ctx.fillStyle = '#64748b';
+    ctx.font = '10px "Segoe UI", Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(ALL_HOURS[hi], GX + TIME_W/2, y + CELL_H/2 + 4);
+
+    // Línea de fila
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(GX, y); ctx.lineTo(GX + TIME_W + CELL_W * numDays, y); ctx.stroke();
+
+    // Bloques
+    for (let d = 0; d < numDays; d++) {
+      const sid = state.schedule[`${d}_${hi}`];
+      const sub = sid ? state.subjects.find(s=>s.id===sid) : null;
+      const x   = GX + TIME_W + d * CELL_W;
+      if (!sub) continue;
+
+      // Calcular span (bloques fusionados)
+      let span = 1;
+      while (
+        hi + span <= endH &&
+        state.schedule[`${d}_${hi+span}`] === sid &&
+        rowIdx + span < hourIdxs.length
+      ) span++;
+
+      const bH = CELL_H * span - 4;
+      const bY = y + 2;
+      const bX = x + 2;
+      const bW = CELL_W - 4;
+
+      // Bloque redondeado
+      ctx.fillStyle = sub.color;
+      ctx.beginPath();
+      ctx.roundRect(bX, bY, bW, bH, RADIUS);
+      ctx.fill();
+
+      // Texto del nombre — ajuste de líneas
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 9px "Segoe UI", Arial, sans-serif';
+      ctx.textAlign = 'center';
+      const maxW = bW - 6;
+      const words = sub.name.split(' ');
+      let line = '', lines = [];
+      words.forEach(w => {
+        const test = line ? line + ' ' + w : w;
+        if (ctx.measureText(test).width > maxW && line) {
+          lines.push(line); line = w;
+        } else line = test;
+      });
+      if (line) lines.push(line);
+      lines = lines.slice(0, span > 1 ? 3 : 2);
+
+      const totalTextH = lines.length * 11;
+      const textStartY = bY + (bH - totalTextH)/2 + 9;
+      lines.forEach((l, li) => ctx.fillText(l, bX + bW/2, textStartY + li * 11));
+
+      // Aula
+      ctx.fillStyle = 'rgba(255,255,255,0.65)';
+      ctx.font = '8px "Segoe UI", Arial, sans-serif';
+      ctx.fillText(sub.building + sub.room, bX + bW/2, bY + bH - 5);
+    }
+  });
+
+  // Líneas verticales
+  for (let d = 0; d <= numDays; d++) {
+    const x = GX + TIME_W + d * CELL_W;
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, GY); ctx.lineTo(x, GY + HEAD_H + CELL_H * hourIdxs.length); ctx.stroke();
+  }
+
+  // Borde exterior
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 1;
+  ctx.strokeRect(GX, GY, TIME_W + CELL_W * numDays, HEAD_H + CELL_H * hourIdxs.length);
+
+  // Abrir en nueva pestaña (más estable en móvil que descargar)
+  canvas.toBlob(blob => {
+    if (!blob) return toast('Error generando imagen');
+    const url = URL.createObjectURL(blob);
+    const win = window.open(url, '_blank');
+    if (!win) {
+      // Fallback: link de descarga
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mi-horario.png';
+      a.click();
+    }
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    toast('Horario generado — mantenlo presionado para guardar');
+  }, 'image/png');
+}
+
+// ==================== COMPARTIR ====================
+function sharePending(id) {
+  const p=state.pendings.find(x=>x.id===id); if(!p) return;
+  const sub=state.subjects.find(s=>s.id===p.subjectId); if(!sub) return;
+  const dateLabel=new Date(p.date+'T00:00:00').toLocaleDateString('es-EC',{weekday:'long',day:'numeric',month:'long'});
+  const text=`📚 *${sub.name}*\n${TYPE_LABELS[p.type]||p.type}${p.desc?' — '+p.desc:''}\n📅 ${dateLabel}\n\n_Enviado desde Mi Agenda_`;
+  openShareSheet('Compartir pendiente',[
+    {icon:'💬',label:'WhatsApp',action:()=>window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank')},
+    {icon:'📋',label:'Copiar',action:()=>{navigator.clipboard?.writeText(text.replace(/\*/g,'').replace(/_/g,''));toast('Copiado ✓');closeShareSheet();}},
+    {icon:'📤',label:'Compartir',action:()=>{
+      if(navigator.share){navigator.share({title:'Mi Agenda',text:text.replace(/\*/g,'').replace(/_/g,'')});}
+      else{navigator.clipboard?.writeText(text.replace(/\*/g,'').replace(/_/g,''));toast('Copiado ✓');}
+      closeShareSheet();
+    }}
+  ]);
+}
+
+function openShareSheet(title,actions) {
+  document.getElementById('share-title').textContent=title;
+  document.getElementById('share-grid').innerHTML=actions.map((a,i)=>
+    `<button class="share-btn" onclick="shareActions[${i}].action()">
+      <span class="share-btn-icon">${a.icon}</span>${a.label}
+    </button>`
+  ).join('');
+  window.shareActions=actions;
+  document.getElementById('share-overlay').classList.add('open');
+}
+function closeShareSheet(e) {
+  if(e&&e.target!==document.getElementById('share-overlay')) return;
+  document.getElementById('share-overlay').classList.remove('open');
+}
+
+// ==================== NOTIFICACIONES ====================
+async function requestNotifPermission() {
+  if(!('Notification' in window)) return toast('Tu navegador no soporta notificaciones');
+  const perm=await Notification.requestPermission();
+  if(perm==='granted'){ toast('¡Notificaciones activadas! 🔔'); scheduleUpcomingNotifs(); }
+  else toast('Permiso denegado');
+}
+
+function scheduleUpcomingNotifs() {
+  if(!('Notification' in window)||Notification.permission!=='granted') return;
+  const today=new Date(); today.setHours(0,0,0,0);
+  state.pendings.filter(p=>{
+    if(p.done) return false;
+    const diff=Math.round((new Date(p.date+'T00:00:00')-today)/86400000);
+    return diff>=0&&diff<=1;
+  }).forEach(p=>{
+    const sub=state.subjects.find(s=>s.id===p.subjectId); if(!sub) return;
+    const d=new Date(p.date+'T08:00:00');
+    const delay=d-new Date();
+    if(delay>0&&delay<86400000*2){
+      setTimeout(()=>new Notification('Mi Agenda — '+TYPE_LABELS[p.type],{
+        body:sub.name+(p.desc?' · '+p.desc:''),icon:'./icon-192.png'
+      }),Math.min(delay,2147483647));
+    }
+  });
+}
+
 // ==================== RESET ====================
 function confirmReset() {
-  if (!confirm('¿Resetear TODO? Se perderán materias, horario, pendientes, notas y perfil.')) return;
-  state = {version:DATA_VERSION, subjects:[], schedule:{}, pendings:[], notes:[],
-    profile:{name:'',institution:'',course:''}, config:{sabado:false,startHour:7,endHour:13}};
-  filterSubject = 'all';
-  document.getElementById('toggle-sabado').checked = false;
-  populateHourSelects();
-  save(); renderAll(); toast('Sistema reseteado');
+  if(!confirm('¿Resetear TODO? Se perderán materias, horario, pendientes y notas. El perfil y la configuración también se limpiarán.')) return;
+  localStorage.removeItem('mi_agenda_welcomed');
+  state={version:DATA_VERSION,subjects:[],schedule:{},pendings:[],notes:[],
+    profile:{name:'',institution:'',course:'',type:'universidad',semester:'',career:''},
+    config:{sabado:false,startHour:7,endHour:13},examMode:null};
+  filterSubject='all';
+  save();
+  renderAll();
+  closeModal();
+  // Mostrar setup de nuevo
+  document.getElementById('welcome-screen').classList.add('active');
+  document.querySelectorAll('.setup-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('setup-step-1').classList.add('active');
+  // Limpiar campos del setup
+  ['s1-name','s1-inst','s1-career'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('s1-semester').selectedIndex=0;
+  populateSetupHourSelects();
+  toast('Sistema reseteado');
 }
 
 // ==================== SW ====================
 function registerServiceWorker() {
-  if ('serviceWorker' in navigator)
+  if('serviceWorker' in navigator)
     navigator.serviceWorker.register('./sw.js').then(r=>swRegistration=r).catch(()=>{});
 }
 
 function updateApp() {
-  if (!swRegistration) return toast('Service Worker no disponible');
+  if(!swRegistration) return toast('Service Worker no disponible');
   toast('Buscando actualizaciones...');
   swRegistration.update().then(()=>{
-    if (swRegistration.waiting) {
+    if(swRegistration.waiting){
       swRegistration.waiting.postMessage({type:'SKIP_WAITING'});
-      setTimeout(()=>window.location.reload(), 400);
+      setTimeout(()=>window.location.reload(),400);
     } else toast('Ya tienes la versión más reciente');
   });
 }
 
 // ==================== INICIO ====================
-
 load();
 registerServiceWorker();
 scheduleUpcomingNotifs();
