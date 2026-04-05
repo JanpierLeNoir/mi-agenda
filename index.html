@@ -859,6 +859,7 @@ function renderSchedule() {
   const todayC = getTodayColIdx();
   const ROW_H  = 58;
 
+  // spanMap[d][hi] = número de filas que ocupa (>=1), o 0 si está absorbida por una celda superior
   const spanMap = {};
   for (let d = 0; d < numD; d++) {
     spanMap[d] = {};
@@ -867,54 +868,78 @@ function renderSchedule() {
       const sid = state.schedule[`${d}_${hi}`];
       if (sid) {
         let span = 1;
-        while (hi+span <= end && state.schedule[`${d}_${hi+span}`] === sid) span++;
+        while (hi + span <= end && state.schedule[`${d}_${hi + span}`] === sid) span++;
         spanMap[d][hi] = span;
-        for (let s = 1; s < span; s++) spanMap[d][hi+s] = 0;
+        for (let s = 1; s < span; s++) spanMap[d][hi + s] = 0; // absorbidas
         hi += span;
       } else { spanMap[d][hi] = 1; hi++; }
     }
   }
 
-  const cols = `60px repeat(${numD},1fr)`;
-  let html = `<div class="schedule-grid">`;
-  html += `<div style="display:grid;grid-template-columns:${cols};background:var(--bg2)">`;
-  html += `<div class="schedule-time" style="background:var(--bg2)"></div>`;
-  days.forEach((d,di) => html += `<div class="schedule-header-cell${di===todayC?' today-col':''}">${d}</div>`);
-  html += `</div>`;
+  // Usamos <table> con rowspan — la forma nativa de fusionar celdas sin bugs de z-index
+  const colW = `calc((100% - 60px) / ${numD})`;
+  let html = `<div class="schedule-grid" style="overflow:hidden;border-radius:var(--radius);border:1px solid var(--bg3)">
+    <table style="width:100%;border-collapse:collapse;table-layout:fixed">
+      <colgroup>
+        <col style="width:60px">
+        ${Array(numD).fill(`<col style="width:${colW}">`).join('')}
+      </colgroup>
+      <thead>
+        <tr style="background:var(--bg2)">
+          <th style="height:36px;border-bottom:1px solid var(--bg3)"></th>`;
+  days.forEach((d, di) => {
+    const isToday = di === todayC;
+    html += `<th style="height:36px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.5px;border-bottom:1px solid var(--bg3);${isToday?'color:var(--accent);background:rgba(99,102,241,.15)':'color:var(--text3)'}">${d}</th>`;
+  });
+  html += `</tr></thead><tbody>`;
 
   hours.forEach((hr, idx) => {
     const hi = start + idx;
-    html += `<div style="display:grid;grid-template-columns:${cols};height:${ROW_H}px;background:var(--bg0);border-top:1px solid var(--bg3)">`;
-    html += `<div class="schedule-time">${hr}</div>`;
+    html += `<tr style="height:${ROW_H}px">`;
+    // Columna de hora
+    html += `<td style="text-align:center;font-size:10px;color:var(--text3);font-weight:500;background:var(--bg1);border-top:1px solid var(--bg3);vertical-align:middle;padding:0 2px">${hr}</td>`;
+
     for (let d = 0; d < numD; d++) {
-      const isToday = d === todayC;
       const sv = spanMap[d][hi];
-      if (sv === 0) { html += `<div class="schedule-cell${isToday?' today-col':''}"></div>`; continue; }
+      if (sv === 0) continue; // rowspan de la celda superior — NO emitir <td>
+
+      const isToday = d === todayC;
       const key = `${d}_${hi}`;
       const sid = state.schedule[key];
-      const sub = sid ? state.subjects.find(s=>s.id===sid) : null;
-      if (sub && sv > 1) {
-        const h = sv * ROW_H - 4;
-        html += `<div class="schedule-cell${isToday?' today-col':''}" style="position:relative;height:${ROW_H}px">
-          <div class="block-span" style="background:${sub.color};height:${h}px;top:2px" onclick="showBlockDetail('${key}')">
-            <div class="block-name">${sub.name.substring(0,14)}</div>
-            <div class="block-code">${sub.building}${sub.room}</div>
-            <div style="font-size:7px;color:rgba(255,255,255,.6);margin-top:2px">${ALL_HOURS[hi]}–${HOURS_END[hi+sv-1]}</div>
-          </div></div>`;
-      } else if (sub) {
-        html += `<div class="schedule-cell${isToday?' today-col':''}">
-          <div class="block" style="background:${sub.color}" onclick="showBlockDetail('${key}')">
-            <div class="block-name">${sub.name.substring(0,12)}</div>
-            <div class="block-code">${sub.building}${sub.room}</div>
-          </div></div>`;
+      const sub = sid ? state.subjects.find(s => s.id === sid) : null;
+
+      const tdStyle = `border-top:1px solid var(--bg3);padding:2px;vertical-align:top;${isToday?'background:rgba(99,102,241,.04)':'background:var(--bg0)'}`;
+      const rowspanAttr = sv > 1 ? ` rowspan="${sv}"` : '';
+
+      if (sub) {
+        // Calcular cuántas líneas caben: cada 58px de alto ≈ 1 hora
+        const totalH = sv * ROW_H - 4;
+        html += `<td${rowspanAttr} style="${tdStyle}padding:2px;vertical-align:middle">
+          <div onclick="showBlockDetail('${key}')"
+            style="background:${sub.color};border-radius:6px;height:${totalH}px;
+                   display:flex;flex-direction:column;align-items:center;justify-content:center;
+                   padding:4px 3px;cursor:pointer;overflow:hidden;text-align:center;
+                   transition:filter .15s" ontouchstart="" onmousedown="this.style.filter='brightness(.85)'" onmouseup="this.style.filter=''" ontouchend="this.style.filter=''">
+            <div style="font-size:9px;font-weight:700;color:#fff;line-height:1.3;word-break:break-word;overflow:hidden;display:-webkit-box;-webkit-line-clamp:${sv>1?4:2};-webkit-box-orient:vertical;width:100%">${sub.name}</div>
+            <div style="font-size:8px;color:rgba(255,255,255,.7);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;text-align:center">${sub.building}${sub.room}</div>
+            ${sv > 1 ? `<div style="font-size:7px;color:rgba(255,255,255,.5);margin-top:1px">${ALL_HOURS[hi]}–${HOURS_END[hi+sv-1]}</div>` : ''}
+          </div>
+        </td>`;
       } else {
-        html += `<div class="schedule-cell${isToday?' today-col':''}">
-          <div class="empty-block" onclick="openAssignBlock(${d},${hi})"><div class="add-icon">+</div></div></div>`;
+        html += `<td${rowspanAttr} style="${tdStyle}">
+          <div onclick="openAssignBlock(${d},${hi})"
+            style="width:100%;height:${ROW_H-4}px;border-radius:6px;background:var(--bg2);
+                   border:1px dashed var(--bg3);display:flex;align-items:center;justify-content:center;
+                   cursor:pointer;transition:background .15s" ontouchstart="" onmouseenter="this.style.background='var(--bg3)'" onmouseleave="this.style.background='var(--bg2)'">
+            <span style="font-size:16px;color:var(--bg3)">+</span>
+          </div>
+        </td>`;
       }
     }
-    html += `</div>`;
+    html += `</tr>`;
   });
-  html += `</div>`;
+
+  html += `</tbody></table></div>`;
   c.innerHTML = html;
   document.getElementById('schedule-sub').textContent = `${hours.length} horas · ${numD} días`;
 }
@@ -1656,7 +1681,24 @@ function exportScheduleImage() {
     ctx.fillText(d, x + CELL_W/2, GY + HEAD_H/2 + 4);
   });
 
-  // Columna de tiempo + filas
+  // Pre-calcular spans igual que renderSchedule para no redibujar celdas cubiertas
+  const spanMap = {};
+  for (let d = 0; d < numDays; d++) {
+    spanMap[d] = {};
+    let hi = startH;
+    while (hi <= endH) {
+      const sid = state.schedule[`${d}_${hi}`];
+      if (sid) {
+        let span = 1;
+        while (hi + span <= endH && state.schedule[`${d}_${hi+span}`] === sid) span++;
+        spanMap[d][hi] = span;
+        for (let s = 1; s < span; s++) spanMap[d][hi+s] = 0; // absorbida
+        hi += span;
+      } else { spanMap[d][hi] = 1; hi++; }
+    }
+  }
+
+  // PASADA 1 — Fondos, etiquetas de hora y líneas (sin bloques)
   hourIdxs.forEach((hi, rowIdx) => {
     const y = GY + HEAD_H + rowIdx * CELL_H;
 
@@ -1672,62 +1714,72 @@ function exportScheduleImage() {
     ctx.textAlign = 'center';
     ctx.fillText(ALL_HOURS[hi], GX + TIME_W/2, y + CELL_H/2 + 4);
 
-    // Línea de fila
+    // Línea horizontal de fila
     ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(GX, y); ctx.lineTo(GX + TIME_W + CELL_W * numDays, y); ctx.stroke();
+  });
 
-    // Bloques
-    for (let d = 0; d < numDays; d++) {
+  // PASADA 2 — Bloques encima de todo (nunca se tapan entre sí)
+  // Iterar por columna para que el spanMap controle qué celdas ya fueron pintadas
+  for (let d = 0; d < numDays; d++) {
+    hourIdxs.forEach((hi, rowIdx) => {
+      const sv = spanMap[d][hi];
+      if (!sv) return; // absorbida por bloque de arriba — no dibujar
+
       const sid = state.schedule[`${d}_${hi}`];
-      const sub = sid ? state.subjects.find(s=>s.id===sid) : null;
-      const x   = GX + TIME_W + d * CELL_W;
-      if (!sub) continue;
+      const sub = sid ? state.subjects.find(s => s.id === sid) : null;
+      if (!sub) return; // celda vacía
 
-      // Calcular span (bloques fusionados)
-      let span = 1;
-      while (
-        hi + span <= endH &&
-        state.schedule[`${d}_${hi+span}`] === sid &&
-        rowIdx + span < hourIdxs.length
-      ) span++;
-
-      const bH = CELL_H * span - 4;
+      const x  = GX + TIME_W + d * CELL_W;
+      const y  = GY + HEAD_H + rowIdx * CELL_H;
+      const bH = CELL_H * sv - 4;
       const bY = y + 2;
       const bX = x + 2;
       const bW = CELL_W - 4;
 
-      // Bloque redondeado
+      // Bloque redondeado fusionado
       ctx.fillStyle = sub.color;
       ctx.beginPath();
       ctx.roundRect(bX, bY, bW, bH, RADIUS);
       ctx.fill();
 
-      // Texto del nombre — ajuste de líneas
+      // Clip para que el texto nunca salga del bloque
+      ctx.save();
+      ctx.beginPath();
+      ctx.roundRect(bX, bY, bW, bH, RADIUS);
+      ctx.clip();
+
+      // Nombre — wrap de palabras
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 9px "Segoe UI", Arial, sans-serif';
       ctx.textAlign = 'center';
-      const maxW = bW - 6;
+      const maxW = bW - 8;
       const words = sub.name.split(' ');
       let line = '', lines = [];
       words.forEach(w => {
         const test = line ? line + ' ' + w : w;
-        if (ctx.measureText(test).width > maxW && line) {
-          lines.push(line); line = w;
-        } else line = test;
+        ctx.measureText(test).width > maxW && line
+          ? (lines.push(line), line = w)
+          : (line = test);
       });
       if (line) lines.push(line);
-      lines = lines.slice(0, span > 1 ? 3 : 2);
+      const maxLines = Math.max(1, Math.floor((bH - 16) / 11));
+      lines = lines.slice(0, maxLines);
 
       const totalTextH = lines.length * 11;
-      const textStartY = bY + (bH - totalTextH)/2 + 9;
+      const textStartY = bY + (bH - totalTextH) / 2 + 9;
       lines.forEach((l, li) => ctx.fillText(l, bX + bW/2, textStartY + li * 11));
 
-      // Aula
-      ctx.fillStyle = 'rgba(255,255,255,0.65)';
-      ctx.font = '8px "Segoe UI", Arial, sans-serif';
-      ctx.fillText(sub.building + sub.room, bX + bW/2, bY + bH - 5);
-    }
-  });
+      // Aula solo si hay espacio
+      if (bY + bH - 7 > textStartY + totalTextH + 3) {
+        ctx.fillStyle = 'rgba(255,255,255,0.65)';
+        ctx.font = '8px "Segoe UI", Arial, sans-serif';
+        ctx.fillText(sub.building + sub.room, bX + bW/2, bY + bH - 7);
+      }
+
+      ctx.restore();
+    });
+  }
 
   // Líneas verticales
   for (let d = 0; d <= numDays; d++) {
